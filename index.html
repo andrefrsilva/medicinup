@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PulseirUp | MedicinUp - A Proteção de Natal</title>
+    <meta name="description" content="A prenda que salva vidas. Dados de saúde acessíveis numa pulseira de cortiça portuguesa.">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://visjs.github.io/vis-timeline/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    <link href="https://visjs.github.io/vis-timeline/styles/vis-timeline-graph2d.min.css" rel="stylesheet" />
+
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medic: { 500: '#2563eb', 600: '#1d4ed8', 900: '#1e3a8a' },
+                        cork: { 400: '#d4a373', 500: '#b08968' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .hero-gradient { background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%); }
+        .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        /* Ajustes Vis.js */
+        .vis-graph-group0, .vis-graph-group1 { stroke-width: 2px; }
+        .vis-point { stroke-width: 2px; }
+        /* Input sem setas */
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        /* Loading Animation */
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #000; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .hidden-section { display: none !important; }
+        
+        /* Override Stripe button container defaults if needed */
+        stripe-buy-button { display: block; margin: 0 auto; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased overflow-x-hidden selection:bg-black selection:text-white">
+
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 glass-nav shadow-md h-16 lg:h-20 flex items-center">
+        <div class="max-w-7xl w-full mx-auto px-4 flex justify-between items-center gap-2 lg:gap-8">
+            
+            <div class="flex-shrink-0 cursor-pointer" onclick="resetToHome()">
+                <span class="font-serif font-bold text-xl lg:text-2xl tracking-tighter text-black">Medicin<span class="text-medic-600 italic">Up</span></span>
+            </div>
+
+            <div class="flex-1 max-w-md mx-auto">
+                <form onsubmit="event.preventDefault(); searchFromNav();" class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-heart-pulse text-gray-400 group-focus-within:text-medic-600 transition"></i>
+                    </div>
+                    <input type="number" id="navSearchInput" 
+                        class="block w-full pl-10 pr-10 py-2 lg:py-2.5 border border-gray-300 rounded-full leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-black focus:ring-1 focus:ring-black sm:text-sm transition-all shadow-inner" 
+                        placeholder="Nº Pulseira (ex: 1001)" required>
+                    <button type="submit" class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-black cursor-pointer rounded-r-full hover:bg-gray-100">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="flex-shrink-0">
+                <a href="#comprar" onclick="resetToHome()" class="bg-black text-white px-4 lg:px-6 py-2 text-xs lg:text-sm font-bold uppercase tracking-widest rounded hover:bg-cork-500 transition shadow-lg flex items-center gap-2">
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="landing-container">
+        
+        <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 hero-gradient text-white overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/medical-icons.png')]"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+                <div class="inline-block border border-cork-400 text-cork-400 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] mb-6 rounded-full animate-pulse">
+                    Oferta Exclusiva de Natal
+                </div>
+                
+                <h1 class="text-4xl md:text-7xl font-serif font-bold leading-tight mb-6 drop-shadow-xl" data-aos="fade-up">
+                    Eles cuidaram de si.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cork-400 via-white to-cork-400">Agora a vez é sua.</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+                    Ofereça paz de espírito. A PulseirUp é o amuleto que fala pelos seus pais ou avós numa emergência, quando eles não conseguem.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                    <a href="#comprar" class="bg-white text-black px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-gray-200 transition shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                        Comprar Agora (49,99€)
+                    </a>
+                    <button onclick="runDemo()" class="bg-transparent border border-gray-600 text-white px-8 py-4 text-sm font-bold uppercase tracking-widest hover:border-white hover:bg-white hover:text-black transition">
+                        Ver Exemplo Real
+                    </button>
+                </div>
+                
+                <div class="mt-12 inline-block bg-white/5 backdrop-blur border border-white/10 p-4 rounded-lg">
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">A promoção termina em:</p>
+                    <div id="countdown" class="text-2xl font-mono font-bold text-cork-400 tabular-nums">Calculando...</div>
+                </div>
+            </div>
+        </header>
+
+        <section class="py-20 bg-white">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 font-serif">Porquê arriscar o impensável?</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="p-8 bg-gray-50 rounded-xl border-t-4 border-red-500 shadow-sm hover:shadow-md transition" data-aos="fade-up">
+                        <i class="fa-solid fa-phone-slash text-3xl text-red-500 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">O Silêncio</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">"E se o meu pai cai na rua inconsciente? O INEM leva-o e ninguém sabe quem ele é, que alergias tem, ou a quem ligar."</p>
+                    </div>
+                    <div class="p-8 bg-gray-50 rounded-xl border-t-4 border-yellow-500 shadow-sm hover:shadow-md transition" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fa-solid fa-pills text-3xl text-yellow-500 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">A Confusão</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">No médico, eles esquecem-se dos nomes dos remédios. Mentem sobre a tensão arterial para não preocupar. A PulseirUp não mente.</p>
+                    </div>
+                    <div class="p-8 bg-gray-50 rounded-xl border-t-4 border-blue-500 shadow-sm hover:shadow-md transition" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fa-solid fa-gift text-3xl text-blue-500 mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">A Culpa</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">Mora longe? A culpa da distância pesa. Isto não é só uma prenda, é a garantia que está a cuidar deles, todos os dias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-gray-100 border-y border-gray-200">
+            <div class="max-w-5xl mx-auto px-4 text-center">
+                <h2 class="text-2xl font-bold mb-10">Tecnologia Simples. Material Nobre.</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="bg-white p-4 rounded shadow-sm"><i class="fa-solid fa-tree text-green-600 mb-2 text-xl"></i><h3 class="font-bold text-sm">100% Cortiça</h3><p class="text-xs text-gray-500">Biodegradável</p></div>
+                    <div class="bg-white p-4 rounded shadow-sm"><i class="fa-solid fa-shield-halved text-blue-600 mb-2 text-xl"></i><h3 class="font-bold text-sm">Privacidade</h3><p class="text-xs text-gray-500">Sem nomes visíveis</p></div>
+                    <div class="bg-white p-4 rounded shadow-sm"><i class="fa-solid fa-location-dot text-red-600 mb-2 text-xl"></i><h3 class="font-bold text-sm">Feito em PT</h3><p class="text-xs text-gray-500">Produto Nacional</p></div>
+                    <div class="bg-white p-4 rounded shadow-sm"><i class="fa-solid fa-database text-purple-600 mb-2 text-xl"></i><h3 class="font-bold text-sm">Dados Google</h3><p class="text-xs text-gray-500">Controlo Total</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comprar" class="py-20 bg-black text-white text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-32 h-32 bg-medic-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+            <div class="absolute top-0 right-0 w-32 h-32 bg-cork-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+
+            <div class="max-w-3xl mx-auto px-4 relative z-10">
+                <h2 class="text-4xl font-serif mb-4">O melhor presente é a Vida.</h2>
+                <p class="text-gray-400 mb-12">Junte-se aos milhares de filhos que já dormem mais descansados.</p>
+                
+                <div class="bg-white text-black p-8 md:p-12 rounded-2xl shadow-2xl transform hover:scale-105 transition duration-300 border-4 border-cork-400 max-w-md mx-auto">
+                    <div class="uppercase tracking-widest text-xs font-bold text-red-600 mb-2">Promoção de Natal</div>
+                    <h3 class="text-3xl font-bold mb-2">Pulseira MedicinUp</h3>
+                    <p class="text-gray-500 text-sm mb-6">Inclui 1 Ano de Subscrição Grátis</p>
+                    
+                    <div class="flex justify-center items-baseline mb-8">
+                        <span class="text-5xl font-extrabold text-black">49,99€</span>
+                        <span class="ml-2 text-gray-400 line-through text-sm">89,99€</span>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <stripe-buy-button
+                          buy-button-id="buy_btn_1SVdyqEcXun88d6ezjmI8cU9"
+                          publishable-key="pk_live_51P2d9GEcXun88d6eBqX7XAka5dSsCOM1AaakfjBmhQ2C15Se58FQeJpBT1DwqciGH3dsnt3K3a4ZIZRjiPLBkNUH00ZbcNJFJa"
+                        >
+                        </stripe-buy-button>
+                    </div>
+                    <ul class="text-left text-sm space-y-3 text-gray-600 border-t pt-6">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i> Envio Gratuito para Portugal</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i> Configuração Inicial Incluída</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-3"></i> Acesso Vitalício aos Gráficos</li>
+                    </ul>
+                </div>
+                <p class="mt-8 text-xs text-gray-500">Pagamento seguro processado pela Stripe.</p>
+            </div>
+        </section>
+    </main>
+
+    <main id="dashboard-container" class="hidden-section pt-24 pb-12 bg-gray-100 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4">
+            
+            <div class="mb-8 flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                        <i class="fa-solid fa-file-medical text-medic-600"></i> Ficha Clínica Digital
+                    </h2>
+                    <p class="text-sm text-gray-500 mt-1">Pulseira ID: <span id="displayUtenteNumber" class="font-mono font-bold text-black text-lg bg-gray-100 px-2 py-1 rounded">---</span></p>
+                </div>
+                <div class="flex flex-wrap gap-2" id="dynamicButtons">
+                    </div>
+            </div>
+
+            <div id="loading-overlay" class="hidden flex justify-center py-20">
+                <div class="loader"></div>
+            </div>
+
+            <div id="data-content" class="space-y-6 hidden">
+                
+                <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
+                    <div class="bg-gray-900 text-white px-6 py-3 flex justify-between items-center cursor-pointer hover:bg-gray-800 transition" onclick="toggleSection(this)">
+                        <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-user-injured mr-2"></i> Dados Pessoais & Emergência</h3>
+                        <span>&#9660;</span>
+                    </div>
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm" id="general-records">
+                        </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <div class="bg-white p-4 rounded-lg shadow border border-gray-200 lg:col-span-2">
+                        <h4 class="font-bold text-gray-700 mb-4 border-b pb-2 flex justify-between">
+                            <span>Pressão Arterial</span>
+                            <span class="text-xs font-normal text-gray-400">Últimos 90 dias</span>
+                        </h4>
+                        <div id="visualization" class="h-72 w-full"></div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-lg shadow border border-gray-200"><h4 class="font-bold text-gray-700 mb-2">Peso (kg)</h4><div id="weightVisualization" class="h-60 w-full"></div></div>
+                    <div class="bg-white p-4 rounded-lg shadow border border-gray-200"><h4 class="font-bold text-gray-700 mb-2">Glicémia</h4><div id="glucoseVisualization" class="h-60 w-full"></div></div>
+                    <div class="bg-white p-4 rounded-lg shadow border border-gray-200"><h4 class="font-bold text-gray-700 mb-2">Sono (h)</h4><div id="sleepVisualization" class="h-60 w-full"></div></div>
+                    <div class="bg-white p-4 rounded-lg shadow border border-gray-200"><h4 class="font-bold text-gray-700 mb-2">Perímetro Abdominal</h4><div id="abdominalPerimeterVisualization" class="h-60 w-full"></div></div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
+                    <div class="bg-medic-600 text-white px-6 py-3 flex justify-between items-center cursor-pointer hover:bg-medic-500 transition" onclick="toggleSection(this)">
+                        <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-dumbbell mr-2"></i> Exercício Físico</h3>
+                        <span>&#9650;</span> </div>
+                    <div class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 hidden bg-gray-50">
+                         <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Caminhada (km)</h5><div id="distwalkingVisualization" class="h-40"></div></div>
+                         <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Bicicleta (km)</h5><div id="distcyclingVisualization" class="h-40"></div></div>
+                         <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Supino (kg)</h5><div id="maxweightVisualization" class="h-40"></div></div>
+                         <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Flexões</h5><div id="pushupsVisualization" class="h-40"></div></div>
+                         <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Mergulhos</h5><div id="deepVisualization" class="h-40"></div></div>
+                         <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Elevações</h5><div id="pullupsVisualization" class="h-40"></div></div>
+                         <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Agachamentos</h5><div id="squatVisualization" class="h-40"></div></div>
+                         <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Abdominais</h5><div id="absVisualization" class="h-40"></div></div>
+                         <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Elev. Pernas</h5><div id="legraisesVisualization" class="h-40"></div></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
+                    <div class="bg-red-600 text-white px-6 py-3 flex justify-between items-center cursor-pointer hover:bg-red-500 transition" onclick="toggleSection(this)">
+                        <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-vial mr-2"></i> Análises Clínicas</h3>
+                        <span>&#9650;</span>
+                    </div>
+                    <div class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 hidden bg-gray-50">
+                        <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Hg A1c (%)</h5><div id="HgA1cVisualization" class="h-40"></div></div>
+                        <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Hemoglobina</h5><div id="HgVisualization" class="h-40"></div></div>
+                        <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Col. Total</h5><div id="totalcholesterolVisualization" class="h-40"></div></div>
+                        <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">LDL</h5><div id="ldlVisualization" class="h-40"></div></div>
+                        <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">HDL</h5><div id="hdlVisualization" class="h-40"></div></div>
+                        <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">INR</h5><div id="inrVisualization" class="h-40"></div></div>
+                        <div class="bg-white border p-2 rounded shadow-sm"><h5 class="text-xs font-bold mb-2 text-gray-500">Ácido Úrico</h5><div id="uricacidVisualization" class="h-40"></div></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow overflow-hidden border-l-4 border-purple-600">
+                    <div class="bg-purple-50 px-6 py-3 flex justify-between items-center cursor-pointer hover:bg-purple-100 transition" onclick="toggleSection(this)">
+                        <h3 class="font-bold text-sm uppercase tracking-wide text-purple-900"><i class="fa-solid fa-brain mr-2"></i> Cognitivo & Memória</h3>
+                        <span>&#9660;</span>
+                    </div>
+                    <div class="p-6" id="memoria-content">
+                        </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6 border border-gray-200">
+                     <h3 class="font-bold text-sm uppercase tracking-wide mb-4 border-b pb-2 flex items-center"><i class="fa-solid fa-notes-medical mr-2"></i> Notas & Sintomas</h3>
+                     <div id="symptoms-content" class="text-sm max-h-60 overflow-y-auto"></div>
+                </div>
+
+                <div class="text-center py-8">
+                    <button onclick="downloadData()" class="bg-green-600 text-white px-6 py-2 rounded shadow hover:bg-green-700 transition flex items-center justify-center mx-auto gap-2">
+                        <i class="fa-solid fa-file-excel"></i> Download Relatório Completo (Excel)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 border-t border-gray-800 pt-12 pb-24 text-gray-500 text-xs">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="mb-4 font-bold text-gray-400">MedicinUp © 2024. Todos os direitos reservados.</p>
+            <div class="flex justify-center gap-6 mb-8">
+                <button onclick="openModal('privacy')" class="hover:text-white underline">Política de Privacidade</button>
+                <button onclick="openModal('terms')" class="hover:text-white underline">Termos e Condições</button>
+            </div>
+            <p class="text-gray-600 max-w-2xl mx-auto">Aviso Legal: A MedicinUp é uma plataforma de visualização de dados de saúde. Não substitui aconselhamento médico profissional. Em caso de emergência, ligue 112. Os dados são propriedade do utilizador.</p>
+        </div>
+    </footer>
+
+    <div id="cookieBanner" class="fixed bottom-0 w-full bg-white p-4 shadow-[0_-10px_30px_rgba(0,0,0,0.1)] z-50 hidden flex-col md:flex-row justify-between items-center gap-4 border-t border-gray-200">
+        <div class="text-sm text-gray-800">
+            <i class="fa-solid fa-cookie-bite text-cork-500 mr-2"></i>
+            Este site utiliza cookies para garantir a segurança e funcionalidade. Ao continuar, aceita a nossa <a href="#" onclick="event.preventDefault(); openModal('privacy')" class="font-bold underline text-black">Política de Privacidade</a> e os <a href="#" onclick="event.preventDefault(); openModal('terms')" class="font-bold underline text-black">Termos e Condições</a>.
+        </div>
+        <button onclick="acceptCookies()" class="bg-black text-white px-8 py-3 text-sm font-bold hover:bg-gray-800 transition rounded">ACEITAR TUDO</button>
+    </div>
+
+    <div id="legalModal" class="fixed inset-0 z-[60] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-3xl max-h-[80vh] overflow-y-auto rounded-xl p-8 relative shadow-2xl">
+            <button onclick="document.getElementById('legalModal').classList.add('hidden')" class="absolute top-4 right-4 text-2xl font-bold text-gray-400 hover:text-black">&times;</button>
+            <div id="modalContent" class="prose prose-sm text-gray-800 max-w-none"></div>
+        </div>
+    </div>
+
+    <div id="privacy-text" class="hidden">
+        <p><span style="background-color: white; color: #222222; font-family: Roboto, arial; font-size: 14px;">PulseirUp use and transfer to any other app of information received from Google APIs will adhere to&nbsp;</span><a href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes" style="background-color: white; color: #1155cc; font-family: Roboto, arial; font-size: 14px;" target="_blank"><u>Google API Services User Data Policy</u></a><span style="background-color: white; color: #222222; font-family: Roboto, arial; font-size: 14px;">, including the Limited Use requirements.</span></p><p><br /></p><p>Última Atualização: 30 de Maio de 2024</p><p>A MedicinUp valoriza sua privacidade e está comprometida em proteger seus dados pessoais de acordo com o Regulamento Geral sobre a Proteção de Dados (GDPR). Esta Política de Privacidade descreve como coletamos, usamos e protegemos suas informações ao utilizar o serviço PulseirUp.</p><h3>1. Coleta de Dados</h3><p>O PulseirUp não coleta diretamente dados pessoais. Todos os dados de saúde são armazenados na conta Google do usuário. A MedicinUp apenas fornece a plataforma para visualização destes dados.</p><p><strong>Uso de Dados da Conta Google</strong>: A MedicinUp acessa os dados da conta Google do usuário exclusivamente para permitir a visualização desses dados através do PulseirUp. Não armazenamos, compartilhamos, nem usamos esses dados para qualquer outra finalidade que não seja claramente descrita nesta política. Nossas práticas de uso de dados estão em total conformidade com a Política de Dados do Usuário dos Serviços da API do Google, incluindo os requisitos de Uso Limitado.</p><h3>2. Dados Anonimizados</h3><p>Os dados de saúde geridos pelo PulseirUp são anonimizados e não contêm informações pessoais identificáveis. O usuário é responsável por garantir que nenhuma informação que possa identificá-lo pessoalmente seja inserida nos dados de saúde.</p><h3>3. Uso dos Dados</h3><p>Os dados de saúde são utilizados exclusivamente para visualização através da plataforma PulseirUp. A MedicinUp não processa, analisa ou utiliza os dados de saúde para qualquer outra finalidade.</p><h3>4. Compartilhamento de Dados</h3><p>A MedicinUp não compartilha dados de saúde dos usuários com terceiros. No entanto, qualquer pessoa que tenha o número da pulseira pode acessar os dados de saúde associados.</p><h3>5. Segurança dos Dados</h3><p>A segurança dos seus dados é nossa prioridade. Implementamos medidas técnicas e organizacionais adequadas para proteger seus dados de saúde contra acesso não autorizado, perda ou alteração. No entanto, a segurança completa depende também das medidas adotadas pelo usuário, como proteger o número identificador da pulseira.</p><h3>6. Direitos dos Usuários</h3><p>De acordo com o GDPR, você tem o direito de:</p><ul><li>Acessar seus dados de saúde a qualquer momento.</li><li>Corrigir ou excluir seus dados de saúde.</li><li>Retirar seu consentimento para o uso de seus dados.</li></ul><h3>7. Retenção de Dados</h3><p>Os dados de saúde são armazenados na conta Google do usuário e podem ser geridos pelo usuário a qualquer momento. A MedicinUp não retém cópias desses dados.</p><h3>8. Contato</h3><p>Para questões relacionadas à privacidade ou para exercer seus direitos, entre em contato conosco através do email: <a rel="noreferrer">mcminsky@gmail.com</a>.</p><h3>9. Alterações nesta Política de Privacidade</h3><p>A MedicinUp pode atualizar esta Política de Privacidade periodicamente. Notificaremos os usuários sobre quaisquer alterações e a nova política entrará em vigor imediatamente após a publicação.</p><h3>10. Lei Aplicável</h3><p>Esta Política de Privacidade é regida pelas leis de Portugal. Qualquer disputa relacionada a esta política será resolvida nos tribunais de Lisboa, Portugal.</p>
+    </div>
+    <div id="terms-text" class="hidden">
+        <p>Última Atualização: 30 de Maio de 2024</p><p>Bem-vindo ao MedicinUp. Estes Termos e Condições de Uso ("Termos") regem o acesso e o uso do serviço "PulseirUp", uma plataforma que permite a gestão e visualização de dados de saúde através de uma pulseira com um número identificador único. Ao utilizar a plataforma MedicinUp, você concorda com estes Termos.</p><h3>1. Aceitação dos Termos</h3><p>Ao acessar e utilizar o PulseirUp, você aceita e concorda em cumprir estes Termos. Se você não concorda com estes Termos, não utilize o PulseirUp.</p><h3>2. Descrição do Serviço</h3><p>O PulseirUp permite aos usuários armazenar e acessar seus dados de saúde através de uma pulseira com um número único. Os dados são armazenados na conta Google do usuário, e a MedicinUp apenas fornece a plataforma para visualização desses dados.</p><h3>3. Conta de Usuário</h3><p>Cada usuário tem direito a uma única conta pessoal. É sua responsabilidade proteger suas informações de login e garantir que nenhuma informação pessoal identificável seja inserida nos dados de saúde. A MedicinUp não coleta, armazena ou processa diretamente os dados de saúde inseridos pelos usuários.</p><h3>4. Uso do Serviço</h3><ul><li>Os usuários podem adicionar, modificar e excluir seus dados de saúde a qualquer momento.</li><li>Os dados são armazenados exclusivamente na conta Google do usuário e podem ser acessados através do número identificador da pulseira.</li><li>Qualquer pessoa com o número da pulseira pode acessar os dados de saúde armazenados, então é responsabilidade do usuário proteger este número.</li></ul><h3>5. Privacidade e Proteção de Dados</h3><p>A MedicinUp adere ao Regulamento Geral sobre a Proteção de Dados (GDPR). Os dados de saúde são anonimizados e a MedicinUp não coleta informações pessoais como nome, email ou outras identificações diretas.</p><h3>6. Responsabilidades do Usuário</h3><ul><li>Garantir que nenhum dado inserido contenha informações que possam identificar pessoalmente o usuário.</li><li>Proteger o número identificador da pulseira.</li><li>Utilizar o serviço conforme os regulamentos e leis aplicáveis.</li></ul><h3>7. Limitação de Responsabilidade</h3><p>A MedicinUp não se responsabiliza por qualquer perda ou dano resultante do uso do PulseirUp, incluindo mas não se limitando a acessos não autorizados devido ao compartilhamento do número da pulseira.</p><h3>8. Modificações nos Termos</h3><p>A MedicinUp reserva-se o direito de modificar estes Termos a qualquer momento. As alterações serão notificadas aos usuários e entrarão em vigor imediatamente após a publicação.</p><h3>9. Contato</h3><p>Para questões ou mais informações, entre em contato conosco através do email: <a rel="noreferrer">mcminsky@gmail.com</a>.</p><h3>10. Lei Aplicável</h3><p>Estes Termos são regidos pelas leis de Portugal. Qualquer disputa relacionada a estes Termos será resolvida nos tribunais de Lisboa, Portugal.</p>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // --- INITIALIZATION ---
+        AOS.init({ duration: 800, once: true });
+        
+        // --- FOMO TIMER LOGIC ---
+        // Calcula "meia noite de depois de amanhã"
+        function updateTimer() {
+            const now = new Date();
+            // Lógica: Hoje + 2 dias, definido para as 00:00:00 do dia seguinte a esse
+            // Simplificando conforme pedido: "até à meia noite de depois de amanhã"
+            const target = new Date();
+            target.setDate(now.getDate() + 2);
+            target.setHours(24, 0, 0, 0); // Meia noite
+
+            const diff = target - now;
+            
+            // Se por acaso passasse (impossível com a lógica rolling), reset
+            
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').innerText = `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // --- COOKIE BANNER LOGIC ---
+        if(!localStorage.getItem('medicinup_cookies_v1')) {
+            document.getElementById('cookieBanner').classList.remove('hidden');
+            document.getElementById('cookieBanner').classList.add('flex');
+        }
+        function acceptCookies(){ 
+            localStorage.setItem('medicinup_cookies_v1', 'true'); 
+            document.getElementById('cookieBanner').classList.add('hidden'); 
+        }
+        function openModal(type){ 
+            const content = document.getElementById(type + '-text').innerHTML;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('legalModal').classList.remove('hidden');
+        }
+
+        // --- ROUTING / SPA LOGIC ---
+        function resetToHome() {
+            document.getElementById('landing-container').classList.remove('hidden-section');
+            document.getElementById('dashboard-container').classList.add('hidden-section');
+            document.getElementById('navSearchInput').value = '';
+            window.scrollTo(0,0);
+        }
+
+        function runDemo() {
+            // Simula pesquisa do 1001
+            document.getElementById('navSearchInput').value = '1001';
+            searchFromNav();
+        }
+
+        // --- DATA ENGINE ---
+        let globalContUrl = null;
+
+        async function searchFromNav() {
+            const num = document.getElementById('navSearchInput').value;
+            if(!num) return;
+
+            // 1. Mudar UI para Dashboard
+            document.getElementById('landing-container').classList.add('hidden-section');
+            document.getElementById('dashboard-container').classList.remove('hidden-section');
+            document.getElementById('loading-overlay').classList.remove('hidden');
+            document.getElementById('data-content').classList.add('hidden');
+            document.getElementById('displayUtenteNumber').innerText = num;
+            
+            // Reset conteúdo anterior
+            document.getElementById('general-records').innerHTML = '';
+            
+            window.scrollTo(0,0);
+
+            try {
+                const dirUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbbCJWxxvUaMkkE2Xszkr0yms4EzzzIBWfCqamf8_3JUJ70C-YmKks0z0petla8LtVMd6Si644XmfD/pub?output=xlsx';
+                
+                // 2. Buscar Diretoria
+                const dirWb = await fetchExcel(dirUrl);
+                const dirData = XLSX.utils.sheet_to_json(dirWb.Sheets[dirWb.SheetNames[0]]);
+                
+                // Encontrar utilizador
+                const userEntries = dirData.filter(r => r['Número da PulseirUp'] == num);
+                
+                if(userEntries.length === 0) throw new Error('Número de Pulseira não encontrado.');
+                
+                // Mais recente
+                const user = userEntries.sort((a,b) => b['Carimbo de data/hora'] - a['Carimbo de data/hora'])[0];
+
+                globalContUrl = user['Link D'];
+                
+                // Configurar Botões de Formulário
+                document.getElementById('dynamicButtons').innerHTML = `
+                    <button onclick="window.open('${user['Link C']}', '_blank')" class="bg-black text-white px-4 py-2 text-xs font-bold uppercase rounded hover:bg-gray-800 transition">+ Atualizar Geral</button>
+                    <button onclick="window.open('${user['Link D']}', '_blank')" class="bg-black text-white px-4 py-2 text-xs font-bold uppercase rounded hover:bg-gray-800 transition">+ Atualizar Contínuos</button>
+                `;
+
+                // 3. Buscar Dados Reais (Geral e Contínuo)
+                const [genWb, contWb] = await Promise.all([
+                    fetchExcel(user['Link C']), 
+                    fetchExcel(user['Link D'])
+                ]);
+                
+                const genData = XLSX.utils.sheet_to_json(genWb.Sheets[genWb.SheetNames[0]])[0]; // Última linha é a mais recente na lógica do forms normalmente, ou pegar a 0 se só houver 1
+                // Nota: Google forms adiciona ao fim. Mas assumindo que a sheet pode ter varias, vamos pegar a ultima se for array
+                const genDataCorrect = XLSX.utils.sheet_to_json(genWb.Sheets[genWb.SheetNames[0]]).pop();
+
+                const contData = XLSX.utils.sheet_to_json(contWb.Sheets[contWb.SheetNames[0]]);
+
+                // 4. Renderizar
+                renderGeneral(genDataCorrect);
+                renderAllGraphs(contData);
+                renderSymptoms(contData);
+                await fetchMemoria(num);
+
+                // Sucesso
+                document.getElementById('loading-overlay').classList.add('hidden');
+                document.getElementById('data-content').classList.remove('hidden');
+
+            } catch(e) {
+                alert('Erro: ' + e.message);
+                resetToHome();
+            }
+        }
+
+        async function fetchExcel(url) {
+            const r = await fetch(url + '&t=' + Date.now());
+            const b = await r.arrayBuffer();
+            return XLSX.read(b, {type:'array'});
+        }
+
+        function renderGeneral(data) {
+            if(!data) { document.getElementById('general-records').innerHTML = 'Sem dados.'; return; }
+            const fields = {
+                'Naturalidade': data['Naturalidade'],
+                'Nascimento': dateFmt(data['Data de Nascimento']),
+                'Estado Civil': data['Estado Civil'],
+                'Altura': data['Altura (cm)'] ? data['Altura (cm)'] + ' cm' : '',
+                'Sangue': data['Tipo Sanguíneo'],
+                'Medicação': data['Medicação Atual'],
+                'Alergias': data['Alergias'],
+                'Profissão': data['Profissão Atual'],
+                'Cirurgias': data['Cirurgias'],
+                'Contacto Emergência': data['Contacto de Emergência'],
+                'Doenças': data['Doenças, Condições ou Eventos']
+            };
+            
+            let html = '';
+            for(let k in fields) {
+                if(fields[k]) {
+                    html += `
+                    <div class="border-b border-gray-100 pb-2">
+                        <span class="block text-xs font-bold text-gray-400 uppercase mb-1">${k}</span>
+                        <span class="font-medium text-gray-800">${fields[k]}</span>
+                    </div>`;
+                }
+            }
+            document.getElementById('general-records').innerHTML = html || 'Sem dados preenchidos.';
+        }
+
+        function renderAllGraphs(data) {
+            plotBP(data);
+            plotSimple(data, 'Peso (em kg)', 'weightVisualization', 'Peso');
+            plotSimple(data, 'Glicémia', 'glucoseVisualization', 'Glicémia');
+            plotSimple(data, 'Sono (horas)', 'sleepVisualization', 'Sono');
+            plotSimple(data, 'Perímetro abdominal (cm)', 'abdominalPerimeterVisualization', 'Perímetro');
+            
+            // Exercicios
+            plotSimple(data, 'Distância de caminhada/corrida (km)', 'distwalkingVisualization', 'Km');
+            plotSimple(data, 'Distância de bicicleta (km)', 'distcyclingVisualization', 'Km');
+            plotSimple(data, 'Peso máximo no supino (kg)', 'maxweightVisualization', 'Kg');
+            plotSimple(data, 'Flexões de peito', 'pushupsVisualization', 'Reps');
+            plotSimple(data, 'Mergulhos de peito', 'deepVisualization', 'Reps');
+            plotSimple(data, 'Elevações', 'pullupsVisualization', 'Reps');
+            plotSimple(data, 'Agachamentos', 'squatVisualization', 'Reps');
+            plotSimple(data, 'Abdominais', 'absVisualization', 'Reps');
+            plotSimple(data, 'Elevações de pernas', 'legraisesVisualization', 'Reps');
+
+            // Analises
+            plotSimple(data, 'Hemoglobina Glicada A1c (%)', 'HgA1cVisualization', '%');
+            plotSimple(data, 'Hemoglobina (g/dL)', 'HgVisualization', 'g/dL');
+            plotSimple(data, 'Colesterol Total (mg/dL)', 'totalcholesterolVisualization', 'mg/dL');
+            plotSimple(data, 'LDL (mg/dL)', 'ldlVisualization', 'mg/dL');
+            plotSimple(data, 'HDL (mg/dL)', 'hdlVisualization', 'mg/dL');
+            plotSimple(data, 'INR', 'inrVisualization', 'INR');
+            plotSimple(data, 'Ácido Úrico (mg/dL)', 'uricacidVisualization', 'mg/dL');
+        }
+
+        function plotBP(data) {
+            const c = document.getElementById('visualization'); c.innerHTML = '';
+            const items = new vis.DataSet();
+            let hasData = false;
+            data.forEach(r => {
+                const d = dateExcel(r['Carimbo de data/hora']);
+                if(d) {
+                    const s = parseFloat(r['Pressão Arterial Sistólica (número alto)']);
+                    const dia = parseFloat(r['Pressão Arterial Diastólica (número baixo)']);
+                    if(!isNaN(s)) { items.add({x:d, y:s, group:1}); hasData = true; }
+                    if(!isNaN(dia)) { items.add({x:d, y:dia, group:2}); hasData = true; }
+                }
+            });
+            
+            if(!hasData) { c.innerHTML = '<div class="flex h-full items-center justify-center text-gray-400 text-xs">Sem dados</div>'; return; }
+
+            const groups = new vis.DataSet([
+                {id:1, content:'Sistólica', style:'stroke:#dc2626; stroke-width:2px;'}, 
+                {id:2, content:'Diastólica', style:'stroke:#2563eb; stroke-width:2px;'}
+            ]);
+            
+            const options = {
+                height: '100%', 
+                drawPoints: { style: 'circle', size: 3 }, 
+                legend: true,
+                dataAxis: { showMinorLabels: false },
+                start: new Date(new Date().setDate(new Date().getDate()-90)) // Zoom inicial 90 dias
+            };
+            new vis.Graph2d(c, items, groups, options);
+        }
+
+        function plotSimple(data, key, id, label) {
+            const c = document.getElementById(id); 
+            if(!c) return;
+            c.innerHTML = '';
+            const items = new vis.DataSet();
+            data.forEach(r => {
+                const d = dateExcel(r['Carimbo de data/hora']);
+                if(d && r[key]) items.add({x:d, y:parseFloat(r[key]), group:0});
+            });
+            
+            if(items.length === 0) { c.innerHTML = '<div class="flex h-full items-center justify-center text-gray-300 text-xs">Sem registos</div>'; return; }
+            
+            const groups = new vis.DataSet([{id:0, content:label, style:'stroke:#4b5563;'}]);
+            new vis.Graph2d(c, items, groups, {height:'100%', drawPoints:true, dataAxis:{showMinorLabels:false}});
+        }
+
+        function renderSymptoms(data) {
+            const filtered = data.filter(r => r['Sintomas / Notas Atuais']);
+            let html = '<ul class="space-y-3">';
+            filtered.forEach(r => {
+                html += `
+                <li class="border-l-4 border-medic-500 pl-3 py-1 bg-gray-50 rounded-r">
+                    <span class="text-[10px] font-bold text-gray-400 block uppercase">${dateFmt2(r['Carimbo de data/hora'])}</span>
+                    <span class="text-gray-800">${r['Sintomas / Notas Atuais']}</span>
+                </li>`;
+            });
+            document.getElementById('symptoms-content').innerHTML = html + '</ul>';
+        }
+
+        async function fetchMemoria(num) {
+            try {
+                const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-0e68aNlJQKThxZBIHGn8rOaHdJilERZEyFTTeHu21Aj6rfN879wCG5qcAO5H2oS4aIEdFX7kw86D/pub?output=xlsx';
+                const wb = await fetchExcel(url);
+                const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]).filter(r => r['ID'] == num);
+                
+                const c = document.getElementById('memoria-content');
+                if(data.length === 0) { c.innerHTML = '<p class="text-gray-400 italic">Sem testes realizados.</p>'; return; }
+                
+                const last = data[data.length-1];
+                c.innerHTML = `
+                    <div class="mb-6 p-4 bg-purple-50 border border-purple-100 rounded-lg text-center">
+                        <span class="text-xs font-bold uppercase text-purple-800 tracking-widest">Último Resultado</span>
+                        <div class="text-4xl font-bold text-purple-700 mt-2">${Math.round(last['result first round']*100)}%</div>
+                    </div>
+                    <h5 class="text-xs font-bold text-gray-500 mb-2">Evolução</h5>
+                    <div id="memGraph" class="h-60 w-full border bg-white rounded"></div>
+                `;
+                
+                const items = new vis.DataSet();
+                data.forEach(r => {
+                    const d = dateExcel(r['Carimbo de data/hora']);
+                    if(d) items.add({x:d, y: parseFloat(r['result first round'])*100, group:0});
+                });
+                new vis.Graph2d(document.getElementById('memGraph'), items, new vis.DataSet([{id:0, content:'Acerto %', style:'stroke:purple'}]), {height:'100%', drawPoints:true});
+            } catch(e) { console.log(e); }
+        }
+
+        // Helpers
+        function dateExcel(s) { if(!s) return null; return new Date((s - 25569)*86400*1000); }
+        function dateFmt(s) { const d = dateExcel(s); return d ? d.toLocaleDateString() : '-'; }
+        function dateFmt2(s) { const d = dateExcel(s); return d ? d.toLocaleString() : '-'; }
+        function toggleSection(el) { 
+            el.nextElementSibling.classList.toggle('hidden'); 
+            el.querySelector('span').innerText = el.nextElementSibling.classList.contains('hidden') ? '▼' : '▲';
+        }
+        function downloadData() { if(globalContUrl) window.open(globalContUrl); }
+        
+        // PWA Register
+        if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+    </script>
+</body>
+</html>
