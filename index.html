@@ -16,6 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://visjs.github.io/vis-timeline/standalone/umd/vis-timeline-graph2d.min.js"></script>
     <link href="https://visjs.github.io/vis-timeline/styles/vis-timeline-graph2d.min.css" rel="stylesheet" />
+    
     <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 
     <script>
@@ -38,11 +39,11 @@
     <style>
         .glass-nav { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
         
-        /* Vis.js Fixes */
-        .vis-graph-group0, .vis-graph-group1 { stroke-width: 2px; }
+        /* Vis.js Styles */
+        .vis-graph-group0, .vis-graph-group1, .vis-graph-group2 { stroke-width: 2px; }
         .vis-point { stroke-width: 2px; }
         
-        /* Input Number Clean */
+        /* Clean Inputs */
         input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         
         /* Loader */
@@ -50,10 +51,12 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         .hidden-section { display: none !important; }
-        stripe-buy-button { display: block; margin: 10px auto; }
         
-        /* Garantir altura dos gráficos */
-        .graph-container { height: 300px; width: 100%; background-color: #fff; }
+        /* Force graph containers to have height */
+        .graph-container { height: 300px; width: 100%; background-color: #fff; margin-bottom: 1rem; }
+        
+        /* Stripe Button Centering */
+        stripe-buy-button { display: block; margin: 0 auto; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 antialiased overflow-x-hidden selection:bg-black selection:text-white">
@@ -113,7 +116,7 @@
                 
                 <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
                     <a href="#comprar" onclick="trackClickBuy()" class="bg-black text-white px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-gray-800 transition shadow-xl border border-black">
-                        Comprar Pulseira (49,99€)
+                        Comprar (49,99€)
                     </a>
                     <button onclick="runDemo()" class="bg-transparent border border-gray-400 text-gray-800 px-8 py-4 text-sm font-bold uppercase tracking-widest hover:border-black hover:bg-black hover:text-white transition">
                         Ver Exemplo Real
@@ -154,7 +157,7 @@
                         
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <h4 class="font-bold text-black mb-1">Hipertensão Descontrolada</h4>
-                            <p class="text-sm text-gray-600">Apenas 20% dos doentes tratados atingem o controlo da PA. O risco de AVC e Enfarte aumenta exponencialmente com medições erradas ou falta delas.</p>
+                            <p class="text-sm text-gray-600">Apenas 20% dos doentes tratados atingem o controlo da PA. O risco de AVC e Enfarte aumenta exponencialmente.</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <h4 class="font-bold text-black mb-1">Vergonha no Consultório</h4>
@@ -201,27 +204,39 @@
             </div>
         </section>
 
+        <section class="py-16 bg-gray-900 text-white">
+            <div class="max-w-5xl mx-auto px-4 text-center">
+                <h2 class="text-2xl font-bold mb-6">Estudantes & Profissionais de Saúde</h2>
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Alunos de Medicina, Enfermagem, Fisioterapia e Nutrição: ganhem comissões para o vosso núcleo ou jantar de curso. 
+                    Esteticistas e Terapeutas: cada cliente vossa precisa disto.
+                </p>
+                <p class="text-sm font-bold text-medic-500">AJUDE A SALVAR VIDAS E GANHE COM ISSO.</p>
+                <div class="mt-8">
+                    <a href="mailto:mcminsky@gmail.com" class="border border-white px-6 py-2 text-xs uppercase tracking-widest hover:bg-white hover:text-black transition">
+                        Contactar para Parceria
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <section id="comprar" class="py-24 bg-white text-center relative overflow-hidden">
             <div class="max-w-3xl mx-auto px-4 relative z-10">
                 <h2 class="text-4xl font-serif font-bold mb-4">O Presente de Natal Perfeito</h2>
                 <p class="text-gray-500 mb-12">Não deixe para amanhã o que pode prevenir hoje.</p>
                 
-                <div class="bg-white border-2 border-cork-400 p-10 rounded-xl shadow-2xl inline-block relative">
+                <div class="bg-white border-2 border-cork-400 p-10 rounded-xl shadow-2xl inline-block relative" onclick="trackClickBuy()">
                     <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-wider">Promoção</div>
                     
                     <h3 class="text-2xl font-bold mb-2">Pulseira MedicinUp</h3>
-                    <p class="text-sm text-gray-500 mb-6">Cortiça Premium + 1 Ano de Plataforma</p>
+                    <p class="text-sm text-gray-500 mb-6">Cortiça Premium + Plataforma Vitalícia</p>
                     
-                    <div class="text-6xl font-extrabold text-black mb-2">49,99€</div>
-                    <p class="text-gray-400 line-through text-sm mb-8">PVP: 89,99€</p>
-                    
-                    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
                     <stripe-buy-button
                       buy-button-id="buy_btn_1SVdyqEcXun88d6ezjmI8cU9"
                       publishable-key="pk_live_51P2d9GEcXun88d6eBqX7XAka5dSsCOM1AaakfjBmhQ2C15Se58FQeJpBT1DwqciGH3dsnt3K3a4ZIZRjiPLBkNUH00ZbcNJFJa"
                     >
                     </stripe-buy-button>
-                    
+
                     <div class="mt-8 text-left space-y-2 text-sm text-gray-600">
                         <p><i class="fa-solid fa-check text-green-500 mr-2"></i> Inclui 1 Ano de Subscrição</p>
                         <p><i class="fa-solid fa-check text-green-500 mr-2"></i> Envio Gratuito para Portugal</p>
@@ -250,15 +265,15 @@
             <div id="data-content" class="space-y-6 hidden">
                 
                 <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
-                    <div class="bg-gray-800 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this, false)">
+                    <div class="bg-gray-800 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
                         <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-user-shield mr-2"></i> Identificação & Emergência</h3>
                         <span>&#9660;</span>
                     </div>
-                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm" id="general-records"></div>
+                    <div class="p-6 text-sm" id="general-records"></div>
                 </div>
 
                 <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
-                    <div class="bg-blue-900 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this, true)">
+                    <div class="bg-blue-900 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
                         <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-heart-pulse mr-2"></i> Sinais Vitais & Monitorização</h3>
                         <span>&#9660;</span>
                     </div>
@@ -275,7 +290,7 @@
                 </div>
 
                 <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
-                    <div class="bg-medic-600 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this, true)">
+                    <div class="bg-medic-600 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
                         <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-dumbbell mr-2"></i> Exercício Físico</h3>
                         <span>&#9660;</span>
                     </div>
@@ -293,7 +308,7 @@
                 </div>
 
                 <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
-                    <div class="bg-red-600 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this, true)">
+                    <div class="bg-red-600 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
                         <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-vial mr-2"></i> Análises Clínicas</h3>
                         <span>&#9660;</span>
                     </div>
@@ -309,7 +324,7 @@
                 </div>
 
                 <div class="bg-white rounded-lg shadow overflow-hidden border-l-4 border-purple-600">
-                    <div class="bg-purple-50 px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this, true)">
+                    <div class="bg-purple-50 px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
                         <h3 class="font-bold text-sm uppercase tracking-wide text-purple-900"><i class="fa-solid fa-brain mr-2"></i> Cognitivo & Memória</h3>
                         <span>&#9660;</span>
                     </div>
@@ -344,7 +359,7 @@
     <div id="cookieBanner" class="fixed bottom-0 w-full bg-white p-4 shadow-2xl z-50 hidden flex-col md:flex-row justify-between items-center gap-4 border-t border-gray-200">
         <div class="text-sm text-gray-800">
             <i class="fa-solid fa-cookie-bite text-cork-500 mr-2"></i>
-            Utilizamos cookies para funcionamento. <a href="#" onclick="event.preventDefault(); openModal('privacy')" class="font-bold underline">Privacidade</a>.
+            Utilizamos cookies para funcionamento. <a href="#" onclick="event.preventDefault(); openModal('privacy')" class="font-bold underline">Privacidade</a> & <a href="#" onclick="event.preventDefault(); openModal('terms')" class="font-bold underline">Termos</a>.
         </div>
         <button onclick="acceptCookies()" class="bg-black text-white px-8 py-3 text-sm font-bold rounded">ACEITAR</button>
     </div>
@@ -371,7 +386,6 @@
 
         // --- GLOBAL DATA STORAGE ---
         let GLOBAL_CONT_DATA = [];
-        let GRAPHS_RENDERED = {};
 
         // --- GOOGLE FORMS TRACKING ---
         const GF_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeSGGY8vksnVVvt7h1Cb9fyfILrBAWr0zsP3bdANhexuKimGw/formResponse";
@@ -429,34 +443,41 @@
         function runDemo() { document.getElementById('navSearchInput').value='1001'; searchFromNav(); }
 
         // --- ACCORDION & GRAPH RENDER ON DEMAND ---
-        // Isto resolve o problema do gráfico cortado/zoom errado.
-        // Só desenha quando o container está visível.
-        function toggleSection(el, isGraphSection) { 
+        // O segredo para o Vis.js funcionar bem é desenhar APENAS quando o div está visível
+        function toggleSection(el) { 
             const content = el.nextElementSibling;
             content.classList.toggle('hidden');
             el.querySelector('span').innerText = content.classList.contains('hidden') ? '▼' : '▲';
             
-            if(!content.classList.contains('hidden') && isGraphSection) {
-                // Se abriu e tem gráficos, vamos desenhá-los agora para garantir tamanho correto
+            // Se abriu e tem dados, desenha os gráficos contidos nela
+            if(!content.classList.contains('hidden') && GLOBAL_CONT_DATA.length > 0) {
                 renderVisibleGraphs(content);
             }
         }
 
         function renderVisibleGraphs(container) {
-            // Encontra todos os containers de gráfico dentro desta secção
+            // Procura TODOS os gráficos neste container
             const containers = container.querySelectorAll('.graph-container');
             containers.forEach(div => {
                 const id = div.id;
-                // Se já desenhou, não faz nada (ou faz redraw se quiseres garantir responsividade)
-                // Aqui vou forçar renderização baseada no ID
-                if(GLOBAL_CONT_DATA.length > 0) {
-                    renderSpecificGraph(id, GLOBAL_CONT_DATA);
-                }
+                // Limpa antes de redesenhar para não duplicar
+                div.innerHTML = '';
+                // Renderiza
+                renderSpecificGraph(id, GLOBAL_CONT_DATA);
             });
+            
+            // Verifica também memória
+            const memGraph = container.querySelector('#memGraph');
+            if(memGraph && container.dataset.memdata) {
+                memGraph.innerHTML = '';
+                const data = JSON.parse(container.dataset.memdata);
+                const items = new vis.DataSet();
+                data.forEach(r => { const d=dateExcel(r['Carimbo de data/hora']); if(d) items.add({x:d, y:parseFloat(r['result first round'])*100, group:0}); });
+                new vis.Graph2d(memGraph, items, new vis.DataSet([{id:0,style:'stroke:purple'}]), {height:'300px', drawPoints:true});
+            }
         }
 
         function renderSpecificGraph(id, data) {
-            // Mapeamento ID -> Função de desenho
             if(id === 'visualization') plotBP(data, id);
             else if(id === 'weightVisualization') plotSimple(data, 'Peso (em kg)', id, 'Peso');
             else if(id === 'glucoseVisualization') plotSimple(data, 'Glicémia', id, 'Glicémia');
@@ -510,14 +531,15 @@
                 `;
 
                 const [genWb, contWb] = await Promise.all([fetchExcel(user['Link C']), fetchExcel(user['Link D'])]);
-                const genData = XLSX.utils.sheet_to_json(genWb.Sheets[genWb.SheetNames[0]]).pop();
+                const genData = XLSX.utils.sheet_to_json(genWb.Sheets[genWb.SheetNames[0]]).pop(); // Ultima linha
                 GLOBAL_CONT_DATA = XLSX.utils.sheet_to_json(contWb.Sheets[contWb.SheetNames[0]]);
 
                 renderGeneral(genData);
                 renderSymptoms(GLOBAL_CONT_DATA);
                 await fetchMemoria(num);
                 
-                // Nota: Gráficos não são desenhados aqui. Serão desenhados quando o user abrir o acordeão.
+                // NOTA: Não desenha gráficos aqui para evitar o bug de renderização oculta.
+                // Eles desenham quando se clica no acordeão.
 
                 document.getElementById('loading-overlay').classList.add('hidden');
                 document.getElementById('data-content').classList.remove('hidden');
@@ -533,17 +555,44 @@
 
         function renderGeneral(data) {
             if(!data) { document.getElementById('general-records').innerHTML='Sem dados.'; return; }
-            const fields = {'Naturalidade': data['Naturalidade'], 'Nascimento': dateFmt(data['Data de Nascimento']), 'Sangue': data['Tipo Sanguíneo'], 'Alergias': data['Alergias'], 'Medicação': data['Medicação Atual'], 'Doenças': data['Doenças, Condições ou Eventos'], 'Contacto': data['Contacto de Emergência']};
-            let html = '';
-            for(let k in fields) if(fields[k]) html+=`<div><span class="text-xs font-bold text-gray-400 uppercase block">${k}</span><span class="font-medium">${fields[k]}</span></div>`;
+            // Mapeamento Completo Original
+            const fields = {
+                'Última Atualização': dateFmt(data['Carimbo de data/hora']),
+                'Naturalidade': data['Naturalidade'],
+                'Data de Nascimento': dateFmt(data['Data de Nascimento']),
+                'Estado Civil': data['Estado Civil'],
+                'Altura (cm)': data['Altura (cm)'],
+                'Medicação Atual': data['Medicação Atual'],
+                'Alergias': data['Alergias'],
+                'Profissão Atual': data['Profissão Atual'],
+                'Cirurgias': data['Cirurgias'],
+                'Internamentos': data['Internamentos'],
+                'Resultados de Exames (links)': data['Resultados de Exames (links)'],
+                'Contacto de Emergência': data['Contacto de Emergência'],
+                'Doenças, Condições ou Eventos': data['Doenças, Condições ou Eventos'],
+                'Outras Doenças': data['Outras Doenças'],
+                'Último Peso (kg)': data['Último Peso (kg)'],
+                'IMC': data['IMC']
+            };
+            
+            let html = '<div class="grid grid-cols-1 gap-2">';
+            for(let k in fields) {
+                // Mostra tudo, mesmo que esteja vazio, com '-'
+                const val = fields[k] ? fields[k] : '-';
+                html += `
+                <div class="grid grid-cols-3 border-b border-gray-100 pb-1">
+                    <span class="col-span-1 text-xs font-bold text-gray-500 uppercase pt-1">${k}</span>
+                    <span class="col-span-2 text-sm font-medium text-gray-900 pl-2">${val}</span>
+                </div>`;
+            }
+            html += '</div>';
             document.getElementById('general-records').innerHTML = html;
         }
 
-        // --- GRAPH PLOTTING (Robust) ---
+        // --- GRAPHS ---
         function plotBP(data, id) {
             const c = document.getElementById(id); 
-            if(!c) return; 
-            c.innerHTML = ''; // Clear
+            if(!c) return;
             
             const items = new vis.DataSet();
             let hasData = false;
@@ -563,13 +612,13 @@
                 height: '300px',
                 drawPoints: { style: 'circle', size: 4 },
                 dataAxis: { showMinorLabels: false },
-                legend: true,
-                start: new Date(new Date().setDate(new Date().getDate()-90)) // Last 90 days
+                legend: true, // Default Vis.js legend
+                start: new Date(new Date().setDate(new Date().getDate()-90))
             };
             
             const groups = new vis.DataSet([
-                {id:1, content:'Sistólica', style:'stroke:red; stroke-width:2px;'}, 
-                {id:2, content:'Diastólica', style:'stroke:blue; stroke-width:2px;'}
+                {id:1, content:'Sistólica (Alta)', style:'stroke:red; stroke-width:2px;'}, 
+                {id:2, content:'Diastólica (Baixa)', style:'stroke:blue; stroke-width:2px;'}
             ]);
             
             new vis.Graph2d(c, items, groups, options);
@@ -577,8 +626,7 @@
 
         function plotSimple(data, key, id, label) {
             const c = document.getElementById(id); 
-            if(!c) return; 
-            c.innerHTML = '';
+            if(!c) return;
             
             const items = new vis.DataSet();
             data.forEach(r => {
@@ -595,7 +643,8 @@
                 shaded: { orientation: 'bottom' }
             };
             
-            new vis.Graph2d(c, items, new vis.DataSet([{id:0, content:label}]), options);
+            const groups = new vis.DataSet([{id:0, content:label, style:'stroke:black'}]);
+            new vis.Graph2d(c, items, groups, options);
         }
 
         function renderSymptoms(data) {
@@ -611,39 +660,14 @@
                 const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]).filter(r => r['ID'] == num);
                 const c = document.getElementById('memoria-content');
                 
-                // Se não houver dados, fecha e esconde o pai. Se houver, desenha só quando visível
                 if(data.length===0) { c.innerHTML='Sem dados.'; return; }
                 
                 c.innerHTML = `<div class="mb-4 font-bold text-purple-700 text-center text-2xl">${Math.round(data[data.length-1]['result first round']*100)}% Acerto</div><div id="memGraph" class="graph-container"></div>`;
                 
-                // Memória tem de ser desenhada quando a secção abre, mas aqui não temos o trigger toggle. 
-                // O user tem de clicar no acordeão de memória para ver.
-                // Vamos anexar os dados ao contentor para uso posterior
+                // Save for render on open
                 c.dataset.memdata = JSON.stringify(data);
                 
             } catch(e){}
-        }
-        
-        // Override para memória no toggleSection
-        const originalToggle = toggleSection;
-        toggleSection = function(el, isGraph) {
-            const content = el.nextElementSibling;
-            content.classList.toggle('hidden');
-            el.querySelector('span').innerText = content.classList.contains('hidden') ? '▼' : '▲';
-            
-            if(!content.classList.contains('hidden')) {
-                if(isGraph) renderVisibleGraphs(content);
-                
-                // Check memória
-                const memGraph = content.querySelector('#memGraph');
-                if(memGraph && content.dataset.memdata) {
-                     const data = JSON.parse(content.dataset.memdata);
-                     const items = new vis.DataSet();
-                     data.forEach(r => { const d=dateExcel(r['Carimbo de data/hora']); if(d) items.add({x:d, y:parseFloat(r['result first round'])*100, group:0}); });
-                     new vis.Graph2d(memGraph, items, new vis.DataSet([{id:0,style:'stroke:purple'}]), {height:'300px', drawPoints:true});
-                     delete content.dataset.memdata; // clean
-                }
-            }
         }
 
         function dateExcel(s){ if(!s)return null; return new Date((s-25569)*86400*1000); }
