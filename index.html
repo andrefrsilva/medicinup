@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PulseirUp | MedicinUp - Proteção de Natal</title>
+    <title>PulseirUp | MedicinUp - A Proteção de Natal</title>
     <meta name="description" content="A prenda que salva vidas. Dados de saúde acessíveis numa pulseira de cortiça portuguesa.">
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
@@ -39,10 +39,10 @@
     <style>
         .glass-nav { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
         
-        /* Vis.js Fixes */
+        /* Vis.js Styles */
         .vis-graph-group0, .vis-graph-group1, .vis-graph-group2 { stroke-width: 2px; }
         .vis-point { stroke-width: 2px; }
-        .vis-legend { background-color: rgba(255,255,255,0.8) !important; }
+        .vis-legend { background-color: rgba(255,255,255,0.9) !important; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         
         /* Clean Inputs */
         input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
@@ -53,10 +53,10 @@
         
         .hidden-section { display: none !important; }
         
-        /* Gráficos: Altura fixa obrigatória para o Vis.js calcular bem */
+        /* Graph Containers: Height required for Vis.js */
         .graph-container { height: 300px; width: 100%; background-color: #fff; margin-bottom: 1rem; border: 1px solid #eee; border-radius: 4px; }
         
-        /* Stripe Button Centering */
+        /* Stripe Button Center */
         stripe-buy-button { display: block; margin: 0 auto; }
     </style>
 </head>
@@ -118,118 +118,136 @@
                     <a href="#comprar" onclick="trackClickBuy()" class="bg-black text-white px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-gray-800 transition shadow-xl border border-black">
                         Cortiça Premium + 1 Ano Plataforma
                     </a>
-                    <button onclick="runDemo()" class="bg-transparent border border-gray-400 text-gray-800 px-8 py-4 text-sm font-bold uppercase tracking-widest hover:border-black hover:bg-black hover:text-white transition">
-                        Ver Exemplo Real
-                    </button>
                 </div>
             </div>
         </div>
 
-        <section class="py-12 bg-gray-100 border-y border-gray-300">
+        <section class="py-16 bg-gray-50 border-y border-gray-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-serif font-bold text-center mb-12">Como Funciona? <br><span class="text-sm font-sans font-normal text-gray-500">Simples. Seguro. Privado.</span></h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-8 text-center relative">
+                    <div class="hidden md:block absolute top-8 left-0 w-full h-0.5 bg-gray-200 -z-10"></div>
+
+                    <div class="bg-gray-50">
+                        <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">1</div>
+                        <h3 class="font-bold text-lg mb-2">Encomenda</h3>
+                        <p class="text-xs text-gray-600">Recebe a pulseira de cortiça em casa.</p>
+                    </div>
+                    <div class="bg-gray-50">
+                        <div class="w-16 h-16 bg-cork-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">2</div>
+                        <h3 class="font-bold text-lg mb-2">Regista</h3>
+                        <p class="text-xs text-gray-600">Associa o Nº Único à sua conta Google.</p>
+                    </div>
+                    <div class="bg-gray-50">
+                        <div class="w-16 h-16 bg-white border-2 border-black text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">3</div>
+                        <h3 class="font-bold text-lg mb-2">Configura</h3>
+                        <p class="text-xs text-gray-600">Escolhe que dados são públicos (Emergência) e quais são privados.</p>
+                    </div>
+                    <div class="bg-gray-50">
+                        <div class="w-16 h-16 bg-white border-2 border-black text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">4</div>
+                        <h3 class="font-bold text-lg mb-2">Adiciona</h3>
+                        <p class="text-xs text-gray-600">Insere medições (tensão, peso) ao longo do tempo.</p>
+                    </div>
+                    <div class="bg-gray-50">
+                        <div class="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg"><i class="fa-solid fa-check"></i></div>
+                        <h3 class="font-bold text-lg mb-2">Segurança</h3>
+                        <p class="text-xs text-gray-600">Em emergência, médicos acedem aos dados vitais.</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <button onclick="runDemo()" class="bg-transparent border border-gray-400 text-gray-800 px-8 py-3 text-sm font-bold uppercase tracking-widest hover:border-black hover:bg-black hover:text-white transition rounded-full">
+                        Ver Exemplo Real do Dashboard
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 bg-white">
             <div class="max-w-5xl mx-auto px-4">
                 <h2 class="text-2xl font-bold text-center mb-8 flex items-center justify-center gap-2">
                     <i class="fa-solid fa-newspaper text-red-600"></i> Realidade nas Manchetes
                 </h2>
                 <div class="space-y-4">
-                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-red-600 hover:bg-gray-50 transition">
+                    <div class="bg-gray-50 p-4 rounded shadow-sm border-l-4 border-red-600 hover:bg-gray-100 transition">
                         <a href="https://www.dn.pt/sociedade/mdico-e-enfermeiro-condenados-por-darem-penicilina-a-doente-alrgico-que-acabou-por-morrer" target="_blank" class="block">
                             <h3 class="font-bold text-lg text-gray-900 hover:underline">"Médico e enfermeiro condenados por darem penicilina a doente alérgico que acabou por morrer"</h3>
                             <p class="text-xs text-gray-500 mt-1 uppercase tracking-wide">Diário de Notícias &rarr; Ler Notícia</p>
                         </a>
                     </div>
-                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-gray-600 hover:bg-gray-50 transition">
-                        <a href="#" class="block pointer-events-none">
-                            <h3 class="font-bold text-lg text-gray-900">"Idoso encontrado desorientado na via pública sem identificação"</h3>
-                            <p class="text-xs text-gray-500 mt-1 uppercase tracking-wide">Jornal de Notícias (Arquivo)</p>
-                        </a>
+                    <div class="bg-gray-50 p-4 rounded shadow-sm border-l-4 border-gray-600">
+                        <h3 class="font-bold text-lg text-gray-900">"Idoso encontrado desorientado na via pública sem identificação"</h3>
+                        <p class="text-xs text-gray-500 mt-1 uppercase tracking-wide">Jornal de Notícias (Arquivo)</p>
                     </div>
-                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-gray-600 hover:bg-gray-50 transition">
-                        <a href="#" class="block pointer-events-none">
-                            <h3 class="font-bold text-lg text-gray-900">"Erro na medicação de doente crónico causa internamento de urgência"</h3>
-                            <p class="text-xs text-gray-500 mt-1 uppercase tracking-wide">Público (Arquivo)</p>
-                        </a>
-                    </div>
-                </div>
-                <p class="text-center text-xs text-gray-500 mt-6">Estas situações acontecem todos os dias. A informação certa no momento certo salva vidas.</p>
-            </div>
-        </section>
-
-        <section class="py-20 bg-white">
-            <div class="max-w-6xl mx-auto px-4">
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div class="space-y-8" data-aos="fade-right">
-                        <h3 class="text-xl font-bold text-black border-b-2 border-cork-400 pb-2 inline-block">A Sua Angústia</h3>
-                        
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-red-500">
-                            <h4 class="font-bold text-red-600 mb-1"><i class="fa-solid fa-heart-crack mr-2"></i>Culpa & Distância</h4>
-                            <p class="text-sm text-gray-600">"Estou longe. E se acontece alguma coisa hoje? Não tenho prenda para lhes dar que realmente importe."</p>
-                        </div>
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
-                            <h4 class="font-bold text-orange-600 mb-1"><i class="fa-solid fa-ambulance mr-2"></i>O Medo do INEM</h4>
-                            <p class="text-sm text-gray-600">"Se o meu pai cai na rua inconsciente, quem avisa? Que medicamentos toma? Tem alergias? Sem a pulseira, ele é um desconhecido no hospital."</p>
-                        </div>
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-gray-500">
-                            <h4 class="font-bold text-gray-600 mb-1"><i class="fa-solid fa-user-secret mr-2"></i>A Mentira</h4>
-                            <p class="text-sm text-gray-600">"Ele diz-me que mede a tensão, mas eu sei que não mede. Ou mente nos valores para não me preocupar."</p>
-                        </div>
-                    </div>
-
-                    <div class="space-y-8" data-aos="fade-left">
-                        <h3 class="text-xl font-bold text-black border-b-2 border-medic-600 pb-2 inline-block">O Risco Deles</h3>
-                        
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-black mb-1">Hipertensão Descontrolada</h4>
-                            <p class="text-sm text-gray-600">Apenas 20% dos doentes tratados atingem o controlo da PA. O risco de AVC e Enfarte aumenta exponencialmente.</p>
-                        </div>
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-black mb-1">Vergonha no Consultório</h4>
-                            <p class="text-sm text-gray-600">O médico pergunta e eles não sabem, não trouxeram o papel ou esqueceram-se. Com a PulseirUp, os dados estão no pulso.</p>
-                        </div>
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-black mb-1">Emergência Médica</h4>
-                            <p class="text-sm text-gray-600">Em caso de AVC, demência ou confusão, eles não conseguem desbloquear o telemóvel para usar a App SNS24. A PulseirUp não precisa de bateria nem de código.</p>
-                        </div>
+                    <div class="bg-gray-50 p-4 rounded shadow-sm border-l-4 border-gray-600">
+                        <h3 class="font-bold text-lg text-gray-900">"Erro na medicação de doente crónico causa internamento de urgência"</h3>
+                        <p class="text-xs text-gray-500 mt-1 uppercase tracking-wide">Público (Arquivo)</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="py-20 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-serif font-bold mb-4">Porquê a PulseirUp?</h2>
-                    <p class="text-gray-500">Complementar à App SNS24. Essencial para o Dia-a-Dia.</p>
-                </div>
-
-                <div class="grid md:grid-cols-4 gap-6 text-center">
-                    <div class="p-6 bg-white rounded-lg hover:shadow-lg transition">
-                        <i class="fa-solid fa-leaf text-green-600 text-4xl mb-4"></i>
-                        <h3 class="font-bold">Cortiça Portuguesa</h3>
-                        <p class="text-xs text-gray-500 mt-2">Biodegradável e Hipoalergénica.</p>
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="space-y-8" data-aos="fade-right">
+                        <h3 class="text-xl font-bold text-black border-b-2 border-cork-400 pb-2 inline-block">A Sua Angústia</h3>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-500">
+                            <h4 class="font-bold text-red-600 mb-1"><i class="fa-solid fa-heart-crack mr-2"></i>Culpa & Distância</h4>
+                            <p class="text-sm text-gray-600">"Estou longe. E se acontece alguma coisa hoje?"</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
+                            <h4 class="font-bold text-orange-600 mb-1"><i class="fa-solid fa-ambulance mr-2"></i>O Medo do INEM</h4>
+                            <p class="text-sm text-gray-600">"Se o meu pai cai na rua inconsciente, quem avisa? Sem a pulseira, ele é um desconhecido."</p>
+                        </div>
                     </div>
-                    <div class="p-6 bg-white rounded-lg hover:shadow-lg transition">
-                        <i class="fa-solid fa-shield-halved text-blue-600 text-4xl mb-4"></i>
-                        <h3 class="font-bold">Privacidade Total</h3>
-                        <p class="text-xs text-gray-500 mt-2">Sem nome visível. Use virada para dentro.</p>
-                    </div>
-                    <div class="p-6 bg-white rounded-lg hover:shadow-lg transition">
-                        <i class="fa-solid fa-radiation text-orange-500 text-4xl mb-4"></i>
-                        <h3 class="font-bold">Exames Seguros</h3>
-                        <p class="text-xs text-gray-500 mt-2">Sem metal. Segura para Ressonância Magnética. À prova de água.</p>
-                    </div>
-                    <div class="p-6 bg-white rounded-lg hover:shadow-lg transition">
-                        <i class="fa-solid fa-hospital-user text-red-600 text-4xl mb-4"></i>
-                        <h3 class="font-bold">Acesso Médico</h3>
-                        <p class="text-xs text-gray-500 mt-2">Em emergência, qualquer médico acede ao histórico digitando o número.</p>
+                    <div class="space-y-8" data-aos="fade-left">
+                        <h3 class="text-xl font-bold text-black border-b-2 border-medic-600 pb-2 inline-block">O Risco Deles</h3>
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-black mb-1">Hipertensão Descontrolada</h4>
+                            <p class="text-sm text-gray-600">Apenas 20% dos doentes controlam a PA. O risco de AVC aumenta sem monitorização.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h4 class="font-bold text-black mb-1">Vergonha no Consultório</h4>
+                            <p class="text-sm text-gray-600">O médico pergunta e eles não sabem. Com a PulseirUp, os dados estão no pulso.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="comprar" class="py-24 bg-white text-center relative overflow-hidden border-t border-gray-200">
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid md:grid-cols-4 gap-6 text-center">
+                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition">
+                        <i class="fa-solid fa-leaf text-green-600 text-4xl mb-4"></i>
+                        <h3 class="font-bold">Cortiça Portuguesa</h3>
+                        <p class="text-xs text-gray-500 mt-2">Biodegradável e Hipoalergénica.</p>
+                    </div>
+                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition">
+                        <i class="fa-solid fa-shield-halved text-blue-600 text-4xl mb-4"></i>
+                        <h3 class="font-bold">Privacidade Total</h3>
+                        <p class="text-xs text-gray-500 mt-2">Sem nome visível. Use virada para dentro.</p>
+                    </div>
+                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition">
+                        <i class="fa-solid fa-radiation text-orange-500 text-4xl mb-4"></i>
+                        <h3 class="font-bold">Exames Seguros</h3>
+                        <p class="text-xs text-gray-500 mt-2">Sem metal (Ressonância OK). À prova de água.</p>
+                    </div>
+                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition">
+                        <i class="fa-solid fa-hospital-user text-red-600 text-4xl mb-4"></i>
+                        <h3 class="font-bold">Acesso Médico</h3>
+                        <p class="text-xs text-gray-500 mt-2">Em emergência, qualquer médico acede ao histórico.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comprar" class="py-24 bg-gray-50 text-center relative overflow-hidden border-t border-gray-200">
             <div class="max-w-3xl mx-auto px-4 relative z-10">
                 <h2 class="text-4xl font-serif font-bold mb-4">O Presente de Natal Perfeito</h2>
-                <p class="text-gray-500 mb-12">Cortiça Premium + 1 Ano de Plataforma</p>
+                <p class="text-gray-500 mb-8">Cortiça Premium + 1 Ano de Plataforma</p>
                 
                 <div class="inline-block" onclick="trackClickBuy()">
                     <stripe-buy-button
@@ -239,9 +257,9 @@
                     </stripe-buy-button>
                 </div>
 
-                <div class="mt-8">
-                    <p class="text-[10px] text-red-500 uppercase tracking-widest mb-1 font-bold">Promoção termina em:</p>
-                    <div id="countdown" class="text-2xl font-mono font-bold text-red-600">Calculando...</div>
+                <div class="mt-6 flex justify-center items-center gap-3">
+                    <p class="text-[10px] text-red-500 uppercase tracking-widest font-bold">Termina em:</p>
+                    <div id="countdown" class="text-xl font-mono font-bold text-red-600">Calculando...</div>
                 </div>
 
                 <div class="mt-8 text-sm text-gray-500 flex justify-center gap-6">
@@ -444,54 +462,6 @@
         }
         function runDemo() { document.getElementById('navSearchInput').value='1001'; searchFromNav(); }
 
-        // --- ACCORDION & GRAPH RENDER ON DEMAND (FIXED BUG) ---
-        function toggleSection(el) { 
-            const content = el.nextElementSibling;
-            content.classList.toggle('hidden');
-            el.querySelector('span').innerText = content.classList.contains('hidden') ? '▼' : '▲';
-            
-            // Se abriu e tem dados, desenha TODOS os gráficos dessa secção
-            if(!content.classList.contains('hidden') && GLOBAL_CONT_DATA.length > 0) {
-                renderVisibleGraphs(content);
-            }
-        }
-
-        function renderVisibleGraphs(container) {
-            // Encontra todos os divs de grafico neste container aberto
-            const containers = container.querySelectorAll('.graph-container');
-            containers.forEach(div => {
-                const id = div.id;
-                // Desenha cada um individualmente
-                renderSpecificGraph(id, GLOBAL_CONT_DATA);
-            });
-        }
-
-        function renderSpecificGraph(id, data) {
-            if(id === 'visualization') plotBP(data, id);
-            else if(id === 'weightVisualization') plotSimple(data, 'Peso (em kg)', id, 'Peso');
-            else if(id === 'glucoseVisualization') plotSimple(data, 'Glicémia', id, 'Glicémia');
-            else if(id === 'sleepVisualization') plotSimple(data, 'Sono (horas)', id, 'Sono');
-            else if(id === 'abdominalPerimeterVisualization') plotSimple(data, 'Perímetro abdominal (cm)', id, 'Perímetro');
-            
-            else if(id === 'distwalkingVisualization') plotSimple(data, 'Distância de caminhada/corrida (km)', id, 'Km');
-            else if(id === 'distcyclingVisualization') plotSimple(data, 'Distância de bicicleta (km)', id, 'Km');
-            else if(id === 'maxweightVisualization') plotSimple(data, 'Peso máximo no supino (kg)', id, 'Kg');
-            else if(id === 'pushupsVisualization') plotSimple(data, 'Flexões de peito', id, 'Reps');
-            else if(id === 'deepVisualization') plotSimple(data, 'Mergulhos de peito', id, 'Reps');
-            else if(id === 'pullupsVisualization') plotSimple(data, 'Elevações', id, 'Reps');
-            else if(id === 'squatVisualization') plotSimple(data, 'Agachamentos', id, 'Reps');
-            else if(id === 'absVisualization') plotSimple(data, 'Abdominais', id, 'Reps');
-            else if(id === 'legraisesVisualization') plotSimple(data, 'Elevações de pernas', id, 'Reps');
-            
-            else if(id === 'HgA1cVisualization') plotSimple(data, 'Hemoglobina Glicada A1c (%)', id, '%');
-            else if(id === 'HgVisualization') plotSimple(data, 'Hemoglobina (g/dL)', id, 'g/dL');
-            else if(id === 'totalcholesterolVisualization') plotSimple(data, 'Colesterol Total (mg/dL)', id, 'mg/dL');
-            else if(id === 'ldlVisualization') plotSimple(data, 'LDL (mg/dL)', id, 'mg/dL');
-            else if(id === 'hdlVisualization') plotSimple(data, 'HDL (mg/dL)', id, 'mg/dL');
-            else if(id === 'inrVisualization') plotSimple(data, 'INR', id, 'INR');
-            else if(id === 'uricacidVisualization') plotSimple(data, 'Ácido Úrico (mg/dL)', id, 'mg/dL');
-        }
-
         // --- DATA ENGINE ---
         let globalContUrl = null;
 
@@ -520,14 +490,12 @@
                 `;
 
                 const [genWb, contWb] = await Promise.all([fetchExcel(user['Link C']), fetchExcel(user['Link D'])]);
-                const genData = XLSX.utils.sheet_to_json(genWb.Sheets[genWb.SheetNames[0]]).pop(); // Ultima linha
+                const genData = XLSX.utils.sheet_to_json(genWb.Sheets[genWb.SheetNames[0]]).pop();
                 GLOBAL_CONT_DATA = XLSX.utils.sheet_to_json(contWb.Sheets[contWb.SheetNames[0]]);
 
                 renderGeneral(genData);
                 renderSymptoms(GLOBAL_CONT_DATA);
                 
-                // NOTA: Gráficos serão renderizados ao abrir o acordeão para evitar bugs de tamanho.
-
                 document.getElementById('loading-overlay').classList.add('hidden');
                 document.getElementById('data-content').classList.remove('hidden');
 
@@ -540,9 +508,9 @@
             return XLSX.read(b, {type:'array'});
         }
 
+        // --- RENDERERS ---
         function renderGeneral(data) {
             if(!data) { document.getElementById('general-records').innerHTML='Sem dados.'; return; }
-            // Mapeamento Completo
             const fields = {
                 'Última Atualização': dateFmt(data['Carimbo de data/hora']),
                 'Naturalidade': data['Naturalidade'],
@@ -554,9 +522,9 @@
                 'Profissão Atual': data['Profissão Atual'],
                 'Cirurgias': data['Cirurgias'],
                 'Internamentos': data['Internamentos'],
-                'Resultados de Exames (links)': data['Resultados de Exames (links)'],
-                'Contacto de Emergência': data['Contacto de Emergência'],
-                'Doenças, Condições ou Eventos': data['Doenças, Condições ou Eventos'],
+                'Resultados de Exames': data['Resultados de Exames (links)'],
+                'Contacto Emergência': data['Contacto de Emergência'],
+                'Doenças/Condições': data['Doenças, Condições ou Eventos'],
                 'Outras Doenças': data['Outras Doenças'],
                 'Último Peso (kg)': data['Último Peso (kg)'],
                 'IMC': data['IMC']
@@ -575,12 +543,52 @@
             document.getElementById('general-records').innerHTML = html;
         }
 
-        // --- GRAPHS ---
-        function plotBP(data, id) {
-            const c = document.getElementById(id); 
-            if(!c) return;
-            c.innerHTML = ''; // Clear container
+        // --- ACCORDION LOGIC (CORRIGIDO PARA DESENHAR TODOS) ---
+        function toggleSection(el) { 
+            const content = el.nextElementSibling;
+            content.classList.toggle('hidden');
+            el.querySelector('span').innerText = content.classList.contains('hidden') ? '▼' : '▲';
             
+            if(!content.classList.contains('hidden') && GLOBAL_CONT_DATA.length > 0) {
+                // Encontra TODOS os containers de gráficos nesta secção e desenha
+                const containers = content.querySelectorAll('.graph-container');
+                containers.forEach(div => {
+                    div.innerHTML = ''; // Limpa
+                    renderSpecificGraph(div.id, GLOBAL_CONT_DATA);
+                });
+            }
+        }
+
+        function renderSpecificGraph(id, data) {
+            if (!document.getElementById(id)) return;
+            
+            if(id === 'visualization') plotBP(data, id);
+            else if(id === 'weightVisualization') plotSimple(data, 'Peso (em kg)', id, 'Peso');
+            else if(id === 'glucoseVisualization') plotSimple(data, 'Glicémia', id, 'Glicémia');
+            else if(id === 'sleepVisualization') plotSimple(data, 'Sono (horas)', id, 'Sono');
+            else if(id === 'abdominalPerimeterVisualization') plotSimple(data, 'Perímetro abdominal (cm)', id, 'Perímetro');
+            
+            else if(id === 'distwalkingVisualization') plotSimple(data, 'Distância de caminhada/corrida (km)', id, 'Km');
+            else if(id === 'distcyclingVisualization') plotSimple(data, 'Distância de bicicleta (km)', id, 'Km');
+            else if(id === 'maxweightVisualization') plotSimple(data, 'Peso máximo no supino (kg)', id, 'Kg');
+            else if(id === 'pushupsVisualization') plotSimple(data, 'Flexões de peito', id, 'Reps');
+            else if(id === 'deepVisualization') plotSimple(data, 'Mergulhos de peito', id, 'Reps');
+            else if(id === 'pullupsVisualization') plotSimple(data, 'Elevações', id, 'Reps');
+            else if(id === 'squatVisualization') plotSimple(data, 'Agachamentos', id, 'Reps');
+            else if(id === 'absVisualization') plotSimple(data, 'Abdominais', id, 'Reps');
+            else if(id === 'legraisesVisualization') plotSimple(data, 'Elevações de pernas', id, 'Reps');
+            
+            else if(id === 'HgA1cVisualization') plotSimple(data, 'Hemoglobina Glicada A1c (%)', id, '%');
+            else if(id === 'HgVisualization') plotSimple(data, 'Hemoglobina (g/dL)', id, 'g/dL');
+            else if(id === 'totalcholesterolVisualization') plotSimple(data, 'Colesterol Total (mg/dL)', id, 'mg/dL');
+            else if(id === 'ldlVisualization') plotSimple(data, 'LDL (mg/dL)', id, 'mg/dL');
+            else if(id === 'hdlVisualization') plotSimple(data, 'HDL (mg/dL)', id, 'mg/dL');
+            else if(id === 'inrVisualization') plotSimple(data, 'INR', id, 'INR');
+            else if(id === 'uricacidVisualization') plotSimple(data, 'Ácido Úrico (mg/dL)', id, 'mg/dL');
+        }
+
+        function plotBP(data, id) {
+            const c = document.getElementById(id); if(!c) return;
             const items = new vis.DataSet();
             let hasData = false;
             data.forEach(r => {
@@ -588,50 +596,36 @@
                 if(d) {
                     const s = parseFloat(r['Pressão Arterial Sistólica (número alto)']);
                     const dia = parseFloat(r['Pressão Arterial Diastólica (número baixo)']);
-                    if(!isNaN(s)) { items.add({x:d, y:s, group:1}); hasData=true; }
-                    if(!isNaN(dia)) { items.add({x:d, y:dia, group:2}); hasData=true; }
+                    // IMPORTANT: group MUST BE STRING 'sys'/'dia' to match
+                    if(!isNaN(s)) { items.add({x:d, y:s, group:'sys'}); hasData=true; }
+                    if(!isNaN(dia)) { items.add({x:d, y:dia, group:'dia'}); hasData=true; }
                 }
             });
 
             if(!hasData) { c.innerHTML='<div class="text-gray-400 text-xs p-4">Sem dados</div>'; return; }
 
-            const options = {
-                height: '300px',
-                drawPoints: { style: 'circle', size: 4 },
-                dataAxis: { showMinorLabels: false },
-                legend: true,
-                start: new Date(new Date().setDate(new Date().getDate()-90))
-            };
+            const options = { height: '100%', drawPoints: { style: 'circle', size: 4 }, dataAxis: { showMinorLabels: false }, legend: true, start: new Date(new Date().setDate(new Date().getDate()-90)) };
             
             const groups = new vis.DataSet([
-                {id:1, content:'Sistólica', style:'stroke:red; stroke-width:2px;'}, 
-                {id:2, content:'Diastólica', style:'stroke:blue; stroke-width:2px;'}
+                {id:'sys', content:'Sistólica', style:'stroke:red; stroke-width:2px;'}, 
+                {id:'dia', content:'Diastólica', style:'stroke:blue; stroke-width:2px;'}
             ]);
-            
             new vis.Graph2d(c, items, groups, options);
         }
 
         function plotSimple(data, key, id, label) {
-            const c = document.getElementById(id); 
-            if(!c) return;
-            c.innerHTML = '';
-            
+            const c = document.getElementById(id); if(!c) return;
             const items = new vis.DataSet();
+            let hasData = false;
             data.forEach(r => {
                 const d = dateExcel(r['Carimbo de data/hora']);
-                if(d && r[key]) items.add({x:d, y:parseFloat(r[key]), group:0});
+                if(d && r[key]) { items.add({x:d, y:parseFloat(r[key]), group:'g1'}); hasData=true; }
             });
             
-            if(items.length === 0) { c.innerHTML='<div class="text-gray-400 text-xs p-4">Sem registos</div>'; return; }
+            if(!hasData) { c.innerHTML='<div class="text-gray-400 text-xs p-4">Sem registos</div>'; return; }
             
-            const options = {
-                height: '300px',
-                drawPoints: { style: 'circle', size: 4 },
-                dataAxis: { showMinorLabels: false },
-                shaded: { orientation: 'bottom' }
-            };
-            
-            const groups = new vis.DataSet([{id:0, content:label, style:'stroke:black'}]);
+            const options = { height: '100%', drawPoints: { style: 'circle', size: 4 }, dataAxis: { showMinorLabels: false }, shaded: { orientation: 'bottom' } };
+            const groups = new vis.DataSet([{id:'g1', content:label, style:'stroke:black'}]);
             new vis.Graph2d(c, items, groups, options);
         }
 
