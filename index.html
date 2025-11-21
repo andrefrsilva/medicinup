@@ -435,7 +435,13 @@
             document.getElementById('cookieBanner').classList.add('flex');
         });
         
-        function trackClickBuy() { sendToGoogleForms("clique_comprar", "Clicou no botão Stripe"); }
+        function trackClickBuy() { 
+    // Envia tracking de forma não-bloqueante (não espera resposta)
+    navigator.sendBeacon(GF_URL, new URLSearchParams({
+        [GF_EVENT]: "clique_comprar",
+        [GF_PAYLOAD]: `[medicinup] Visitor:${getVisitorId()} | Clicou no botão Stripe`
+    }));
+}
         
         function updateTimer() {
             const now = new Date();
@@ -644,3 +650,4 @@
     </script>
 </body>
 </html>
+
