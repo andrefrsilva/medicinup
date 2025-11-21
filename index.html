@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PulseirUp | MedicinUp - A Proteção de Natal</title>
+    <title>PulseirUp | MedicinUp</title>
     <meta name="description" content="A prenda que salva vidas. Dados de saúde acessíveis numa pulseira de cortiça portuguesa.">
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,700&display=swap" rel="stylesheet">
@@ -38,25 +40,18 @@
 
     <style>
         .glass-nav { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        
-        /* Vis.js Styles */
         .vis-graph-group0, .vis-graph-group1, .vis-graph-group2 { stroke-width: 2px; }
         .vis-point { stroke-width: 2px; }
-        .vis-legend { background-color: rgba(255,255,255,0.9) !important; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .vis-legend { background-color: rgba(255,255,255,0.95) !important; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 5px; border-radius: 4px; }
         
-        /* Clean Inputs */
+        /* Hide input arrows */
         input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         
-        /* Loader */
         .loader { border: 3px solid #f3f3f3; border-top: 3px solid #000; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         .hidden-section { display: none !important; }
-        
-        /* Graph Containers: Height required for Vis.js */
         .graph-container { height: 300px; width: 100%; background-color: #fff; margin-bottom: 1rem; border: 1px solid #eee; border-radius: 4px; }
-        
-        /* Stripe Button Center */
         stripe-buy-button { display: block; margin: 0 auto; }
     </style>
 </head>
@@ -89,14 +84,11 @@
 
     <main id="landing-container">
         
-        <div class="mt-16 lg:mt-20 w-full overflow-hidden relative">
-            <img src="https://github.com/andrefrsilva/medicinup/blob/main/pusleira%20com%20texto.jpg?raw=true" alt="Pulseira MedicinUp no braço" class="w-full h-auto object-cover max-h-[65vh]">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end pb-12 justify-center md:hidden">
-                 <div class="text-white text-center px-4">
-                     <h1 class="text-4xl font-serif font-bold mb-2">E Se Cair?</h1>
-                     <p class="text-sm opacity-90">A proteção que fala por eles.</p>
-                 </div>
-            </div>
+        <div class="mt-16 lg:mt-20 w-full bg-black">
+            <video class="w-full max-w-5xl mx-auto h-auto object-cover" autoplay loop muted playsinline>
+                <source src="https://github.com/andrefrsilva/medicinup/raw/refs/heads/main/video%20pusleira%202.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
 
         <div class="bg-white py-16 text-center px-4">
@@ -129,30 +121,30 @@
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-8 text-center relative">
                     <div class="hidden md:block absolute top-8 left-0 w-full h-0.5 bg-gray-200 -z-10"></div>
 
-                    <div class="bg-gray-50">
+                    <div class="bg-gray-50 relative z-10">
                         <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">1</div>
-                        <h3 class="font-bold text-lg mb-2">Encomenda</h3>
-                        <p class="text-xs text-gray-600">Recebe a pulseira de cortiça em casa.</p>
+                        <h3 class="font-bold text-lg mb-2">Compra</h3>
+                        <p class="text-xs text-gray-600">Recebe a pulseira em casa.</p>
                     </div>
-                    <div class="bg-gray-50">
+                    <div class="bg-gray-50 relative z-10">
                         <div class="w-16 h-16 bg-cork-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">2</div>
                         <h3 class="font-bold text-lg mb-2">Regista</h3>
-                        <p class="text-xs text-gray-600">Associa o Nº Único à sua conta Google.</p>
+                        <p class="text-xs text-gray-600">Usa a sua conta Google.</p>
                     </div>
-                    <div class="bg-gray-50">
+                    <div class="bg-gray-50 relative z-10">
                         <div class="w-16 h-16 bg-white border-2 border-black text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">3</div>
-                        <h3 class="font-bold text-lg mb-2">Configura</h3>
-                        <p class="text-xs text-gray-600">Escolhe que dados são públicos (Emergência) e quais são privados.</p>
+                        <h3 class="font-bold text-lg mb-2">Define</h3>
+                        <p class="text-xs text-gray-600">Escolhe o que é público e o que é privado.</p>
                     </div>
-                    <div class="bg-gray-50">
+                    <div class="bg-gray-50 relative z-10">
                         <div class="w-16 h-16 bg-white border-2 border-black text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">4</div>
-                        <h3 class="font-bold text-lg mb-2">Adiciona</h3>
-                        <p class="text-xs text-gray-600">Insere medições (tensão, peso) ao longo do tempo.</p>
+                        <h3 class="font-bold text-lg mb-2">Mede</h3>
+                        <p class="text-xs text-gray-600">Adiciona Peso e Tensão ao longo do ano.</p>
                     </div>
-                    <div class="bg-gray-50">
+                    <div class="bg-gray-50 relative z-10">
                         <div class="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg"><i class="fa-solid fa-check"></i></div>
-                        <h3 class="font-bold text-lg mb-2">Segurança</h3>
-                        <p class="text-xs text-gray-600">Em emergência, médicos acedem aos dados vitais.</p>
+                        <h3 class="font-bold text-lg mb-2">Partilha</h3>
+                        <p class="text-xs text-gray-600">Médicos e família consultam o histórico.</p>
                     </div>
                 </div>
 
@@ -164,87 +156,7 @@
             </div>
         </section>
 
-        <section class="py-12 bg-white">
-            <div class="max-w-5xl mx-auto px-4">
-                <h2 class="text-2xl font-bold text-center mb-8 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-newspaper text-red-600"></i> Realidade nas Manchetes
-                </h2>
-                <div class="space-y-4">
-                    <div class="bg-gray-50 p-4 rounded shadow-sm border-l-4 border-red-600 hover:bg-gray-100 transition">
-                        <a href="https://www.dn.pt/sociedade/mdico-e-enfermeiro-condenados-por-darem-penicilina-a-doente-alrgico-que-acabou-por-morrer" target="_blank" class="block">
-                            <h3 class="font-bold text-lg text-gray-900 hover:underline">"Médico e enfermeiro condenados por darem penicilina a doente alérgico que acabou por morrer"</h3>
-                            <p class="text-xs text-gray-500 mt-1 uppercase tracking-wide">Diário de Notícias &rarr; Ler Notícia</p>
-                        </a>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded shadow-sm border-l-4 border-gray-600">
-                        <h3 class="font-bold text-lg text-gray-900">"Idoso encontrado desorientado na via pública sem identificação"</h3>
-                        <p class="text-xs text-gray-500 mt-1 uppercase tracking-wide">Jornal de Notícias (Arquivo)</p>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded shadow-sm border-l-4 border-gray-600">
-                        <h3 class="font-bold text-lg text-gray-900">"Erro na medicação de doente crónico causa internamento de urgência"</h3>
-                        <p class="text-xs text-gray-500 mt-1 uppercase tracking-wide">Público (Arquivo)</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-20 bg-gray-50">
-            <div class="max-w-6xl mx-auto px-4">
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div class="space-y-8" data-aos="fade-right">
-                        <h3 class="text-xl font-bold text-black border-b-2 border-cork-400 pb-2 inline-block">A Sua Angústia</h3>
-                        <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-500">
-                            <h4 class="font-bold text-red-600 mb-1"><i class="fa-solid fa-heart-crack mr-2"></i>Culpa & Distância</h4>
-                            <p class="text-sm text-gray-600">"Estou longe. E se acontece alguma coisa hoje?"</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
-                            <h4 class="font-bold text-orange-600 mb-1"><i class="fa-solid fa-ambulance mr-2"></i>O Medo do INEM</h4>
-                            <p class="text-sm text-gray-600">"Se o meu pai cai na rua inconsciente, quem avisa? Sem a pulseira, ele é um desconhecido."</p>
-                        </div>
-                    </div>
-                    <div class="space-y-8" data-aos="fade-left">
-                        <h3 class="text-xl font-bold text-black border-b-2 border-medic-600 pb-2 inline-block">O Risco Deles</h3>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-black mb-1">Hipertensão Descontrolada</h4>
-                            <p class="text-sm text-gray-600">Apenas 20% dos doentes controlam a PA. O risco de AVC aumenta sem monitorização.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-black mb-1">Vergonha no Consultório</h4>
-                            <p class="text-sm text-gray-600">O médico pergunta e eles não sabem. Com a PulseirUp, os dados estão no pulso.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="grid md:grid-cols-4 gap-6 text-center">
-                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition">
-                        <i class="fa-solid fa-leaf text-green-600 text-4xl mb-4"></i>
-                        <h3 class="font-bold">Cortiça Portuguesa</h3>
-                        <p class="text-xs text-gray-500 mt-2">Biodegradável e Hipoalergénica.</p>
-                    </div>
-                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition">
-                        <i class="fa-solid fa-shield-halved text-blue-600 text-4xl mb-4"></i>
-                        <h3 class="font-bold">Privacidade Total</h3>
-                        <p class="text-xs text-gray-500 mt-2">Sem nome visível. Use virada para dentro.</p>
-                    </div>
-                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition">
-                        <i class="fa-solid fa-radiation text-orange-500 text-4xl mb-4"></i>
-                        <h3 class="font-bold">Exames Seguros</h3>
-                        <p class="text-xs text-gray-500 mt-2">Sem metal (Ressonância OK). À prova de água.</p>
-                    </div>
-                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition">
-                        <i class="fa-solid fa-hospital-user text-red-600 text-4xl mb-4"></i>
-                        <h3 class="font-bold">Acesso Médico</h3>
-                        <p class="text-xs text-gray-500 mt-2">Em emergência, qualquer médico acede ao histórico.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="comprar" class="py-24 bg-gray-50 text-center relative overflow-hidden border-t border-gray-200">
+        <section id="comprar" class="py-24 bg-white text-center relative overflow-hidden border-t border-gray-200">
             <div class="max-w-3xl mx-auto px-4 relative z-10">
                 <h2 class="text-4xl font-serif font-bold mb-4">O Presente de Natal Perfeito</h2>
                 <p class="text-gray-500 mb-8">Cortiça Premium + 1 Ano de Plataforma</p>
@@ -259,7 +171,7 @@
 
                 <div class="mt-6 flex justify-center items-center gap-3">
                     <p class="text-[10px] text-red-500 uppercase tracking-widest font-bold">Termina em:</p>
-                    <div id="countdown" class="text-xl font-mono font-bold text-red-600">Calculando...</div>
+                    <div id="countdown" class="text-xl font-mono font-bold text-red-600">...</div>
                 </div>
 
                 <div class="mt-8 text-sm text-gray-500 flex justify-center gap-6">
@@ -268,11 +180,14 @@
                 </div>
             </div>
         </section>
+
+        <div class="w-full overflow-hidden pb-10 bg-white">
+            <img src="https://github.com/andrefrsilva/medicinup/blob/main/pusleira%20com%20texto.jpg?raw=true" alt="Pulseira Detalhe" class="w-full max-w-4xl mx-auto h-auto object-cover opacity-90">
+        </div>
     </main>
 
     <main id="dashboard-container" class="hidden-section pt-24 pb-12 bg-gray-100 min-h-screen">
         <div class="max-w-7xl mx-auto px-4">
-            
             <div class="mb-6 flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                 <div>
                     <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
@@ -301,10 +216,7 @@
                         <span>&#9660;</span>
                     </div>
                     <div class="p-4 space-y-8 hidden">
-                         <div class="w-full">
-                            <h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Pressão Arterial</h4>
-                            <div id="visualization" class="graph-container"></div>
-                         </div>
+                         <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Pressão Arterial</h4><div id="visualization" class="graph-container"></div></div>
                          <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Peso (kg)</h4><div id="weightVisualization" class="graph-container"></div></div>
                          <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Glicémia</h4><div id="glucoseVisualization" class="graph-container"></div></div>
                          <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Sono (h)</h4><div id="sleepVisualization" class="graph-container"></div></div>
@@ -357,8 +269,8 @@
                 </div>
 
                 <div class="text-center py-8">
-                    <button onclick="downloadData()" class="bg-green-600 text-white px-6 py-3 rounded shadow hover:bg-green-700 transition flex items-center justify-center mx-auto gap-2 font-bold uppercase text-sm">
-                        <i class="fa-solid fa-file-excel"></i> Download Relatório Excel
+                    <button onclick="downloadData()" class="bg-green-600 text-white px-6 py-3 rounded shadow hover:bg-green-700 transition font-bold uppercase text-sm">
+                        Download Relatório Excel
                     </button>
                 </div>
             </div>
@@ -372,105 +284,111 @@
                 <button onclick="openModal('privacy')" class="hover:text-white underline">Política de Privacidade</button>
                 <button onclick="openModal('terms')" class="hover:text-white underline">Termos e Condições</button>
             </div>
-            <p class="text-gray-600 max-w-2xl mx-auto">Aviso Legal: Os dados de saúde são propriedade do utilizador e alojados na sua Google Sheet pessoal. A MedicinUp fornece a interface de visualização.</p>
+            <p class="text-gray-600 max-w-2xl mx-auto">Aviso Legal: Os dados de saúde são propriedade do utilizador.</p>
         </div>
     </footer>
 
     <div id="cookieBanner" class="fixed bottom-0 w-full bg-white p-4 shadow-2xl z-50 hidden flex-col md:flex-row justify-between items-center gap-4 border-t border-gray-200">
         <div class="text-sm text-gray-800">
-            <i class="fa-solid fa-cookie-bite text-cork-500 mr-2"></i>
-            Utilizamos cookies para funcionamento. <a href="#" onclick="event.preventDefault(); openModal('privacy')" class="font-bold underline">Privacidade</a> & <a href="#" onclick="event.preventDefault(); openModal('terms')" class="font-bold underline">Termos</a>.
+            Utilizamos cookies. <a href="#" onclick="openModal('privacy')" class="font-bold underline">Privacidade</a>.
         </div>
         <button onclick="acceptCookies()" class="bg-black text-white px-8 py-3 text-sm font-bold rounded">ACEITAR</button>
     </div>
 
     <div id="legalModal" class="fixed inset-0 z-[60] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-3xl max-h-[80vh] overflow-y-auto rounded-xl p-8 relative shadow-2xl">
-            <button onclick="document.getElementById('legalModal').classList.add('hidden')" class="absolute top-4 right-4 text-2xl font-bold text-gray-400 hover:text-black">&times;</button>
+            <button onclick="document.getElementById('legalModal').classList.add('hidden')" class="absolute top-4 right-4 text-2xl">&times;</button>
             <div id="modalContent" class="prose prose-sm text-gray-800 max-w-none"></div>
         </div>
     </div>
 
     <div id="privacy-text" class="hidden">
-        <p>PulseirUp use and transfer to any other app of information received from Google APIs will adhere to <a href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes" target="_blank">Google API Services User Data Policy</a>.</p>
-        <p>Última Atualização: 30 de Maio de 2024. A MedicinUp valoriza sua privacidade. Os dados são da sua conta Google.</p>
-        <p>Não partilhamos dados com terceiros. O número é a chave pública. Em caso de dúvida: mcminsky@gmail.com</p>
+        <p>Política de Privacidade: Conformidade total com Google API Services User Data Policy. Os dados são seus.</p>
     </div>
     <div id="terms-text" class="hidden">
-        <p>Última Atualização: 30 de Maio de 2024. Ao usar a PulseirUp concorda com os termos. É responsável pela proteção do seu número.</p>
+        <p>Termos e Condições: O uso da pulseira implica aceitação. A segurança do número é responsabilidade do utilizador.</p>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({once: true});
-
-        // --- GLOBAL DATA STORAGE ---
         let GLOBAL_CONT_DATA = [];
 
-        // --- GOOGLE FORMS TRACKING ---
-        const GF_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeSGGY8vksnVVvt7h1Cb9fyfILrBAWr0zsP3bdANhexuKimGw/formResponse";
-        const GF_EVENT = "entry.1962600437"; 
-        const GF_PAYLOAD = "entry.656835352";
-
-        function getVisitorId() {
-            let id = localStorage.getItem('medicinup_vid');
-            if(!id) { id = crypto.randomUUID(); localStorage.setItem('medicinup_vid', id); }
-            return id;
-        }
-
-        function sendToGoogleForms(event, extra="") {
-            const fid = getVisitorId();
-            const payload = `[medicinup] Visitor:${fid} | ${extra}`;
-            const data = new URLSearchParams();
-            data.append(GF_EVENT, event);
-            data.append(GF_PAYLOAD, payload);
-            fetch(GF_URL, { method: "POST", mode: "no-cors", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: data.toString() }).catch(e=>{});
-        }
-
-        // --- TIMER & COOKIES ---
-        window.addEventListener('DOMContentLoaded', () => {
-            sendToGoogleForms("visita_site", "Page Load");
-            updateTimer();
-            if(!localStorage.getItem('medicinup_cookies')) document.getElementById('cookieBanner').classList.remove('hidden');
-            document.getElementById('cookieBanner').classList.add('flex');
-        });
-        
-        function trackClickBuy() { 
-    // Envia tracking de forma não-bloqueante (não espera resposta)
-    navigator.sendBeacon(GF_URL, new URLSearchParams({
-        [GF_EVENT]: "clique_comprar",
-        [GF_PAYLOAD]: `[medicinup] Visitor:${getVisitorId()} | Clicou no botão Stripe`
-    }));
-}
-        
+        // TIMER
         function updateTimer() {
             const now = new Date();
             const target = new Date();
-            target.setDate(now.getDate() + 2);
-            target.setHours(24, 0, 0, 0);
+            target.setDate(now.getDate() + 2); target.setHours(24,0,0,0);
             const diff = target - now;
             const d = Math.floor(diff/(1000*60*60*24));
             const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
             const m = Math.floor((diff%(1000*60*60))/(1000*60));
-            const s = Math.floor((diff%(1000*60))/1000);
-            document.getElementById('countdown').innerText = `${d}d ${h}h ${m}m ${s}s`;
+            document.getElementById('countdown').innerText = `${d}d ${h}h ${m}m`;
         }
         setInterval(updateTimer, 1000);
-        
+        updateTimer();
+
+        // COOKIES
+        if(!localStorage.getItem('medicinup_cookies')) document.getElementById('cookieBanner').classList.remove('hidden');
+        document.getElementById('cookieBanner').classList.add('flex');
         function acceptCookies(){ localStorage.setItem('medicinup_cookies', 'true'); document.getElementById('cookieBanner').classList.add('hidden'); }
         function openModal(t){ document.getElementById('modalContent').innerHTML=document.getElementById(t+'-text').innerHTML; document.getElementById('legalModal').classList.remove('hidden'); }
 
-        // --- NAVIGATION ---
+        // NAV
         function resetToHome() {
             document.getElementById('landing-container').classList.remove('hidden-section');
             document.getElementById('dashboard-container').classList.add('hidden-section');
             window.scrollTo(0,0);
         }
         function runDemo() { document.getElementById('navSearchInput').value='1001'; searchFromNav(); }
+        function trackClickBuy() {} // Placeholder para analytics
 
-        // --- DATA ENGINE ---
+        // ACCORDION GRAPH RENDERER
+        function toggleSection(el) { 
+            const content = el.nextElementSibling;
+            content.classList.toggle('hidden');
+            el.querySelector('span').innerText = content.classList.contains('hidden') ? '▼' : '▲';
+            
+            if(!content.classList.contains('hidden') && GLOBAL_CONT_DATA.length > 0) {
+                // Force render all graphs inside this section
+                const containers = content.querySelectorAll('.graph-container');
+                containers.forEach(div => {
+                    div.innerHTML = ''; 
+                    renderSpecificGraph(div.id, GLOBAL_CONT_DATA);
+                });
+            }
+        }
+
+        function renderSpecificGraph(id, data) {
+            // Mapeamento seguro
+            const mapping = {
+                'visualization': () => plotBP(data, id),
+                'weightVisualization': () => plotSimple(data, 'Peso (em kg)', id, 'Peso'),
+                'glucoseVisualization': () => plotSimple(data, 'Glicémia', id, 'Glicémia'),
+                'sleepVisualization': () => plotSimple(data, 'Sono (horas)', id, 'Sono'),
+                'abdominalPerimeterVisualization': () => plotSimple(data, 'Perímetro abdominal (cm)', id, 'Perímetro'),
+                'distwalkingVisualization': () => plotSimple(data, 'Distância de caminhada/corrida (km)', id, 'Km'),
+                'distcyclingVisualization': () => plotSimple(data, 'Distância de bicicleta (km)', id, 'Km'),
+                'maxweightVisualization': () => plotSimple(data, 'Peso máximo no supino (kg)', id, 'Kg'),
+                'pushupsVisualization': () => plotSimple(data, 'Flexões de peito', id, 'Reps'),
+                'deepVisualization': () => plotSimple(data, 'Mergulhos de peito', id, 'Reps'),
+                'pullupsVisualization': () => plotSimple(data, 'Elevações', id, 'Reps'),
+                'squatVisualization': () => plotSimple(data, 'Agachamentos', id, 'Reps'),
+                'absVisualization': () => plotSimple(data, 'Abdominais', id, 'Reps'),
+                'legraisesVisualization': () => plotSimple(data, 'Elevações de pernas', id, 'Reps'),
+                'HgA1cVisualization': () => plotSimple(data, 'Hemoglobina Glicada A1c (%)', id, '%'),
+                'HgVisualization': () => plotSimple(data, 'Hemoglobina (g/dL)', id, 'g/dL'),
+                'totalcholesterolVisualization': () => plotSimple(data, 'Colesterol Total (mg/dL)', id, 'mg/dL'),
+                'ldlVisualization': () => plotSimple(data, 'LDL (mg/dL)', id, 'mg/dL'),
+                'hdlVisualization': () => plotSimple(data, 'HDL (mg/dL)', id, 'mg/dL'),
+                'inrVisualization': () => plotSimple(data, 'INR', id, 'INR'),
+                'uricacidVisualization': () => plotSimple(data, 'Ácido Úrico (mg/dL)', id, 'mg/dL')
+            };
+            if(mapping[id]) mapping[id]();
+        }
+
+        // DATA SEARCH
         let globalContUrl = null;
-
         async function searchFromNav() {
             const num = document.getElementById('navSearchInput').value;
             if(!num) return;
@@ -490,10 +408,7 @@
                 if(!user) throw new Error('Número não encontrado.');
 
                 globalContUrl = user['Link D'];
-                document.getElementById('dynamicButtons').innerHTML = `
-                    <button onclick="window.open('${user['Link C']}')" class="bg-black text-white px-3 py-1 text-xs font-bold uppercase rounded hover:bg-gray-800">+ Update Geral</button>
-                    <button onclick="window.open('${user['Link D']}')" class="bg-black text-white px-3 py-1 text-xs font-bold uppercase rounded hover:bg-gray-800">+ Update Dados</button>
-                `;
+                document.getElementById('dynamicButtons').innerHTML = `<button onclick="window.open('${user['Link C']}')" class="bg-black text-white px-3 py-1 text-xs font-bold rounded">UPDATE GERAL</button><button onclick="window.open('${user['Link D']}')" class="bg-black text-white px-3 py-1 text-xs font-bold rounded">UPDATE DADOS</button>`;
 
                 const [genWb, contWb] = await Promise.all([fetchExcel(user['Link C']), fetchExcel(user['Link D'])]);
                 const genData = XLSX.utils.sheet_to_json(genWb.Sheets[genWb.SheetNames[0]]).pop();
@@ -514,87 +429,23 @@
             return XLSX.read(b, {type:'array'});
         }
 
-        // --- RENDERERS ---
         function renderGeneral(data) {
             if(!data) { document.getElementById('general-records').innerHTML='Sem dados.'; return; }
-            const fields = {
-                'Última Atualização': dateFmt(data['Carimbo de data/hora']),
-                'Naturalidade': data['Naturalidade'],
-                'Data de Nascimento': dateFmt(data['Data de Nascimento']),
-                'Estado Civil': data['Estado Civil'],
-                'Altura (cm)': data['Altura (cm)'],
-                'Medicação Atual': data['Medicação Atual'],
-                'Alergias': data['Alergias'],
-                'Profissão Atual': data['Profissão Atual'],
-                'Cirurgias': data['Cirurgias'],
-                'Internamentos': data['Internamentos'],
-                'Resultados de Exames': data['Resultados de Exames (links)'],
-                'Contacto Emergência': data['Contacto de Emergência'],
-                'Doenças/Condições': data['Doenças, Condições ou Eventos'],
-                'Outras Doenças': data['Outras Doenças'],
-                'Último Peso (kg)': data['Último Peso (kg)'],
-                'IMC': data['IMC']
-            };
-            
+            const fields = {'Última Atualização': dateFmt(data['Carimbo de data/hora']), 'Naturalidade': data['Naturalidade'], 'Data de Nascimento': dateFmt(data['Data de Nascimento']), 'Estado Civil': data['Estado Civil'], 'Altura (cm)': data['Altura (cm)'], 'Medicação Atual': data['Medicação Atual'], 'Alergias': data['Alergias'], 'Profissão Atual': data['Profissão Atual'], 'Cirurgias': data['Cirurgias'], 'Internamentos': data['Internamentos'], 'Resultados de Exames': data['Resultados de Exames (links)'], 'Contacto Emergência': data['Contacto de Emergência'], 'Doenças/Condições': data['Doenças, Condições ou Eventos'], 'Outras Doenças': data['Outras Doenças'], 'Último Peso (kg)': data['Último Peso (kg)'], 'IMC': data['IMC']};
             let html = '<div class="grid grid-cols-1 gap-2">';
             for(let k in fields) {
                 const val = fields[k] ? fields[k] : '-';
-                html += `
-                <div class="grid grid-cols-3 border-b border-gray-100 pb-1">
-                    <span class="col-span-1 text-xs font-bold text-gray-500 uppercase pt-1">${k}</span>
-                    <span class="col-span-2 text-sm font-medium text-gray-900 pl-2 break-words">${val}</span>
-                </div>`;
+                html += `<div class="grid grid-cols-3 border-b border-gray-100 pb-1"><span class="col-span-1 text-xs font-bold text-gray-500 uppercase pt-1 break-words pr-1">${k}</span><span class="col-span-2 text-sm font-medium text-gray-900 pl-2 break-words">${val}</span></div>`;
             }
             html += '</div>';
             document.getElementById('general-records').innerHTML = html;
         }
 
-        // --- ACCORDION LOGIC (CORRIGIDO PARA DESENHAR TODOS) ---
-        function toggleSection(el) { 
-            const content = el.nextElementSibling;
-            content.classList.toggle('hidden');
-            el.querySelector('span').innerText = content.classList.contains('hidden') ? '▼' : '▲';
-            
-            if(!content.classList.contains('hidden') && GLOBAL_CONT_DATA.length > 0) {
-                // Encontra TODOS os containers de gráficos nesta secção e desenha
-                const containers = content.querySelectorAll('.graph-container');
-                containers.forEach(div => {
-                    div.innerHTML = ''; // Limpa
-                    renderSpecificGraph(div.id, GLOBAL_CONT_DATA);
-                });
-            }
-        }
-
-        function renderSpecificGraph(id, data) {
-            if (!document.getElementById(id)) return;
-            
-            if(id === 'visualization') plotBP(data, id);
-            else if(id === 'weightVisualization') plotSimple(data, 'Peso (em kg)', id, 'Peso');
-            else if(id === 'glucoseVisualization') plotSimple(data, 'Glicémia', id, 'Glicémia');
-            else if(id === 'sleepVisualization') plotSimple(data, 'Sono (horas)', id, 'Sono');
-            else if(id === 'abdominalPerimeterVisualization') plotSimple(data, 'Perímetro abdominal (cm)', id, 'Perímetro');
-            
-            else if(id === 'distwalkingVisualization') plotSimple(data, 'Distância de caminhada/corrida (km)', id, 'Km');
-            else if(id === 'distcyclingVisualization') plotSimple(data, 'Distância de bicicleta (km)', id, 'Km');
-            else if(id === 'maxweightVisualization') plotSimple(data, 'Peso máximo no supino (kg)', id, 'Kg');
-            else if(id === 'pushupsVisualization') plotSimple(data, 'Flexões de peito', id, 'Reps');
-            else if(id === 'deepVisualization') plotSimple(data, 'Mergulhos de peito', id, 'Reps');
-            else if(id === 'pullupsVisualization') plotSimple(data, 'Elevações', id, 'Reps');
-            else if(id === 'squatVisualization') plotSimple(data, 'Agachamentos', id, 'Reps');
-            else if(id === 'absVisualization') plotSimple(data, 'Abdominais', id, 'Reps');
-            else if(id === 'legraisesVisualization') plotSimple(data, 'Elevações de pernas', id, 'Reps');
-            
-            else if(id === 'HgA1cVisualization') plotSimple(data, 'Hemoglobina Glicada A1c (%)', id, '%');
-            else if(id === 'HgVisualization') plotSimple(data, 'Hemoglobina (g/dL)', id, 'g/dL');
-            else if(id === 'totalcholesterolVisualization') plotSimple(data, 'Colesterol Total (mg/dL)', id, 'mg/dL');
-            else if(id === 'ldlVisualization') plotSimple(data, 'LDL (mg/dL)', id, 'mg/dL');
-            else if(id === 'hdlVisualization') plotSimple(data, 'HDL (mg/dL)', id, 'mg/dL');
-            else if(id === 'inrVisualization') plotSimple(data, 'INR', id, 'INR');
-            else if(id === 'uricacidVisualization') plotSimple(data, 'Ácido Úrico (mg/dL)', id, 'mg/dL');
-        }
-
+        // PLOT FUNCTIONS (FIXED)
         function plotBP(data, id) {
-            const c = document.getElementById(id); if(!c) return;
+            const c = document.getElementById(id); 
+            if(!c) return;
+            
             const items = new vis.DataSet();
             let hasData = false;
             data.forEach(r => {
@@ -602,25 +453,30 @@
                 if(d) {
                     const s = parseFloat(r['Pressão Arterial Sistólica (número alto)']);
                     const dia = parseFloat(r['Pressão Arterial Diastólica (número baixo)']);
-                    // IMPORTANT: group MUST BE STRING 'sys'/'dia' to match
                     if(!isNaN(s)) { items.add({x:d, y:s, group:'sys'}); hasData=true; }
                     if(!isNaN(dia)) { items.add({x:d, y:dia, group:'dia'}); hasData=true; }
                 }
             });
 
-            if(!hasData) { c.innerHTML='<div class="text-gray-400 text-xs p-4">Sem dados</div>'; return; }
+            if(!hasData || items.length === 0) { c.innerHTML='<div class="flex items-center justify-center h-full text-gray-400 text-xs">Sem dados</div>'; return; }
 
-            const options = { height: '100%', drawPoints: { style: 'circle', size: 4 }, dataAxis: { showMinorLabels: false }, legend: true, start: new Date(new Date().setDate(new Date().getDate()-90)) };
-            
             const groups = new vis.DataSet([
-                {id:'sys', content:'Sistólica', style:'stroke:red; stroke-width:2px;'}, 
+                {id:'sys', content:'Sistólica', style:'stroke:red; stroke-width:2px;'},
                 {id:'dia', content:'Diastólica', style:'stroke:blue; stroke-width:2px;'}
             ]);
-            new vis.Graph2d(c, items, groups, options);
+            
+            new vis.Graph2d(c, items, groups, { 
+                height: '300px', 
+                drawPoints: { style: 'circle', size: 4 }, 
+                legend: true, 
+                start: new Date(new Date().setDate(new Date().getDate()-90)) 
+            });
         }
 
         function plotSimple(data, key, id, label) {
-            const c = document.getElementById(id); if(!c) return;
+            const c = document.getElementById(id); 
+            if(!c) return;
+            
             const items = new vis.DataSet();
             let hasData = false;
             data.forEach(r => {
@@ -628,11 +484,14 @@
                 if(d && r[key]) { items.add({x:d, y:parseFloat(r[key]), group:'g1'}); hasData=true; }
             });
             
-            if(!hasData) { c.innerHTML='<div class="text-gray-400 text-xs p-4">Sem registos</div>'; return; }
+            if(!hasData || items.length === 0) { c.innerHTML='<div class="flex items-center justify-center h-full text-gray-400 text-xs">Sem registos</div>'; return; }
             
-            const options = { height: '100%', drawPoints: { style: 'circle', size: 4 }, dataAxis: { showMinorLabels: false }, shaded: { orientation: 'bottom' } };
             const groups = new vis.DataSet([{id:'g1', content:label, style:'stroke:black'}]);
-            new vis.Graph2d(c, items, groups, options);
+            new vis.Graph2d(c, items, groups, { 
+                height: '300px', 
+                drawPoints: { style: 'circle', size: 4 }, 
+                shaded: { orientation: 'bottom' } 
+            });
         }
 
         function renderSymptoms(data) {
@@ -650,4 +509,3 @@
     </script>
 </body>
 </html>
-
