@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,700&display=swap" rel="stylesheet">
@@ -41,10 +41,10 @@
     <style>
         .glass-nav { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
         
-        /* Vis.js Styles & Fixes */
+        /* Vis.js Styles */
         .vis-graph-group0, .vis-graph-group1, .vis-graph-group2 { stroke-width: 2px; }
-        .vis-point { stroke-width: 2px; }
-        .vis-legend { background-color: rgba(255,255,255,0.9) !important; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 5px; border-radius: 4px; }
+        .vis-point { stroke-width: 3px; }
+        .vis-legend { background-color: rgba(255,255,255,0.95) !important; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 5px; border-radius: 4px; }
         
         /* Inputs */
         input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
@@ -54,7 +54,11 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         .hidden-section { display: none !important; }
+        
+        /* Graph Container */
         .graph-container { height: 300px; width: 100%; background-color: #fff; margin-bottom: 1rem; border: 1px solid #eee; border-radius: 4px; }
+        
+        /* Stripe Center */
         stripe-buy-button { display: block; margin: 0 auto; }
     </style>
 </head>
@@ -88,7 +92,7 @@
     <main id="landing-container">
         
         <div class="mt-16 lg:mt-20 w-full bg-black">
-            <video class="w-full max-w-5xl mx-auto h-auto object-cover max-h-[70vh]" autoplay loop muted playsinline>
+            <video class="w-full lg:max-w-5xl mx-auto h-auto object-cover max-h-[70vh]" autoplay loop muted playsinline>
                 <source src="https://github.com/andrefrsilva/medicinup/raw/refs/heads/main/video%20pusleira%202.mp4" type="video/mp4">
             </video>
         </div>
@@ -100,11 +104,11 @@
                 </div>
                 
                 <h1 class="text-5xl md:text-7xl font-serif font-bold leading-tight mb-6 text-black" data-aos="fade-up">
-                    E se o seu pai cair na rua e não conseguir falar?
+                    E Se Cair?
                 </h1>
                 
                 <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-                    O silêncio é o maior inimigo numa emergência. A Pulseira MedicinUp é o amuleto que fala pelos seus pais ou avós quando eles não conseguem. 
+                    O silêncio é o maior inimigo. A Pulseira MedicinUp é o amuleto que fala pelos seus pais ou avós numa emergência, quando eles não conseguem. 
                     <br><strong>Eles cuidaram de si. Agora a vez é sua.</strong>
                 </p>
                 
@@ -119,7 +123,7 @@
         <section class="py-12 bg-gray-50 border-y border-gray-200">
             <div class="max-w-5xl mx-auto px-4">
                 <h2 class="text-2xl font-bold text-center mb-8 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Porque isto não acontece só aos outros
+                    <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Realidade nas Manchetes
                 </h2>
                 <div class="space-y-4">
                     <div class="bg-white p-5 rounded-lg shadow-sm border-l-8 border-red-600 hover:bg-gray-50 transition">
@@ -137,7 +141,6 @@
                         <p class="text-xs text-gray-500 mt-2 uppercase tracking-wide font-bold">Público (Arquivo)</p>
                     </div>
                 </div>
-                <p class="text-center text-xs text-gray-500 mt-6">A informação certa no segundo certo salva vidas.</p>
             </div>
         </section>
 
@@ -156,7 +159,7 @@
                     <div class="bg-white">
                         <div class="w-16 h-16 bg-cork-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-xl">2</div>
                         <h3 class="font-bold text-lg mb-2">Regista</h3>
-                        <p class="text-xs text-gray-600 px-2">Usa o seu email para ativar o Nº Único da pulseira.</p>
+                        <p class="text-xs text-gray-600 px-2">Associa o Nº Único usando o seu email.</p>
                     </div>
                     <div class="bg-white">
                         <div class="w-16 h-16 bg-white border-2 border-black text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-xl">3</div>
@@ -166,18 +169,18 @@
                     <div class="bg-white">
                         <div class="w-16 h-16 bg-white border-2 border-black text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-xl">4</div>
                         <h3 class="font-bold text-lg mb-2">Mede</h3>
-                        <p class="text-xs text-gray-600 px-2">Vai inserindo Peso e Tensão ao longo do ano.</p>
+                        <p class="text-xs text-gray-600 px-2">Insere dados como Peso e Tensão ao longo do tempo.</p>
                     </div>
                     <div class="bg-white">
                         <div class="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-xl"><i class="fa-solid fa-check"></i></div>
                         <h3 class="font-bold text-lg mb-2">Tranquilidade</h3>
-                        <p class="text-xs text-gray-600 px-2">Filhos e Médicos consultam o histórico vital.</p>
+                        <p class="text-xs text-gray-600 px-2">Em emergência, médicos consultam o histórico vital.</p>
                     </div>
                 </div>
 
                 <div class="text-center mt-12">
                     <button onclick="runDemo()" class="bg-gray-100 border border-gray-300 text-gray-800 px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-black hover:text-white transition rounded-full">
-                        Ver Exemplo Real do Sistema
+                        Ver Exemplo Real do Dashboard
                     </button>
                 </div>
             </div>
@@ -194,11 +197,11 @@
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
                             <h4 class="font-bold text-orange-600 mb-1"><i class="fa-solid fa-ambulance mr-2"></i>O Pânico do INEM</h4>
-                            <p class="text-sm text-gray-600">"Se o meu pai cai na rua, quem avisa? Que medicamentos toma? Tem alergias? Sem a pulseira, ele é um desconhecido no hospital."</p>
+                            <p class="text-sm text-gray-600">"Se o meu pai cai na rua, quem avisa? Que medicamentos toma? Sem a pulseira, ele é um desconhecido no hospital."</p>
                         </div>
                     </div>
                     <div class="space-y-8" data-aos="fade-left">
-                        <h3 class="text-xl font-bold text-black border-b-2 border-medic-600 pb-2 inline-block">O Risco Deles (Pais/Avós)</h3>
+                        <h3 class="text-xl font-bold text-black border-b-2 border-medic-600 pb-2 inline-block">O Risco Deles (Pais)</h3>
                         <div class="bg-white p-6 rounded-lg shadow-sm">
                             <h4 class="font-bold text-black mb-1">Hipertensão Descontrolada</h4>
                             <p class="text-sm text-gray-600">Apenas 20% dos doentes controlam a PA. O risco de AVC e Enfarte aumenta drasticamente sem registo constante.</p>
@@ -245,17 +248,17 @@
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="bg-white p-6 rounded-lg shadow-sm italic text-gray-600 relative">
                         <div class="text-4xl text-cork-400 absolute top-2 left-4">"</div>
-                        <p class="mb-4 mt-4 text-sm">"O meu pai é muito teimoso, dizia sempre que a tensão estava boa. Comprei a pulseira e obriguei-o a registar. O médico viu o histórico e mudou logo a medicação. Se não fosse isto..."</p>
+                        <p class="mb-4 mt-4 text-sm">"O meu pai é muito teimoso, dizia sempre que a tensão estava boa. Comprei a pulseira e obriguei-o a registar. O médico viu o histórico e mudou logo a medicação."</p>
                         <p class="text-xs font-bold text-black not-italic">— Ana M., Vila Real</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-sm italic text-gray-600 relative">
                         <div class="text-4xl text-cork-400 absolute top-2 left-4">"</div>
-                        <p class="mb-4 mt-4 text-sm">"Estou emigrado na Suíça e andava sempre com o coração nas mãos. Agora consulto a app e vejo se a minha mãe se pesou e como está. É um alívio enorme."</p>
+                        <p class="mb-4 mt-4 text-sm">"Estou emigrado na Suíça e andava sempre com o coração nas mãos. Agora consulto a app e vejo se a minha mãe se pesou e como está. É um alívio."</p>
                         <p class="text-xs font-bold text-black not-italic">— Carlos P., Zurique</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-sm italic text-gray-600 relative">
                         <div class="text-4xl text-cork-400 absolute top-2 left-4">"</div>
-                        <p class="mb-4 mt-4 text-sm">"A minha avó teve um princípio de AVC na rua. O INEM viu a pulseira, ligou-me logo e souberam que ela tomava anticoagulantes. Salvou-lhe a vida."</p>
+                        <p class="mb-4 mt-4 text-sm">"A minha avó teve um princípio de AVC. O INEM viu a pulseira, ligou-me logo e souberam que ela tomava anticoagulantes. Salvou-lhe a vida."</p>
                         <p class="text-xs font-bold text-black not-italic">— Sofia R., Lisboa</p>
                     </div>
                 </div>
@@ -275,9 +278,9 @@
                     </stripe-buy-button>
                 </div>
 
-                <div class="mt-6 flex flex-col items-center justify-center gap-2">
-                    <p class="text-[10px] text-red-500 uppercase tracking-widest font-bold">Promoção termina em:</p>
-                    <div id="countdown" class="text-2xl font-mono font-bold text-red-600 bg-red-50 px-4 py-1 rounded">Calculando...</div>
+                <div class="mt-6 flex justify-center items-center gap-3">
+                    <p class="text-[10px] text-red-500 uppercase tracking-widest font-bold">Termina em:</p>
+                    <div id="countdown" class="text-xl font-mono font-bold text-red-600">Calculando...</div>
                 </div>
 
                 <div class="mt-8 text-sm text-gray-500 flex justify-center gap-6">
@@ -376,8 +379,8 @@
                 </div>
 
                 <div class="text-center py-8">
-                    <button onclick="downloadData()" class="bg-green-600 text-white px-6 py-3 rounded shadow hover:bg-green-700 transition flex items-center justify-center mx-auto gap-2 font-bold uppercase text-sm">
-                        <i class="fa-solid fa-file-excel"></i> Download Relatório Excel
+                    <button onclick="downloadData()" class="bg-green-600 text-white px-6 py-3 rounded shadow hover:bg-green-700 transition font-bold uppercase text-sm">
+                        Download Relatório Excel
                     </button>
                 </div>
             </div>
@@ -391,16 +394,13 @@
                 <button onclick="openModal('privacy')" class="hover:text-white underline">Política de Privacidade</button>
                 <button onclick="openModal('terms')" class="hover:text-white underline">Termos e Condições</button>
             </div>
-            <p class="text-gray-600 max-w-2xl mx-auto">Aviso Legal: Os dados de saúde são propriedade do utilizador. A MedicinUp fornece a interface de visualização.</p>
-            <div class="mt-8 pt-8 border-t border-gray-800">
-                <a href="mailto:mcminsky@gmail.com" class="text-gray-700 hover:text-gray-500">Parceiros & Afiliados</a>
-            </div>
+            <p class="text-gray-600 max-w-2xl mx-auto">Aviso Legal: Os dados de saúde são propriedade do utilizador e autenticados via Email.</p>
         </div>
     </footer>
 
     <div id="cookieBanner" class="fixed bottom-0 w-full bg-white p-4 shadow-2xl z-50 hidden flex-col md:flex-row justify-between items-center gap-4 border-t border-gray-200">
         <div class="text-sm text-gray-800">
-            Utilizamos cookies. <a href="#" onclick="event.preventDefault(); openModal('privacy')" class="font-bold underline">Privacidade</a> & <a href="#" onclick="event.preventDefault(); openModal('terms')" class="font-bold underline">Termos</a>.
+            Utilizamos cookies. <a href="#" onclick="event.preventDefault(); openModal('privacy')" class="font-bold underline">Privacidade</a>.
         </div>
         <button onclick="acceptCookies()" class="bg-black text-white px-8 py-3 text-sm font-bold rounded">ACEITAR</button>
     </div>
@@ -413,11 +413,10 @@
     </div>
 
     <div id="privacy-text" class="hidden">
-        <p>Política de Privacidade: A MedicinUp cumpre com a Google API Services User Data Policy. Os dados são alojados na sua conta pessoal e autenticados por email.</p>
-        <p>Contact: mcminsky@gmail.com</p>
+        <p>Política de Privacidade: Conformidade com Google API Services. Os dados são seus e alojados na sua conta.</p>
     </div>
     <div id="terms-text" class="hidden">
-        <p>Termos: O uso da pulseira implica aceitação. A segurança do número identificador é responsabilidade do utilizador.</p>
+        <p>Termos: O uso da pulseira implica aceitação. Segurança do número é responsabilidade do utilizador.</p>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -443,8 +442,10 @@
 
         // TIMER
         function updateTimer() {
-            const target = new Date(); target.setDate(new Date().getDate() + 2); target.setHours(24,0,0,0);
-            const diff = target - new Date();
+            const now = new Date();
+            const target = new Date();
+            target.setDate(now.getDate() + 2); target.setHours(24,0,0,0);
+            const diff = target - now;
             const d = Math.floor(diff/(1000*60*60*24));
             const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
             const m = Math.floor((diff%(1000*60*60))/(1000*60));
@@ -458,69 +459,23 @@
         function resetToHome() { document.getElementById('landing-container').classList.remove('hidden-section'); document.getElementById('dashboard-container').classList.add('hidden-section'); window.scrollTo(0,0); }
         function runDemo() { document.getElementById('navSearchInput').value='1001'; searchFromNav(); }
 
-        // DATA ENGINE
-        let globalContUrl = null;
-        async function searchFromNav() {
-            const num = document.getElementById('navSearchInput').value;
-            if(!num) return;
-            
-            document.getElementById('landing-container').classList.add('hidden-section');
-            document.getElementById('dashboard-container').classList.remove('hidden-section');
-            document.getElementById('loading-overlay').classList.remove('hidden');
-            document.getElementById('data-content').classList.add('hidden');
-            document.getElementById('displayUtenteNumber').innerText = num;
-            document.getElementById('general-records').innerHTML = '';
-            window.scrollTo(0,0);
-
-            try {
-                const dirWb = await fetchExcel('https://docs.google.com/spreadsheets/d/e/2PACX-1vSbbCJWxxvUaMkkE2Xszkr0yms4EzzzIBWfCqamf8_3JUJ70C-YmKks0z0petla8LtVMd6Si644XmfD/pub?output=xlsx');
-                const dirData = XLSX.utils.sheet_to_json(dirWb.Sheets[dirWb.SheetNames[0]]);
-                const user = dirData.filter(r => r['Número da PulseirUp'] == num).sort((a,b) => b['Carimbo de data/hora'] - a['Carimbo de data/hora'])[0];
-                if(!user) throw new Error('Número não encontrado.');
-
-                globalContUrl = user['Link D'];
-                document.getElementById('dynamicButtons').innerHTML = `<button onclick="window.open('${user['Link C']}')" class="bg-black text-white px-3 py-1 text-xs font-bold uppercase rounded hover:bg-gray-800">+ Update Geral</button><button onclick="window.open('${user['Link D']}')" class="bg-black text-white px-3 py-1 text-xs font-bold uppercase rounded hover:bg-gray-800">+ Update Dados</button>`;
-
-                const [genWb, contWb] = await Promise.all([fetchExcel(user['Link C']), fetchExcel(user['Link D'])]);
-                const genData = XLSX.utils.sheet_to_json(genWb.Sheets[genWb.SheetNames[0]]).pop();
-                GLOBAL_CONT_DATA = XLSX.utils.sheet_to_json(contWb.Sheets[contWb.SheetNames[0]]);
-
-                renderGeneral(genData);
-                renderSymptoms(GLOBAL_CONT_DATA);
-                document.getElementById('loading-overlay').classList.add('hidden');
-                document.getElementById('data-content').classList.remove('hidden');
-            } catch(e) { alert(e.message); resetToHome(); }
-        }
-
-        async function fetchExcel(url) {
-            const r = await fetch(url + '&t=' + Date.now());
-            const b = await r.arrayBuffer();
-            return XLSX.read(b, {type:'array'});
-        }
-
-        function renderGeneral(data) {
-            if(!data) { document.getElementById('general-records').innerHTML='Sem dados.'; return; }
-            const fields = {'Última Atualização': dateFmt(data['Carimbo de data/hora']), 'Naturalidade': data['Naturalidade'], 'Data de Nascimento': dateFmt(data['Data de Nascimento']), 'Estado Civil': data['Estado Civil'], 'Altura (cm)': data['Altura (cm)'], 'Medicação Atual': data['Medicação Atual'], 'Alergias': data['Alergias'], 'Profissão Atual': data['Profissão Atual'], 'Cirurgias': data['Cirurgias'], 'Internamentos': data['Internamentos'], 'Resultados de Exames': data['Resultados de Exames (links)'], 'Contacto Emergência': data['Contacto de Emergência'], 'Doenças/Condições': data['Doenças, Condições ou Eventos'], 'Outras Doenças': data['Outras Doenças'], 'Último Peso (kg)': data['Último Peso (kg)'], 'IMC': data['IMC']};
-            let html = '<div class="grid grid-cols-1 gap-2">';
-            for(let k in fields) {
-                const val = fields[k] ? fields[k] : '-';
-                html += `<div class="grid grid-cols-3 border-b border-gray-100 pb-1"><span class="col-span-1 text-xs font-bold text-gray-500 uppercase pt-1 pr-1">${k}</span><span class="col-span-2 text-sm font-medium text-gray-900 pl-2 break-words">${val}</span></div>`;
-            }
-            html += '</div>';
-            document.getElementById('general-records').innerHTML = html;
-        }
-
-        // ACCORDION & GRAPH RENDERING (STRICT)
+        // ACCORDION
         function toggleSection(el) { 
             const content = el.nextElementSibling;
             content.classList.toggle('hidden');
             el.querySelector('span').innerText = content.classList.contains('hidden') ? '▼' : '▲';
+            
             if(!content.classList.contains('hidden') && GLOBAL_CONT_DATA.length > 0) {
+                console.log('Opening section, rendering graphs for:', GLOBAL_CONT_DATA.length, 'rows');
                 const containers = content.querySelectorAll('.graph-container');
-                containers.forEach(div => { div.innerHTML = ''; renderSpecificGraph(div.id, GLOBAL_CONT_DATA); });
+                containers.forEach(div => {
+                    div.innerHTML = ''; 
+                    renderSpecificGraph(div.id, GLOBAL_CONT_DATA);
+                });
             }
         }
 
+        // MAPPER
         function renderSpecificGraph(id, data) {
             const map = {
                 'visualization': () => plotBP(data, id),
@@ -548,6 +503,58 @@
             if(map[id]) map[id]();
         }
 
+        // DATA SEARCH
+        let globalContUrl = null;
+        async function searchFromNav() {
+            const num = document.getElementById('navSearchInput').value;
+            if(!num) return;
+            
+            document.getElementById('landing-container').classList.add('hidden-section');
+            document.getElementById('dashboard-container').classList.remove('hidden-section');
+            document.getElementById('loading-overlay').classList.remove('hidden');
+            document.getElementById('data-content').classList.add('hidden');
+            document.getElementById('displayUtenteNumber').innerText = num;
+            document.getElementById('general-records').innerHTML = '';
+            window.scrollTo(0,0);
+
+            try {
+                const dirWb = await fetchExcel('https://docs.google.com/spreadsheets/d/e/2PACX-1vSbbCJWxxvUaMkkE2Xszkr0yms4EzzzIBWfCqamf8_3JUJ70C-YmKks0z0petla8LtVMd6Si644XmfD/pub?output=xlsx');
+                const dirData = XLSX.utils.sheet_to_json(dirWb.Sheets[dirWb.SheetNames[0]]);
+                const user = dirData.filter(r => r['Número da PulseirUp'] == num).sort((a,b) => b['Carimbo de data/hora'] - a['Carimbo de data/hora'])[0];
+                if(!user) throw new Error('Número não encontrado.');
+
+                globalContUrl = user['Link D'];
+                document.getElementById('dynamicButtons').innerHTML = `<button onclick="window.open('${user['Link C']}')" class="bg-black text-white px-3 py-1 text-xs font-bold rounded">UPDATE GERAL</button><button onclick="window.open('${user['Link D']}')" class="bg-black text-white px-3 py-1 text-xs font-bold rounded">UPDATE DADOS</button>`;
+
+                const [genWb, contWb] = await Promise.all([fetchExcel(user['Link C']), fetchExcel(user['Link D'])]);
+                const genData = XLSX.utils.sheet_to_json(genWb.Sheets[genWb.SheetNames[0]]).pop();
+                GLOBAL_CONT_DATA = XLSX.utils.sheet_to_json(contWb.Sheets[contWb.SheetNames[0]]);
+
+                renderGeneral(genData);
+                renderSymptoms(GLOBAL_CONT_DATA);
+                document.getElementById('loading-overlay').classList.add('hidden');
+                document.getElementById('data-content').classList.remove('hidden');
+            } catch(e) { alert(e.message); resetToHome(); }
+        }
+
+        async function fetchExcel(url) {
+            const r = await fetch(url + '&t=' + Date.now());
+            const b = await r.arrayBuffer();
+            return XLSX.read(b, {type:'array'});
+        }
+
+        function renderGeneral(data) {
+            if(!data) { document.getElementById('general-records').innerHTML='Sem dados.'; return; }
+            const fields = {'Última Atualização': dateFmt(data['Carimbo de data/hora']), 'Naturalidade': data['Naturalidade'], 'Data de Nascimento': dateFmt(data['Data de Nascimento']), 'Estado Civil': data['Estado Civil'], 'Altura (cm)': data['Altura (cm)'], 'Medicação Atual': data['Medicação Atual'], 'Alergias': data['Alergias'], 'Profissão Atual': data['Profissão Atual'], 'Cirurgias': data['Cirurgias'], 'Internamentos': data['Internamentos'], 'Resultados de Exames': data['Resultados de Exames (links)'], 'Contacto Emergência': data['Contacto de Emergência'], 'Doenças/Condições': data['Doenças, Condições ou Eventos'], 'Outras Doenças': data['Outras Doenças'], 'Último Peso (kg)': data['Último Peso (kg)'], 'IMC': data['IMC']};
+            let html = '<div class="grid grid-cols-1 gap-2">';
+            for(let k in fields) {
+                const val = fields[k] ? fields[k] : '-';
+                html += `<div class="grid grid-cols-3 border-b border-gray-100 pb-1"><span class="col-span-1 text-xs font-bold text-gray-500 uppercase pt-1 pr-1">${k}</span><span class="col-span-2 text-sm font-medium text-gray-900 pl-2 break-words whitespace-normal">${val}</span></div>`;
+            }
+            html += '</div>';
+            document.getElementById('general-records').innerHTML = html;
+        }
+
         function plotBP(data, id) {
             const c = document.getElementById(id); if(!c) return;
             const items = new vis.DataSet();
@@ -557,25 +564,36 @@
                 if(d) {
                     const s = parseFloat(r['Pressão Arterial Sistólica (número alto)']);
                     const dia = parseFloat(r['Pressão Arterial Diastólica (número baixo)']);
+                    // Forced String IDs for Groups
                     if(!isNaN(s)) { items.add({x:d, y:s, group:'sys'}); hasData=true; }
                     if(!isNaN(dia)) { items.add({x:d, y:dia, group:'dia'}); hasData=true; }
                 }
             });
-            if(!hasData || items.length === 0) { c.innerHTML='<div class="flex items-center justify-center h-full text-gray-400 text-xs">Sem dados</div>'; return; }
-            new vis.Graph2d(c, items, new vis.DataSet([{id:'sys', content:'Sistólica', style:'stroke:red'},{id:'dia', content:'Diastólica', style:'stroke:blue'}]), { height: '100%', legend: true, drawPoints: {style:'circle', size:3}, start: new Date(new Date().setDate(new Date().getDate()-90)) });
+            if(!hasData) { c.innerHTML='<div class="flex items-center justify-center h-full text-gray-400 text-xs">Sem dados</div>'; return; }
+            
+            // Groups must match string IDs
+            const groups = new vis.DataSet([
+                {id:'sys', content:'Sistólica', style:'stroke:red'}, 
+                {id:'dia', content:'Diastólica', style:'stroke:blue'}
+            ]);
+            new vis.Graph2d(c, items, groups, { height: '300px', legend: true, drawPoints: {style:'circle', size:4}, start: new Date(new Date().setDate(new Date().getDate()-90)) });
         }
 
         function plotSimple(data, key, id, label) {
             const c = document.getElementById(id); if(!c) return;
             const items = new vis.DataSet();
+            let count = 0;
             data.forEach(r => {
                 const d = dateExcel(r['Carimbo de data/hora']);
-                if(d && r[key]) items.add({x:d, y:parseFloat(r[key]), group:'g1'});
+                // No groups for simple plots to avoid getItemRange error
+                if(d && r[key]) { items.add({x:d, y:parseFloat(r[key])}); count++; }
             });
-            // STRICT CHECK: Se não houver items, NÃO cria o gráfico para evitar erro getItemRange
-            if(items.length === 0) { c.innerHTML='<div class="flex items-center justify-center h-full text-gray-400 text-xs">Sem registos</div>'; return; }
+            console.log(`Plotting ${label}: ${count} points`);
             
-            new vis.Graph2d(c, items, new vis.DataSet([{id:'g1', content:label, style:'stroke:black'}]), { height: '100%', drawPoints: {style:'circle', size:3}, shaded: {orientation:'bottom'} });
+            if(count === 0) { c.innerHTML='<div class="flex items-center justify-center h-full text-gray-400 text-xs">Sem registos</div>'; return; }
+            
+            // Pass null for groups to force single line mode (Fixes getItemRange)
+            new vis.Graph2d(c, items, null, { height: '300px', drawPoints: {style:'circle', size:4}, shaded: {orientation:'bottom'} });
         }
 
         function renderSymptoms(data) {
