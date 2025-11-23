@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MedicinUp | A Pulseira que Salva</title>
+    <title>MedicinUp | A Joia que Salva</title>
     <meta name="description" content="A prenda que salva vidas. Dados de saúde acessíveis numa pulseira de cortiça portuguesa.">
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
@@ -11,7 +11,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
@@ -27,6 +27,7 @@
                 extend: {
                     colors: {
                         medic: { 500: '#2563eb', 600: '#1d4ed8', 900: '#1e3a8a' },
+                        gold: { 400: '#D4AF37', 500: '#C5A028', 600: '#B08D20' },
                         cork: { 400: '#d4a373', 500: '#b08968' }
                     },
                     fontFamily: {
@@ -43,35 +44,40 @@
         
         /* Vis.js Styles */
         .vis-graph-group0, .vis-graph-group1, .vis-graph-group2 { stroke-width: 2px; }
-        .vis-point { stroke-width: 3px; }
-        .vis-legend { background-color: rgba(255,255,255,0.95) !important; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 5px; border-radius: 4px; }
+        .vis-point { stroke-width: 2px; }
+        .vis-legend { background-color: rgba(255,255,255,0.9) !important; border: 1px solid #eee; padding: 5px; border-radius: 4px; }
         
-        /* Inputs */
+        /* Clean Inputs */
         input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         
         /* Loader */
-        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #000; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #D4AF37; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         .hidden-section { display: none !important; }
-        
-        /* Graph Container */
         .graph-container { height: 300px; width: 100%; background-color: #fff; margin-bottom: 1rem; border: 1px solid #eee; border-radius: 4px; }
-        
-        /* Stripe Center */
         stripe-buy-button { display: block; margin: 0 auto; }
+
+        /* Preloader */
+        #preloader { position: fixed; inset: 0; background: #fff; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
+        
+        /* Video Filters */
+        .bw-video { filter: grayscale(100%); transition: filter 0.3s; }
+        .bw-video:hover { filter: grayscale(0%); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 antialiased overflow-x-hidden selection:bg-black selection:text-white">
+<body class="bg-white text-gray-900 antialiased overflow-x-hidden selection:bg-gold-400 selection:text-white">
+
+    <div id="preloader"><div class="loader"></div></div>
 
     <nav class="fixed w-full z-50 top-0 transition-all duration-300 glass-nav shadow-sm h-16 lg:h-20 flex items-center">
         <div class="max-w-7xl w-full mx-auto px-4 flex justify-between items-center gap-2 lg:gap-8">
-            <div class="flex-shrink-0 cursor-pointer" onclick="resetToHome()">
-                <span class="font-serif font-bold text-xl lg:text-2xl tracking-tighter text-black">Medicin<span class="text-medic-600 italic">Up</span></span>
+            <div class="flex-shrink-0 cursor-pointer" onclick="window.resetToHome()">
+                <span class="font-serif font-bold text-xl lg:text-2xl tracking-tighter text-black">Medicin<span class="text-gold-500 italic">Up</span></span>
             </div>
             
             <div class="flex-1 max-w-md mx-auto">
-                <form onsubmit="event.preventDefault(); searchFromNav();" class="relative group">
+                <form onsubmit="event.preventDefault(); window.searchFromNav();" class="relative group">
                     <input type="number" id="navSearchInput" 
                         class="block w-full pl-4 pr-12 py-2 lg:py-2.5 border border-gray-300 rounded-full leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-black focus:ring-1 focus:ring-black sm:text-sm transition-all shadow-inner" 
                         placeholder="Nº Pulseira (ex: 1001)" required>
@@ -82,7 +88,7 @@
             </div>
 
             <div class="flex-shrink-0">
-                <a href="#comprar" onclick="trackClickBuy(); resetToHome()" class="bg-black text-white px-4 lg:px-6 py-2 text-xs lg:text-sm font-bold uppercase tracking-widest rounded hover:bg-cork-500 transition shadow-lg flex items-center gap-2">
+                <a href="#comprar" onclick="window.trackClickBuy(); window.resetToHome()" class="bg-black text-white px-4 lg:px-6 py-2 text-xs lg:text-sm font-bold uppercase tracking-widest rounded hover:bg-gold-500 transition shadow-lg flex items-center gap-2">
                     <span>Comprar</span>
                 </a>
             </div>
@@ -92,53 +98,95 @@
     <main id="landing-container">
         
         <div class="mt-16 lg:mt-20 w-full bg-black">
-            <video class="w-full lg:max-w-5xl mx-auto h-auto object-cover max-h-[70vh]" autoplay loop muted playsinline>
+            <video class="w-full lg:max-w-5xl mx-auto h-auto object-cover max-h-[65vh]" autoplay loop muted playsinline preload="auto">
                 <source src="https://github.com/andrefrsilva/medicinup/raw/refs/heads/main/video%20pusleira%202.mp4" type="video/mp4">
             </video>
         </div>
 
         <div class="bg-white py-16 text-center px-4">
             <div class="max-w-4xl mx-auto">
-                <div class="inline-block border border-cork-400 text-cork-400 px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] mb-6 rounded-full animate-pulse">
+                <div class="inline-block border border-gold-400 text-gold-600 px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] mb-6 rounded-full animate-pulse">
                     Oferta Exclusiva de Natal
                 </div>
                 
                 <h1 class="text-5xl md:text-7xl font-serif font-bold leading-tight mb-6 text-black" data-aos="fade-up">
-                    E Se Cair?
+                    A Joia de que eles precisam
                 </h1>
                 
-                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-                    O silêncio é o maior inimigo. A Pulseira MedicinUp é o amuleto que fala pelos seus pais ou avós numa emergência, quando eles não conseguem. 
-                    <br><strong>Eles cuidaram de si. Agora a vez é sua.</strong>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed font-light" data-aos="fade-up" data-aos-delay="100">
+                    O seu pai ou avó não tem a informação médica de emergência organizada e à mão para quando (sim, algum dia irá acontecer!) for preciso. Nem tem sítio onde facilmente meter as medições para você controlar se está tudo bem com eles.
+                    <br><br>
+                    <strong>Tratámos de tudo. Está aqui a sua garantia de paz de espírito.</strong>
                 </p>
+                <p class="font-bold text-lg mb-10 text-gold-600">Este Natal, a prenda para eles está aqui.</p>
                 
                 <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#comprar" onclick="trackClickBuy()" class="bg-black text-white px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-gray-800 transition shadow-xl border border-black">
-                        Cortiça Premium + 1 Ano Plataforma
+                    <a href="#comprar" onclick="window.trackClickBuy()" class="bg-black text-white px-10 py-4 text-sm font-bold uppercase tracking-widest hover:bg-gold-500 transition shadow-xl border border-black">
+                        Comprar Já
                     </a>
                 </div>
             </div>
         </div>
 
-        <section class="py-12 bg-gray-50 border-y border-gray-200">
+        <section class="py-10 bg-black px-4 border-y-4 border-red-600">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-black">
+                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto"><source src="https://github.com/andrefrsilva/medicinup/raw/refs/heads/main/idosa%20molha%20relogio.mp4" type="video/mp4"></video>
+                    </div>
+                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-black">
+                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto"><source src="https://github.com/andrefrsilva/medicinup/blob/main/medico%20nao%20sabe%20da%20medica%C3%A7ao%20do%20idoso.mp4?raw=true" type="video/mp4"></video>
+                    </div>
+                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-black">
+                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto"><source src="https://github.com/andrefrsilva/medicinup/blob/main/pilhas%20de%20livros%20medico.mp4?raw=true" type="video/mp4"></video>
+                    </div>
+                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-black">
+                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto"><source src="https://github.com/andrefrsilva/medicinup/blob/main/um%20segundo%20de%20vida%20a%20menos.mp4?raw=true" type="video/mp4"></video>
+                    </div>
+                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-black">
+                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto"><source src="https://github.com/andrefrsilva/medicinup/raw/refs/heads/main/video%20idoso%20inconsciente%20e%20bombeiro%20a%20toa.mp4" type="video/mp4"></video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-serif font-bold text-center mb-16">A Realidade Crua</h2>
+                <div class="grid md:grid-cols-2 gap-16">
+                    <div class="space-y-6" data-aos="fade-right">
+                        <h3 class="text-2xl font-serif font-bold text-black border-b-2 border-gold-400 pb-2 mb-6">Para Si (Filho/Neto)</h3>
+                        <div class="pl-4 border-l-4 border-red-600"><h4 class="font-bold text-red-700">A Culpa do Emigrante</h4><p class="text-sm text-gray-600">"Estou longe. Se ele cair hoje à noite, eu só sei amanhã. Sinto que escolhi o dinheiro em vez deles."</p></div>
+                        <div class="pl-4 border-l-4 border-red-600"><h4 class="font-bold text-red-700">O Terror da Chamada</h4><p class="text-sm text-gray-600">O médico pergunta "Que medicamentos toma?". Você não sabe. A sua resposta podia salvar a vida dele.</p></div>
+                        <div class="pl-4 border-l-4 border-black"><h4 class="font-bold">A Paranóia Diária</h4><p class="text-sm text-gray-600">Liga 3x por dia. Se não atendem ao 2º toque, entra em pânico. Eles sentem-se sufocados, você sente-se louco.</p></div>
+                        <div class="pl-4 border-l-4 border-black"><h4 class="font-bold">A Mentira do "Estou Bem"</h4><p class="text-sm text-gray-600">O pai diz que mede a tensão. Você sabe que ele mente para não preocupar. Vai ter um problema grave a esconder coisas.</p></div>
+                        <div class="pl-4 border-l-4 border-black"><h4 class="font-bold">Smartwatches na Gaveta</h4><p class="text-sm text-gray-600">Comprou aquele relógio caro. Ele não usa porque "acabou a bateria" ou "é complicado". Dinheiro ao lixo, segurança zero.</p></div>
+                        <div class="pl-4 border-l-4 border-black"><h4 class="font-bold">A Vergonha Social</h4><p class="text-sm text-gray-600">Os amigos falam dos pais com orgulho. Você evita o tema porque sabe que não está a controlar a saúde deles como devia.</p></div>
+                    </div>
+                    <div class="space-y-6" data-aos="fade-left">
+                        <h3 class="text-2xl font-serif font-bold text-black border-b-2 border-red-600 pb-2 mb-6">Para Eles (Pais/Avós)</h3>
+                        <div class="pl-4 border-l-4 border-black"><h4 class="font-bold">O Medo de Ser um Fardo</h4><p class="text-sm text-gray-600">"Não quero incomodar." Caiu, doeu, mas levantou-se e não disse a ninguém. Prefere sofrer em silêncio.</p></div>
+                        <div class="pl-4 border-l-4 border-red-600"><h4 class="font-bold text-red-700">O Terror de Morrer Sozinho</h4><p class="text-sm text-gray-600">Acorda à noite com dor no peito. "Se for agora, ninguém vai saber até de manhã." O pânico paralisa.</p></div>
+                        <div class="pl-4 border-l-4 border-black"><h4 class="font-bold">A Frustração da Tecnologia</h4><p class="text-sm text-gray-600">Apps, logins, baterias. Sente-se burro e inútil. "Já não sirvo para nada, nem um botão consigo carregar."</p></div>
+                        <div class="pl-4 border-l-4 border-red-600"><h4 class="font-bold text-red-700">O Medo do Hospital Anónimo</h4><p class="text-sm text-gray-600">Se for inconsciente, como sabem que é alérgico à penicilina? Pode morrer por um erro evitável e estúpido.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-gray-100">
             <div class="max-w-5xl mx-auto px-4">
-                <h2 class="text-2xl font-bold text-center mb-8 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-triangle-exclamation text-red-600"></i> Realidade nas Manchetes
-                </h2>
-                <div class="space-y-4">
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-8 border-red-600 hover:bg-gray-50 transition">
-                        <a href="https://www.dn.pt/sociedade/mdico-e-enfermeiro-condenados-por-darem-penicilina-a-doente-alrgico-que-acabou-por-morrer" target="_blank" class="block">
-                            <h3 class="font-serif font-bold text-xl text-gray-900 hover:underline">"Médico e enfermeiro condenados por darem penicilina a doente alérgico que acabou por morrer"</h3>
-                            <p class="text-xs text-gray-500 mt-2 uppercase tracking-wide font-bold">Diário de Notícias <span class="text-gray-300">|</span> Ler Notícia &rarr;</p>
+                <h2 class="text-2xl font-bold text-center mb-10"><i class="fa-solid fa-newspaper text-red-600 mr-2"></i> Realidade nas Manchetes</h2>
+                <div class="space-y-6">
+                    <div class="bg-white p-6 shadow-sm border-l-8 border-red-600">
+                        <a href="https://www.dn.pt/sociedade/mdico-e-enfermeiro-condenados-por-darem-penicilina-a-doente-alrgico-que-acabou-por-morrer" target="_blank" class="block hover:opacity-70">
+                            <h3 class="font-serif font-bold text-xl text-black">"Médico e enfermeiro condenados por darem penicilina a doente alérgico que acabou por morrer"</h3>
+                            <p class="text-xs font-bold mt-2 text-gray-500 uppercase">Diário de Notícias &rarr;</p>
                         </a>
                     </div>
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-8 border-black">
-                        <h3 class="font-serif font-bold text-xl text-gray-900">"Idoso encontrado desorientado na via pública sem identificação não sabia dizer o próprio nome"</h3>
-                        <p class="text-xs text-gray-500 mt-2 uppercase tracking-wide font-bold">Correio da Manhã (Arquivo)</p>
-                    </div>
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-8 border-black">
-                        <h3 class="font-serif font-bold text-xl text-gray-900">"INEM: Falta de informação sobre medicação crónica atrasa socorro em 30%"</h3>
-                        <p class="text-xs text-gray-500 mt-2 uppercase tracking-wide font-bold">Público (Arquivo)</p>
+                    <div class="bg-white p-6 shadow-sm border-l-8 border-black">
+                        <h3 class="font-serif font-bold text-xl text-black">"Idoso encontrado desorientado na via pública sem identificação não sabia dizer o próprio nome"</h3>
+                        <p class="text-xs font-bold mt-2 text-gray-500 uppercase">Correio da Manhã</p>
                     </div>
                 </div>
             </div>
@@ -146,185 +194,155 @@
 
         <section class="py-16 bg-white">
             <div class="max-w-6xl mx-auto px-4">
-                <h2 class="text-3xl font-serif font-bold text-center mb-12">Como Funciona? <br><span class="text-sm font-sans font-normal text-gray-500">Simples. Seguro. Sem Tecnologia Complicada para Eles.</span></h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-8 text-center relative">
-                    <div class="hidden md:block absolute top-8 left-0 w-full h-0.5 bg-gray-100 -z-10"></div>
-
-                    <div class="bg-white">
-                        <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-xl">1</div>
-                        <h3 class="font-bold text-lg mb-2">Encomenda</h3>
-                        <p class="text-xs text-gray-600 px-2">Recebe a pulseira de cortiça elegante em casa.</p>
+                <h2 class="text-2xl font-bold text-center mb-12">Histórias Reais</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="p-6 bg-gray-50 rounded-lg italic relative">
+                        <div class="absolute top-2 left-2 text-4xl text-gold-400">"</div>
+                        <p class="text-sm text-gray-700 mt-4">"O meu pai é teimoso. Dizia que a tensão estava boa. Comprei a pulseira, vi que estava a 18. O médico mudou a medicação e evitou o AVC."</p>
+                        <p class="text-xs font-bold text-black mt-4 not-italic">— Ana M., Vila Real</p>
                     </div>
-                    <div class="bg-white">
-                        <div class="w-16 h-16 bg-cork-400 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-xl">2</div>
-                        <h3 class="font-bold text-lg mb-2">Regista</h3>
-                        <p class="text-xs text-gray-600 px-2">Associa o Nº Único usando o seu email.</p>
+                    <div class="p-6 bg-gray-50 rounded-lg italic relative">
+                        <div class="absolute top-2 left-2 text-4xl text-gold-400">"</div>
+                        <p class="text-sm text-gray-700 mt-4">"Estou na Suíça. A minha mãe teve uma tontura, o INEM viu a pulseira e ligou-me logo. Souberam que ela toma anticoagulantes. Salvou-lhe a vida."</p>
+                        <p class="text-xs font-bold text-black mt-4 not-italic">— Carlos P., Zurique</p>
                     </div>
-                    <div class="bg-white">
-                        <div class="w-16 h-16 bg-white border-2 border-black text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-xl">3</div>
-                        <h3 class="font-bold text-lg mb-2">Define</h3>
-                        <p class="text-xs text-gray-600 px-2">Escolhe o que é público (Emergência) e o que é privado.</p>
-                    </div>
-                    <div class="bg-white">
-                        <div class="w-16 h-16 bg-white border-2 border-black text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-xl">4</div>
-                        <h3 class="font-bold text-lg mb-2">Mede</h3>
-                        <p class="text-xs text-gray-600 px-2">Insere dados como Peso e Tensão ao longo do tempo.</p>
-                    </div>
-                    <div class="bg-white">
-                        <div class="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-xl"><i class="fa-solid fa-check"></i></div>
-                        <h3 class="font-bold text-lg mb-2">Tranquilidade</h3>
-                        <p class="text-xs text-gray-600 px-2">Em emergência, médicos consultam o histórico vital.</p>
+                    <div class="p-6 bg-gray-50 rounded-lg italic relative">
+                        <div class="absolute top-2 left-2 text-4xl text-gold-400">"</div>
+                        <p class="text-sm text-gray-700 mt-4">"Sinto-me mais seguro. Não preciso de carregar nada nem decorar nomes de comprimidos. Está tudo no pulso."</p>
+                        <p class="text-xs font-bold text-black mt-4 not-italic">— Sr. António, 78 anos</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
+        <section class="py-16 bg-gray-900 text-white">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-serif font-bold text-center mb-12">Como Funciona?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-8 text-center">
+                    <div><div class="w-12 h-12 bg-black border-2 border-white text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-xl">1</div><h3 class="font-bold">Compra</h3></div>
+                    <div><div class="w-12 h-12 bg-black border-2 border-white text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-xl">2</div><h3 class="font-bold">Recebe</h3><p class="text-xs text-gray-400 mt-2">Recebe a pulseira numa elegante caixa para oferecer.</p></div>
+                    <div><div class="w-12 h-12 bg-black border-2 border-white text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-xl">3</div><h3 class="font-bold">Regista</h3><p class="text-xs text-gray-400 mt-2">Com o código que vem na caixa.</p></div>
+                    <div><div class="w-12 h-12 bg-black border-2 border-white text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-xl">4</div><h3 class="font-bold">Dados</h3><p class="text-xs text-gray-400 mt-2">Adiciona os dados e escolhe o que quer público. Tanto os fixos como os dos registos que vai fazendo.</p></div>
+                    <div><div class="w-12 h-12 bg-black border-2 border-white text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-xl">5</div><h3 class="font-bold">Segurança e Controlo</h3><p class="text-xs text-gray-400 mt-2">Em caso de emergência, está tudo sempre pronto e o médico pode aceder através do número na pulseira. Entretanto os filhos ou netos também podem ir controlando tudo na plataforma.</p></div>
+                </div>
                 <div class="text-center mt-12">
-                    <button onclick="runDemo()" class="bg-gray-100 border border-gray-300 text-gray-800 px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-black hover:text-white transition rounded-full">
+                    <button onclick="window.runDemo()" class="bg-transparent border border-white text-white px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-black transition rounded-full">
                         Ver Exemplo Real do Dashboard
                     </button>
                 </div>
             </div>
         </section>
 
-        <section class="py-20 bg-gray-50 border-t border-gray-200">
-            <div class="max-w-6xl mx-auto px-4">
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div class="space-y-8" data-aos="fade-right">
-                        <h3 class="text-xl font-bold text-black border-b-2 border-cork-400 pb-2 inline-block">A Sua Angústia (Filhos)</h3>
-                        <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-500">
-                            <h4 class="font-bold text-red-600 mb-1"><i class="fa-solid fa-heart-crack mr-2"></i>Culpa & Distância</h4>
-                            <p class="text-sm text-gray-600">"Estou longe/emigrado. E se acontece alguma coisa hoje? Sinto que não estou a cuidar deles como devia."</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
-                            <h4 class="font-bold text-orange-600 mb-1"><i class="fa-solid fa-ambulance mr-2"></i>O Pânico do INEM</h4>
-                            <p class="text-sm text-gray-600">"Se o meu pai cai na rua, quem avisa? Que medicamentos toma? Sem a pulseira, ele é um desconhecido no hospital."</p>
-                        </div>
-                    </div>
-                    <div class="space-y-8" data-aos="fade-left">
-                        <h3 class="text-xl font-bold text-black border-b-2 border-medic-600 pb-2 inline-block">O Risco Deles (Pais)</h3>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-black mb-1">Hipertensão Descontrolada</h4>
-                            <p class="text-sm text-gray-600">Apenas 20% dos doentes controlam a PA. O risco de AVC e Enfarte aumenta drasticamente sem registo constante.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h4 class="font-bold text-black mb-1">Síndrome da Bata Branca</h4>
-                            <p class="text-sm text-gray-600">No consultório a tensão sobe. O médico precisa de ver os valores reais de casa para medicar corretamente.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="grid md:grid-cols-4 gap-6 text-center">
-                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition group">
-                        <i class="fa-solid fa-leaf text-green-600 text-4xl mb-4 group-hover:scale-110 transition"></i>
-                        <h3 class="font-bold">Cortiça Portuguesa</h3>
-                        <p class="text-xs text-gray-500 mt-2">Biodegradável, suave e não provoca alergias.</p>
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-2xl font-serif font-bold text-center mb-12">Vantagens Únicas</h2>
+                <div class="grid md:grid-cols-4 gap-8 text-center">
+                    <div class="p-4 border hover:border-gold-400 transition rounded">
+                        <i class="fa-solid fa-leaf text-green-600 text-3xl mb-3"></i>
+                        <h3 class="font-bold text-sm">Cortiça Portuguesa</h3>
+                        <p class="text-xs text-gray-500 mt-1">Biodegradável, suave, não provoca alergias.</p>
                     </div>
-                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition group">
-                        <i class="fa-solid fa-magnet text-orange-500 text-4xl mb-4 group-hover:scale-110 transition"></i>
-                        <h3 class="font-bold">Exam Safe</h3>
-                        <p class="text-xs text-gray-500 mt-2">Sem metal. Segura para Ressonância Magnética e TAC.</p>
+                    <div class="p-4 border hover:border-gold-400 transition rounded">
+                        <i class="fa-solid fa-magnet text-red-600 text-3xl mb-3"></i>
+                        <h3 class="font-bold text-sm">Exam Safe</h3>
+                        <p class="text-xs text-gray-500 mt-1">Sem metal. Segura para Ressonância Magnética/TAC.</p>
                     </div>
-                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition group">
-                        <i class="fa-solid fa-droplet text-blue-500 text-4xl mb-4 group-hover:scale-110 transition"></i>
-                        <h3 class="font-bold">À Prova de Água</h3>
-                        <p class="text-xs text-gray-500 mt-2">Lavável e duradoura. Pode tomar banho com ela.</p>
+                    <div class="p-4 border hover:border-gold-400 transition rounded">
+                        <i class="fa-solid fa-droplet text-blue-500 text-3xl mb-3"></i>
+                        <h3 class="font-bold text-sm">À Prova de Água</h3>
+                        <p class="text-xs text-gray-500 mt-1">Lavável. Pode tomar banho com ela.</p>
                     </div>
-                    <div class="p-6 border border-gray-100 rounded-lg hover:shadow-lg transition group">
-                        <i class="fa-solid fa-hospital-user text-red-600 text-4xl mb-4 group-hover:scale-110 transition"></i>
-                        <h3 class="font-bold">Acesso Médico</h3>
-                        <p class="text-xs text-gray-500 mt-2">Em emergência, qualquer médico acede ao histórico digitando o número.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-20 bg-gray-50 border-t border-gray-200">
-            <div class="max-w-5xl mx-auto px-4">
-                <h2 class="text-2xl font-bold text-center mb-10">Histórias Reais de Quem Cuida</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-sm italic text-gray-600 relative">
-                        <div class="text-4xl text-cork-400 absolute top-2 left-4">"</div>
-                        <p class="mb-4 mt-4 text-sm">"O meu pai é muito teimoso, dizia sempre que a tensão estava boa. Comprei a pulseira e obriguei-o a registar. O médico viu o histórico e mudou logo a medicação."</p>
-                        <p class="text-xs font-bold text-black not-italic">— Ana M., Vila Real</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm italic text-gray-600 relative">
-                        <div class="text-4xl text-cork-400 absolute top-2 left-4">"</div>
-                        <p class="mb-4 mt-4 text-sm">"Estou emigrado na Suíça e andava sempre com o coração nas mãos. Agora consulto a app e vejo se a minha mãe se pesou e como está. É um alívio."</p>
-                        <p class="text-xs font-bold text-black not-italic">— Carlos P., Zurique</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm italic text-gray-600 relative">
-                        <div class="text-4xl text-cork-400 absolute top-2 left-4">"</div>
-                        <p class="mb-4 mt-4 text-sm">"A minha avó teve um princípio de AVC. O INEM viu a pulseira, ligou-me logo e souberam que ela tomava anticoagulantes. Salvou-lhe a vida."</p>
-                        <p class="text-xs font-bold text-black not-italic">— Sofia R., Lisboa</p>
+                    <div class="p-4 border hover:border-gold-400 transition rounded">
+                        <i class="fa-solid fa-hospital-user text-red-600 text-3xl mb-3"></i>
+                        <h3 class="font-bold text-sm">Acesso Médico</h3>
+                        <p class="text-xs text-gray-500 mt-1">Em emergência, qualquer médico acede ao histórico digitando o número.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="comprar" class="py-24 bg-white text-center relative overflow-hidden border-t border-gray-200">
-            <div class="max-w-3xl mx-auto px-4 relative z-10">
-                <h2 class="text-4xl font-serif font-bold mb-4">O Presente de Natal Perfeito</h2>
-                <p class="text-gray-500 mb-8">Cortiça Premium + 1 Ano de Plataforma</p>
                 
-                <div class="inline-block" onclick="trackClickBuy()">
-                    <stripe-buy-button
-                      buy-button-id="buy_btn_1SVdyqEcXun88d6ezjmI8cU9"
-                      publishable-key="pk_live_51P2d9GEcXun88d6eBqX7XAka5dSsCOM1AaakfjBmhQ2C15Se58FQeJpBT1DwqciGH3dsnt3K3a4ZIZRjiPLBkNUH00ZbcNJFJa"
-                    >
-                    </stripe-buy-button>
+                <div class="mt-10 bg-gray-50 p-6 rounded-lg border border-gray-200 text-center">
+                    <i class="fa-solid fa-lock text-gold-600 text-2xl mb-2"></i>
+                    <h3 class="font-bold text-lg">Privacidade & Proteção de Dados</h3>
+                    <p class="text-sm text-gray-600 max-w-2xl mx-auto mt-2">
+                        A informação de saúde é sua (Lei nº 58/2019). Dados alojados na sua conta pessoal, encriptados e controlados por si. 
+                        Conformidade total com <a href="https://gdpr-info.eu/" target="_blank" class="underline text-black">GDPR</a> e <a href="https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?artigo_id=1660A0003&nid=1660&tabela=leis&pagina=1&ficha=1&so_miolo=?area=Identifica%E7%E3o&nversao=" target="_blank" class="underline text-black">Lei Portuguesa</a>.
+                    </p>
                 </div>
+            </div>
+        </section>
 
-                <div class="mt-6 flex justify-center items-center gap-3">
-                    <p class="text-[10px] text-red-500 uppercase tracking-widest font-bold">Termina em:</p>
-                    <div id="countdown" class="text-xl font-mono font-bold text-red-600">Calculando...</div>
-                </div>
+        <section class="py-12 bg-gold-400 text-white text-center">
+            <div class="max-w-4xl mx-auto px-4">
+                <h2 class="text-2xl font-serif font-bold mb-2">Garantia de Satisfação Absoluta</h2>
+                <p class="text-lg">Como sabemos que eles vão adorar e pedir para os vizinhos, se eles não gostarem, em Janeiro devolvemos-lhe o dinheiro!</p>
+            </div>
+        </section>
 
-                <div class="mt-8 text-sm text-gray-500 flex justify-center gap-6">
-                    <span><i class="fa-solid fa-check text-green-500"></i> Envio Grátis</span>
-                    <span><i class="fa-solid fa-check text-green-500"></i> Pagamento Seguro</span>
+        <section id="comprar" class="py-24 bg-white text-center relative">
+            <div class="max-w-5xl mx-auto px-4">
+                <h2 class="text-4xl font-serif font-bold mb-12">Escolha o Pack de Natal</h2>
+                <div class="grid md:grid-cols-3 gap-8 items-end">
+                    <div class="p-6 border border-gray-200 rounded-lg" onclick="window.trackClick('buy_1')">
+                        <h3 class="font-bold text-lg mb-2">Só quer uma?</h3>
+                        <p class="text-xs text-gray-500 mb-4">1 Pulseira (com 1 ano de plataforma)</p>
+                        <div class="text-3xl font-bold mb-4">49,99€</div>
+                        <stripe-buy-button buy-button-id="buy_btn_1SVdyqEcXun88d6ezjmI8cU9" publishable-key="pk_live_51P2d9GEcXun88d6eBqX7XAka5dSsCOM1AaakfjBmhQ2C15Se58FQeJpBT1DwqciGH3dsnt3K3a4ZIZRjiPLBkNUH00ZbcNJFJa"></stripe-buy-button>
+                    </div>
+                    <div class="p-8 border-2 border-gold-500 rounded-xl shadow-2xl relative bg-white transform scale-105 z-10" onclick="window.trackClick('buy_2')">
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-bold px-3 py-1 uppercase rounded">Mais Vendido</div>
+                        <h3 class="font-bold text-xl mb-2">Para mais alguém?</h3>
+                        <p class="text-xs text-gray-500 mb-4">Pack 2 Pulseiras (Pais ou Avós)</p>
+                        <div class="text-4xl font-bold mb-4 text-gold-600">89,99€</div>
+                        <p class="text-xs text-green-600 font-bold mb-6">Fica já com as prendas tratadas!</p>
+                        <stripe-buy-button buy-button-id="buy_btn_1SWZhbEcXun88d6e6zN2hFQ3" publishable-key="pk_live_51P2d9GEcXun88d6eBqX7XAka5dSsCOM1AaakfjBmhQ2C15Se58FQeJpBT1DwqciGH3dsnt3K3a4ZIZRjiPLBkNUH00ZbcNJFJa"></stripe-buy-button>
+                    </div>
+                    <div class="p-6 border border-gray-200 rounded-lg" onclick="window.trackClick('buy_4')">
+                        <h3 class="font-bold text-lg mb-2">Família Completa?</h3>
+                        <p class="text-xs text-gray-500 mb-4">Pack 4 (Pais e Sogros)</p>
+                        <div class="text-3xl font-bold mb-4">169,99€</div>
+                        <stripe-buy-button buy-button-id="buy_btn_1SWZzWEcXun88d6eeFo5Bje9" publishable-key="pk_live_51P2d9GEcXun88d6eBqX7XAka5dSsCOM1AaakfjBmhQ2C15Se58FQeJpBT1DwqciGH3dsnt3K3a4ZIZRjiPLBkNUH00ZbcNJFJa"></stripe-buy-button>
+                    </div>
                 </div>
+                <div class="mt-12 flex flex-col items-center justify-center gap-2">
+                    <p class="text-[10px] text-red-600 uppercase tracking-widest font-bold">Promoção termina em:</p>
+                    <div id="countdown" class="text-xl font-mono font-bold text-red-600 bg-red-50 px-4 py-1 rounded">...</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-gray-50 text-center border-t border-gray-200">
+            <div class="max-w-md mx-auto px-4">
+                <h2 class="text-2xl font-bold mb-6">Ainda tem dúvidas?</h2>
+                <form onsubmit="event.preventDefault(); window.sendContact(this);" class="space-y-4 text-left">
+                    <input type="text" name="nome" placeholder="Nome" required class="w-full p-3 border rounded focus:border-black focus:ring-0">
+                    <input type="text" name="contacto" placeholder="Contacto (Email ou Tel)" required class="w-full p-3 border rounded focus:border-black focus:ring-0">
+                    <textarea name="mensagem" placeholder="Mensagem" required class="w-full p-3 border rounded h-32 focus:border-black focus:ring-0"></textarea>
+                    <button type="submit" class="w-full bg-black text-white font-bold py-3 rounded hover:bg-gray-800 transition">Enviar Mensagem</button>
+                </form>
             </div>
         </section>
 
         <div class="w-full overflow-hidden pb-10 bg-white">
-            <img src="https://github.com/andrefrsilva/medicinup/blob/main/pusleira%20com%20texto.jpg?raw=true" alt="Pulseira Detalhe" class="w-full max-w-4xl mx-auto h-auto object-cover opacity-80 hover:opacity-100 transition">
+            <img src="https://github.com/andrefrsilva/medicinup/blob/main/pusleira%20com%20texto.jpg?raw=true" alt="Pulseira MedicinUp Detalhe" class="w-full max-w-4xl mx-auto h-auto object-cover opacity-90">
         </div>
     </main>
 
     <main id="dashboard-container" class="hidden-section pt-24 pb-12 bg-gray-100 min-h-screen">
         <div class="max-w-7xl mx-auto px-4">
-            
             <div class="mb-6 flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
-                        <i class="fa-solid fa-file-medical text-medic-600"></i> Ficha Clínica Digital
-                    </h2>
-                    <p class="text-sm text-gray-500 mt-1">ID Utente: <span id="displayUtenteNumber" class="font-mono font-bold text-black bg-gray-100 px-2 py-0.5 rounded">---</span></p>
+                    <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-3"><i class="fa-solid fa-file-medical text-gold-500"></i> Ficha Clínica Digital</h2>
+                    <p class="text-sm text-gray-500 mt-1">ID: <span id="displayUtenteNumber" class="font-mono font-bold text-black bg-gray-100 px-2 py-0.5 rounded">---</span></p>
                 </div>
                 <div class="flex gap-3 mt-4 md:mt-0" id="dynamicButtons"></div>
             </div>
-
             <div id="loading-overlay" class="hidden flex justify-center py-20"><div class="loader"></div></div>
-
             <div id="data-content" class="space-y-6 hidden">
-                
-                <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
-                    <div class="bg-gray-800 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
-                        <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-user-shield mr-2"></i> Identificação & Emergência</h3>
-                        <span>&#9660;</span>
-                    </div>
+                <div class="bg-white rounded-lg shadow border border-gray-200 overflow-hidden">
+                    <div class="bg-black text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="window.toggleSection(this)"><h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-user-shield mr-2"></i> Identificação</h3><span>&#9660;</span></div>
                     <div class="p-6 text-sm" id="general-records"></div>
                 </div>
-
-                <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
-                    <div class="bg-blue-900 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
-                        <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-heart-pulse mr-2"></i> Sinais Vitais & Monitorização</h3>
-                        <span>&#9660;</span>
-                    </div>
+                <div class="bg-white rounded-lg shadow border border-gray-200 overflow-hidden">
+                    <div class="bg-gold-500 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="window.toggleSection(this)"><h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-heart-pulse mr-2"></i> Sinais Vitais</h3><span>&#9660;</span></div>
                     <div class="p-4 space-y-8 hidden">
                          <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Pressão Arterial</h4><div id="visualization" class="graph-container"></div></div>
                          <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Peso (kg)</h4><div id="weightVisualization" class="graph-container"></div></div>
@@ -333,12 +351,8 @@
                          <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Perímetro Abdominal (cm)</h4><div id="abdominalPerimeterVisualization" class="graph-container"></div></div>
                     </div>
                 </div>
-
-                <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
-                    <div class="bg-medic-600 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
-                        <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-dumbbell mr-2"></i> Exercício Físico</h3>
-                        <span>&#9660;</span>
-                    </div>
+                <div class="bg-white rounded-lg shadow border border-gray-200 overflow-hidden">
+                    <div class="bg-black text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="window.toggleSection(this)"><h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-dumbbell mr-2"></i> Exercício</h3><span>&#9660;</span></div>
                     <div class="p-4 space-y-8 hidden">
                          <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Caminhada (km)</h4><div id="distwalkingVisualization" class="graph-container"></div></div>
                          <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Bicicleta (km)</h4><div id="distcyclingVisualization" class="graph-container"></div></div>
@@ -351,12 +365,8 @@
                          <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Elev. Pernas</h4><div id="legraisesVisualization" class="graph-container"></div></div>
                     </div>
                 </div>
-
-                <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
-                    <div class="bg-red-600 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
-                        <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-vial mr-2"></i> Análises Clínicas</h3>
-                        <span>&#9660;</span>
-                    </div>
+                <div class="bg-white rounded-lg shadow border border-gray-200 overflow-hidden">
+                    <div class="bg-red-700 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="window.toggleSection(this)"><h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-vial mr-2"></i> Análises</h3><span>&#9660;</span></div>
                     <div class="p-4 space-y-8 hidden">
                         <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Hg A1c (%)</h4><div id="HgA1cVisualization" class="graph-container"></div></div>
                         <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Hemoglobina</h4><div id="HgVisualization" class="graph-container"></div></div>
@@ -367,148 +377,135 @@
                         <div class="w-full"><h4 class="font-bold text-gray-700 mb-2 border-b pb-1">Ácido Úrico</h4><div id="uricacidVisualization" class="graph-container"></div></div>
                     </div>
                 </div>
-
-                <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
-                    <div class="bg-cork-500 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="toggleSection(this)">
-                        <h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-notes-medical mr-2"></i> Notas & Sintomas</h3>
-                        <span>&#9660;</span>
-                    </div>
-                    <div class="p-6 hidden">
-                        <div id="symptoms-content" class="text-sm max-h-60 overflow-y-auto"></div>
-                    </div>
+                <div class="bg-white rounded-lg shadow border border-gray-200 overflow-hidden">
+                    <div class="bg-gray-600 text-white px-6 py-4 flex justify-between items-center cursor-pointer" onclick="window.toggleSection(this)"><h3 class="font-bold text-sm uppercase tracking-wide"><i class="fa-solid fa-notes-medical mr-2"></i> Notas & Sintomas</h3><span>&#9660;</span></div>
+                    <div class="p-6 hidden"><div id="symptoms-content" class="text-sm max-h-60 overflow-y-auto"></div></div>
                 </div>
-
-                <div class="text-center py-8">
-                    <button onclick="downloadData()" class="bg-green-600 text-white px-6 py-3 rounded shadow hover:bg-green-700 transition font-bold uppercase text-sm">
-                        Download Relatório Excel
-                    </button>
-                </div>
+                <div class="text-center py-8"><button onclick="window.downloadData()" class="bg-green-600 text-white px-6 py-3 rounded shadow font-bold uppercase text-sm">Download Relatório Excel</button></div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-gray-900 border-t border-gray-800 pt-12 pb-24 text-gray-500 text-xs text-center">
+    <footer class="bg-black border-t border-gray-800 pt-12 pb-24 text-gray-500 text-xs text-center">
         <div class="max-w-7xl mx-auto px-4">
             <p class="mb-4 font-bold text-gray-400">MedicinUp © 2024.</p>
-            <div class="flex justify-center gap-6 mb-8">
-                <button onclick="openModal('privacy')" class="hover:text-white underline">Política de Privacidade</button>
-                <button onclick="openModal('terms')" class="hover:text-white underline">Termos e Condições</button>
-            </div>
-            <p class="text-gray-600 max-w-2xl mx-auto">Aviso Legal: Os dados de saúde são propriedade do utilizador e autenticados via Email.</p>
+            <div class="flex justify-center gap-6 mb-8"><button onclick="window.openModal('privacy')" class="hover:text-white underline">Privacidade</button><button onclick="window.openModal('terms')" class="hover:text-white underline">Termos</button></div>
+            <p>Dados de saúde são propriedade do utilizador. Autenticação segura.</p>
         </div>
     </footer>
 
     <div id="cookieBanner" class="fixed bottom-0 w-full bg-white p-4 shadow-2xl z-50 hidden flex-col md:flex-row justify-between items-center gap-4 border-t border-gray-200">
-        <div class="text-sm text-gray-800">
-            Utilizamos cookies. <a href="#" onclick="event.preventDefault(); openModal('privacy')" class="font-bold underline">Privacidade</a>.
-        </div>
-        <button onclick="acceptCookies()" class="bg-black text-white px-8 py-3 text-sm font-bold rounded">ACEITAR</button>
+        <div class="text-sm text-gray-800">Usamos cookies para funcionamento. <a href="#" onclick="window.openModal('privacy')" class="font-bold underline">Privacidade</a>.</div>
+        <button onclick="window.acceptCookies()" class="bg-black text-white px-8 py-3 text-sm font-bold rounded">ACEITAR</button>
     </div>
 
     <div id="legalModal" class="fixed inset-0 z-[60] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-3xl max-h-[80vh] overflow-y-auto rounded-xl p-8 relative shadow-2xl">
-            <button onclick="document.getElementById('legalModal').classList.add('hidden')" class="absolute top-4 right-4 text-2xl font-bold text-gray-400 hover:text-black">&times;</button>
+            <button onclick="document.getElementById('legalModal').classList.add('hidden')" class="absolute top-4 right-4 text-2xl font-bold">&times;</button>
             <div id="modalContent" class="prose prose-sm text-gray-800 max-w-none"></div>
         </div>
     </div>
 
-    <div id="privacy-text" class="hidden">
-        <p>Política de Privacidade: Conformidade com Google API Services. Os dados são seus e alojados na sua conta.</p>
-    </div>
-    <div id="terms-text" class="hidden">
-        <p>Termos: O uso da pulseira implica aceitação. Segurança do número é responsabilidade do utilizador.</p>
-    </div>
+    <div id="privacy-text" class="hidden"><p>Política de Privacidade: Conformidade com Google API Services. Os dados são seus e alojados na sua conta.</p></div>
+    <div id="terms-text" class="hidden"><p>Termos: O uso da pulseira implica aceitação. Segurança do número é responsabilidade do utilizador.</p></div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({once: true});
-        let GLOBAL_CONT_DATA = [];
-
-        // TRACKING
+        // GLOBAL SCOPE FUNCTIONS
+        window.GLOBAL_CONT_DATA = [];
         const GF_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeSGGY8vksnVVvt7h1Cb9fyfILrBAWr0zsP3bdANhexuKimGw/formResponse";
-        function getVisitorId() {
+
+        window.getVisitorId = function() {
             let id = localStorage.getItem('medicinup_vid');
             if(!id) { id = crypto.randomUUID(); localStorage.setItem('medicinup_vid', id); }
             return id;
         }
-        function sendToGoogleForms(event, extra="") {
-            const data = new URLSearchParams();
-            data.append("entry.1962600437", event);
-            data.append("entry.656835352", `[medicinup] Visitor:${getVisitorId()} | ${extra}`);
+
+        window.sendToGoogleForms = function(event, extra="") {
+            const data = new URLSearchParams(); 
+            data.append("entry.1962600437", event); 
+            data.append("entry.656835352", `[medicinup] Visitor:${window.getVisitorId()} | ${extra}`);
             fetch(GF_URL, { method: "POST", mode: "no-cors", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: data.toString() }).catch(e=>{});
         }
-        window.addEventListener('DOMContentLoaded', () => { sendToGoogleForms("visita_site", "Page Load"); updateTimer(); if(!localStorage.getItem('medicinup_cookies')) document.getElementById('cookieBanner').classList.remove('hidden'); document.getElementById('cookieBanner').classList.add('flex'); });
-        function trackClickBuy() { sendToGoogleForms("clique_comprar", "Clicou Stripe"); }
 
-        // TIMER
-        function updateTimer() {
-            const now = new Date();
-            const target = new Date();
-            target.setDate(now.getDate() + 2); target.setHours(24,0,0,0);
-            const diff = target - now;
-            const d = Math.floor(diff/(1000*60*60*24));
-            const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-            const m = Math.floor((diff%(1000*60*60))/(1000*60));
-            document.getElementById('countdown').innerText = `${d}d ${h}h ${m}m`;
-        }
-        setInterval(updateTimer, 1000);
+        window.trackClick = function(tag) { window.sendToGoogleForms("clique", tag); }
+        window.trackClickBuy = function() { window.sendToGoogleForms("clique_comprar", "Clicou Stripe"); }
+        window.sendContact = function(form) { const msg = `Nome: ${form.nome.value}\nMsg: ${form.mensagem.value}`; window.sendToGoogleForms("contact_form", `[Mensagem] ${msg}`); alert('Mensagem enviada.'); form.reset(); }
 
-        // UI UTILS
-        function acceptCookies(){ localStorage.setItem('medicinup_cookies', 'true'); document.getElementById('cookieBanner').classList.add('hidden'); }
-        function openModal(t){ document.getElementById('modalContent').innerHTML=document.getElementById(t+'-text').innerHTML; document.getElementById('legalModal').classList.remove('hidden'); }
-        function resetToHome() { document.getElementById('landing-container').classList.remove('hidden-section'); document.getElementById('dashboard-container').classList.add('hidden-section'); window.scrollTo(0,0); }
-        function runDemo() { document.getElementById('navSearchInput').value='1001'; searchFromNav(); }
+        window.acceptCookies = function(){ localStorage.setItem('medicinup_cookies', 'true'); document.getElementById('cookieBanner').classList.add('hidden'); }
+        window.openModal = function(t){ document.getElementById('modalContent').innerHTML=document.getElementById(t+'-text').innerHTML; document.getElementById('legalModal').classList.remove('hidden'); }
+        window.resetToHome = function() { document.getElementById('landing-container').classList.remove('hidden-section'); document.getElementById('dashboard-container').classList.add('hidden-section'); window.scrollTo(0,0); }
+        window.runDemo = function() { document.getElementById('navSearchInput').value='1001'; window.searchFromNav(); }
 
-        // ACCORDION
-        function toggleSection(el) { 
+        window.toggleSection = function(el) { 
             const content = el.nextElementSibling;
             content.classList.toggle('hidden');
             el.querySelector('span').innerText = content.classList.contains('hidden') ? '▼' : '▲';
-            
-            if(!content.classList.contains('hidden') && GLOBAL_CONT_DATA.length > 0) {
-                console.log('Opening section, rendering graphs for:', GLOBAL_CONT_DATA.length, 'rows');
+            if(!content.classList.contains('hidden') && window.GLOBAL_CONT_DATA.length > 0) {
                 const containers = content.querySelectorAll('.graph-container');
-                containers.forEach(div => {
-                    div.innerHTML = ''; 
-                    renderSpecificGraph(div.id, GLOBAL_CONT_DATA);
-                });
+                containers.forEach(div => { div.innerHTML = ''; window.renderSpecificGraph(div.id, window.GLOBAL_CONT_DATA); });
             }
         }
 
-        // MAPPER
-        function renderSpecificGraph(id, data) {
+        window.renderSpecificGraph = function(id, data) {
             const map = {
-                'visualization': () => plotBP(data, id),
-                'weightVisualization': () => plotSimple(data, 'Peso (em kg)', id, 'Peso'),
-                'glucoseVisualization': () => plotSimple(data, 'Glicémia', id, 'Glicémia'),
-                'sleepVisualization': () => plotSimple(data, 'Sono (horas)', id, 'Sono'),
-                'abdominalPerimeterVisualization': () => plotSimple(data, 'Perímetro abdominal (cm)', id, 'Perímetro'),
-                'distwalkingVisualization': () => plotSimple(data, 'Distância de caminhada/corrida (km)', id, 'Km'),
-                'distcyclingVisualization': () => plotSimple(data, 'Distância de bicicleta (km)', id, 'Km'),
-                'maxweightVisualization': () => plotSimple(data, 'Peso máximo no supino (kg)', id, 'Kg'),
-                'pushupsVisualization': () => plotSimple(data, 'Flexões de peito', id, 'Reps'),
-                'deepVisualization': () => plotSimple(data, 'Mergulhos de peito', id, 'Reps'),
-                'pullupsVisualization': () => plotSimple(data, 'Elevações', id, 'Reps'),
-                'squatVisualization': () => plotSimple(data, 'Agachamentos', id, 'Reps'),
-                'absVisualization': () => plotSimple(data, 'Abdominais', id, 'Reps'),
-                'legraisesVisualization': () => plotSimple(data, 'Elevações de pernas', id, 'Reps'),
-                'HgA1cVisualization': () => plotSimple(data, 'Hemoglobina Glicada A1c (%)', id, '%'),
-                'HgVisualization': () => plotSimple(data, 'Hemoglobina (g/dL)', id, 'g/dL'),
-                'totalcholesterolVisualization': () => plotSimple(data, 'Colesterol Total (mg/dL)', id, 'mg/dL'),
-                'ldlVisualization': () => plotSimple(data, 'LDL (mg/dL)', id, 'mg/dL'),
-                'hdlVisualization': () => plotSimple(data, 'HDL (mg/dL)', id, 'mg/dL'),
-                'inrVisualization': () => plotSimple(data, 'INR', id, 'INR'),
-                'uricacidVisualization': () => plotSimple(data, 'Ácido Úrico (mg/dL)', id, 'mg/dL')
+                'visualization': () => window.plotBP(data, id),
+                'weightVisualization': () => window.plotSimple(data, 'Peso (em kg)', id, 'Peso'),
+                'glucoseVisualization': () => window.plotSimple(data, 'Glicémia', id, 'Glicémia'),
+                'sleepVisualization': () => window.plotSimple(data, 'Sono (horas)', id, 'Sono'),
+                'abdominalPerimeterVisualization': () => window.plotSimple(data, 'Perímetro abdominal (cm)', id, 'Perímetro'),
+                'distwalkingVisualization': () => window.plotSimple(data, 'Distância de caminhada/corrida (km)', id, 'Km'),
+                'distcyclingVisualization': () => window.plotSimple(data, 'Distância de bicicleta (km)', id, 'Km'),
+                'maxweightVisualization': () => window.plotSimple(data, 'Peso máximo no supino (kg)', id, 'Kg'),
+                'pushupsVisualization': () => window.plotSimple(data, 'Flexões de peito', id, 'Reps'),
+                'deepVisualization': () => window.plotSimple(data, 'Mergulhos de peito', id, 'Reps'),
+                'pullupsVisualization': () => window.plotSimple(data, 'Elevações', id, 'Reps'),
+                'squatVisualization': () => window.plotSimple(data, 'Agachamentos', id, 'Reps'),
+                'absVisualization': () => window.plotSimple(data, 'Abdominais', id, 'Reps'),
+                'legraisesVisualization': () => window.plotSimple(data, 'Elevações de pernas', id, 'Reps'),
+                'HgA1cVisualization': () => window.plotSimple(data, 'Hemoglobina Glicada A1c (%)', id, '%'),
+                'HgVisualization': () => window.plotSimple(data, 'Hemoglobina (g/dL)', id, 'g/dL'),
+                'totalcholesterolVisualization': () => window.plotSimple(data, 'Colesterol Total (mg/dL)', id, 'mg/dL'),
+                'ldlVisualization': () => window.plotSimple(data, 'LDL (mg/dL)', id, 'mg/dL'),
+                'hdlVisualization': () => window.plotSimple(data, 'HDL (mg/dL)', id, 'mg/dL'),
+                'inrVisualization': () => window.plotSimple(data, 'INR', id, 'INR'),
+                'uricacidVisualization': () => window.plotSimple(data, 'Ácido Úrico (mg/dL)', id, 'mg/dL')
             };
             if(map[id]) map[id]();
         }
 
-        // DATA SEARCH
-        let globalContUrl = null;
-        async function searchFromNav() {
+        window.plotBP = function(data, id) {
+            const c = document.getElementById(id); if(!c) return;
+            const items = new vis.DataSet();
+            let hasData = false;
+            data.forEach(r => {
+                const d = window.dateExcel(r['Carimbo de data/hora']);
+                if(d) {
+                    const s = parseFloat(r['Pressão Arterial Sistólica (número alto)']);
+                    const dia = parseFloat(r['Pressão Arterial Diastólica (número baixo)']);
+                    if(!isNaN(s)) { items.add({x:d, y:s, group:'sys'}); hasData=true; }
+                    if(!isNaN(dia)) { items.add({x:d, y:dia, group:'dia'}); hasData=true; }
+                }
+            });
+            if(!hasData || items.length===0) { c.innerHTML='<div class="flex items-center justify-center h-full text-gray-400 text-xs">Sem dados</div>'; return; }
+            new vis.Graph2d(c, items, new vis.DataSet([{id:'sys', content:'Sistólica', style:'stroke:red'}, {id:'dia', content:'Diastólica', style:'stroke:blue'}]), { height: '300px', legend: true, drawPoints: {style:'circle', size:4}, start: new Date(new Date().setDate(new Date().getDate()-90)) });
+        }
+
+        window.plotSimple = function(data, key, id, label) {
+            const c = document.getElementById(id); if(!c) return;
+            const items = new vis.DataSet();
+            let count = 0;
+            data.forEach(r => {
+                const d = window.dateExcel(r['Carimbo de data/hora']);
+                if(d && r[key]) { items.add({x:d, y:parseFloat(r[key]), group:'g1'}); count++; }
+            });
+            if(count === 0) { c.innerHTML='<div class="flex items-center justify-center h-full text-gray-400 text-xs">Sem registos</div>'; return; }
+            new vis.Graph2d(c, items, null, { height: '300px', drawPoints: {style:'circle', size:4}, shaded: {orientation:'bottom'} });
+        }
+
+        window.searchFromNav = async function() {
             const num = document.getElementById('navSearchInput').value;
             if(!num) return;
-            
             document.getElementById('landing-container').classList.add('hidden-section');
             document.getElementById('dashboard-container').classList.remove('hidden-section');
             document.getElementById('loading-overlay').classList.remove('hidden');
@@ -516,97 +513,59 @@
             document.getElementById('displayUtenteNumber').innerText = num;
             document.getElementById('general-records').innerHTML = '';
             window.scrollTo(0,0);
-
             try {
-                const dirWb = await fetchExcel('https://docs.google.com/spreadsheets/d/e/2PACX-1vSbbCJWxxvUaMkkE2Xszkr0yms4EzzzIBWfCqamf8_3JUJ70C-YmKks0z0petla8LtVMd6Si644XmfD/pub?output=xlsx');
+                const dirWb = await window.fetchExcel('https://docs.google.com/spreadsheets/d/e/2PACX-1vSbbCJWxxvUaMkkE2Xszkr0yms4EzzzIBWfCqamf8_3JUJ70C-YmKks0z0petla8LtVMd6Si644XmfD/pub?output=xlsx');
                 const dirData = XLSX.utils.sheet_to_json(dirWb.Sheets[dirWb.SheetNames[0]]);
                 const user = dirData.filter(r => r['Número da PulseirUp'] == num).sort((a,b) => b['Carimbo de data/hora'] - a['Carimbo de data/hora'])[0];
                 if(!user) throw new Error('Número não encontrado.');
-
-                globalContUrl = user['Link D'];
-                document.getElementById('dynamicButtons').innerHTML = `<button onclick="window.open('${user['Link C']}')" class="bg-black text-white px-3 py-1 text-xs font-bold rounded">UPDATE GERAL</button><button onclick="window.open('${user['Link D']}')" class="bg-black text-white px-3 py-1 text-xs font-bold rounded">UPDATE DADOS</button>`;
-
-                const [genWb, contWb] = await Promise.all([fetchExcel(user['Link C']), fetchExcel(user['Link D'])]);
+                window.globalContUrl = user['Link D'];
+                document.getElementById('dynamicButtons').innerHTML = `<button onclick="window.open('${user['Link C']}')" class="bg-black text-white px-3 py-1 text-xs font-bold rounded uppercase">Update Geral</button><button onclick="window.open('${user['Link D']}')" class="bg-black text-white px-3 py-1 text-xs font-bold rounded uppercase">Update Dados</button>`;
+                const [genWb, contWb] = await Promise.all([window.fetchExcel(user['Link C']), window.fetchExcel(user['Link D'])]);
                 const genData = XLSX.utils.sheet_to_json(genWb.Sheets[genWb.SheetNames[0]]).pop();
-                GLOBAL_CONT_DATA = XLSX.utils.sheet_to_json(contWb.Sheets[contWb.SheetNames[0]]);
-
-                renderGeneral(genData);
-                renderSymptoms(GLOBAL_CONT_DATA);
+                window.GLOBAL_CONT_DATA = XLSX.utils.sheet_to_json(contWb.Sheets[contWb.SheetNames[0]]);
+                window.renderGeneral(genData);
+                window.renderSymptoms(window.GLOBAL_CONT_DATA);
                 document.getElementById('loading-overlay').classList.add('hidden');
                 document.getElementById('data-content').classList.remove('hidden');
-            } catch(e) { alert(e.message); resetToHome(); }
+            } catch(e) { alert(e.message); window.resetToHome(); }
         }
 
-        async function fetchExcel(url) {
-            const r = await fetch(url + '&t=' + Date.now());
-            const b = await r.arrayBuffer();
-            return XLSX.read(b, {type:'array'});
-        }
-
-        function renderGeneral(data) {
+        window.fetchExcel = async function(url) { const r = await fetch(url+'&t='+Date.now()); const b = await r.arrayBuffer(); return XLSX.read(b, {type:'array'}); }
+        
+        window.renderGeneral = function(data) {
             if(!data) { document.getElementById('general-records').innerHTML='Sem dados.'; return; }
-            const fields = {'Última Atualização': dateFmt(data['Carimbo de data/hora']), 'Naturalidade': data['Naturalidade'], 'Data de Nascimento': dateFmt(data['Data de Nascimento']), 'Estado Civil': data['Estado Civil'], 'Altura (cm)': data['Altura (cm)'], 'Medicação Atual': data['Medicação Atual'], 'Alergias': data['Alergias'], 'Profissão Atual': data['Profissão Atual'], 'Cirurgias': data['Cirurgias'], 'Internamentos': data['Internamentos'], 'Resultados de Exames': data['Resultados de Exames (links)'], 'Contacto Emergência': data['Contacto de Emergência'], 'Doenças/Condições': data['Doenças, Condições ou Eventos'], 'Outras Doenças': data['Outras Doenças'], 'Último Peso (kg)': data['Último Peso (kg)'], 'IMC': data['IMC']};
+            const fields = {'Última Atualização': window.dateFmt(data['Carimbo de data/hora']), 'Naturalidade': data['Naturalidade'], 'Data de Nascimento': window.dateFmt(data['Data de Nascimento']), 'Estado Civil': data['Estado Civil'], 'Altura (cm)': data['Altura (cm)'], 'Medicação Atual': data['Medicação Atual'], 'Alergias': data['Alergias'], 'Profissão Atual': data['Profissão Atual'], 'Cirurgias': data['Cirurgias'], 'Internamentos': data['Internamentos'], 'Resultados de Exames': data['Resultados de Exames (links)'], 'Contacto Emergência': data['Contacto de Emergência'], 'Doenças/Condições': data['Doenças, Condições ou Eventos'], 'Outras Doenças': data['Outras Doenças'], 'Último Peso (kg)': data['Último Peso (kg)'], 'IMC': data['IMC']};
             let html = '<div class="grid grid-cols-1 gap-2">';
-            for(let k in fields) {
-                const val = fields[k] ? fields[k] : '-';
-                html += `<div class="grid grid-cols-3 border-b border-gray-100 pb-1"><span class="col-span-1 text-xs font-bold text-gray-500 uppercase pt-1 pr-1">${k}</span><span class="col-span-2 text-sm font-medium text-gray-900 pl-2 break-words whitespace-normal">${val}</span></div>`;
-            }
-            html += '</div>';
-            document.getElementById('general-records').innerHTML = html;
+            for(let k in fields) { const val = fields[k] ? fields[k] : '-'; html += `<div class="grid grid-cols-3 border-b border-gray-100 pb-1"><span class="col-span-1 text-xs font-bold text-gray-500 uppercase pt-1 pr-1">${k}</span><span class="col-span-2 text-sm font-medium text-gray-900 pl-2 break-words whitespace-normal">${val}</span></div>`; }
+            html += '</div>'; document.getElementById('general-records').innerHTML = html;
         }
 
-        function plotBP(data, id) {
-            const c = document.getElementById(id); if(!c) return;
-            const items = new vis.DataSet();
-            let hasData = false;
-            data.forEach(r => {
-                const d = dateExcel(r['Carimbo de data/hora']);
-                if(d) {
-                    const s = parseFloat(r['Pressão Arterial Sistólica (número alto)']);
-                    const dia = parseFloat(r['Pressão Arterial Diastólica (número baixo)']);
-                    // Forced String IDs for Groups
-                    if(!isNaN(s)) { items.add({x:d, y:s, group:'sys'}); hasData=true; }
-                    if(!isNaN(dia)) { items.add({x:d, y:dia, group:'dia'}); hasData=true; }
-                }
-            });
-            if(!hasData) { c.innerHTML='<div class="flex items-center justify-center h-full text-gray-400 text-xs">Sem dados</div>'; return; }
-            
-            // Groups must match string IDs
-            const groups = new vis.DataSet([
-                {id:'sys', content:'Sistólica', style:'stroke:red'}, 
-                {id:'dia', content:'Diastólica', style:'stroke:blue'}
-            ]);
-            new vis.Graph2d(c, items, groups, { height: '300px', legend: true, drawPoints: {style:'circle', size:4}, start: new Date(new Date().setDate(new Date().getDate()-90)) });
-        }
-
-        function plotSimple(data, key, id, label) {
-            const c = document.getElementById(id); if(!c) return;
-            const items = new vis.DataSet();
-            let count = 0;
-            data.forEach(r => {
-                const d = dateExcel(r['Carimbo de data/hora']);
-                // No groups for simple plots to avoid getItemRange error
-                if(d && r[key]) { items.add({x:d, y:parseFloat(r[key])}); count++; }
-            });
-            console.log(`Plotting ${label}: ${count} points`);
-            
-            if(count === 0) { c.innerHTML='<div class="flex items-center justify-center h-full text-gray-400 text-xs">Sem registos</div>'; return; }
-            
-            // Pass null for groups to force single line mode (Fixes getItemRange)
-            new vis.Graph2d(c, items, null, { height: '300px', drawPoints: {style:'circle', size:4}, shaded: {orientation:'bottom'} });
-        }
-
-        function renderSymptoms(data) {
+        window.renderSymptoms = function(data) {
             const f = data.filter(r => r['Sintomas / Notas Atuais']);
             let h = '<ul class="space-y-2">';
-            f.forEach(r => h+=`<li class="border-l-2 border-black pl-2"><span class="text-[10px] text-gray-500 block">${dateFmt2(r['Carimbo de data/hora'])}</span>${r['Sintomas / Notas Atuais']}</li>`);
+            f.forEach(r => h+=`<li class="border-l-2 border-black pl-2"><span class="text-[10px] text-gray-500 block">${window.dateFmt2(r['Carimbo de data/hora'])}</span>${r['Sintomas / Notas Atuais']}</li>`);
             document.getElementById('symptoms-content').innerHTML = h+'</ul>';
         }
 
-        function dateExcel(s){ if(!s)return null; return new Date((s-25569)*86400*1000); }
-        function dateFmt(s){ const d=dateExcel(s); return d?d.toLocaleDateString():'-'; }
-        function dateFmt2(s){ const d=dateExcel(s); return d?d.toLocaleString():'-'; }
-        function downloadData(){ if(globalContUrl) window.open(globalContUrl); }
+        window.dateExcel = function(s){ if(!s)return null; return new Date((s-25569)*86400*1000); }
+        window.dateFmt = function(s){ const d=window.dateExcel(s); return d?d.toLocaleDateString():'-'; }
+        window.dateFmt2 = function(s){ const d=window.dateExcel(s); return d?d.toLocaleString():'-'; }
+        window.downloadData = function(){ if(window.globalContUrl) window.open(window.globalContUrl); }
+
+        // INIT
+        window.addEventListener('load', () => {
+            const pl = document.getElementById('preloader');
+            pl.style.opacity = '0';
+            setTimeout(() => pl.style.display = 'none', 500);
+            document.querySelectorAll('video').forEach(v => v.play().catch(()=>{}));
+            AOS.init({once: true});
+            window.sendToGoogleForms("visita_site", "Page Load"); 
+            window.updateTimer(); 
+            setInterval(window.updateTimer, 1000);
+            if(!localStorage.getItem('medicinup_cookies')) document.getElementById('cookieBanner').classList.remove('hidden'); 
+            document.getElementById('cookieBanner').classList.add('flex');
+        });
+
         if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
     </script>
 </body>
