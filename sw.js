@@ -1,4 +1,4 @@
-const CACHE_NAME = 'medicinup-final-v9';
+const CACHE_NAME = 'medicinup-v17-fixed';
 const urlsToCache = [
   '/',
   '/index.html',
