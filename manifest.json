@@ -1,6 +1,6 @@
 {
-  "name": "MedicinUp - PulseirUp",
-  "short_name": "PulseirUp",
+  "name": "MedicinUp",
+  "short_name": "MedicinUp",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
