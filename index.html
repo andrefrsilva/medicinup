@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MedicinUp | A Joia que Salva</title>
+    <title>MedicinUp | A Jóia que Salva</title>
     <meta name="description" content="A prenda que salva vidas. Dados de saúde acessíveis numa pulseira de cortiça portuguesa.">
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
@@ -47,7 +47,7 @@
         .vis-point { stroke-width: 2px; }
         .vis-legend { background-color: rgba(255,255,255,0.9) !important; border: 1px solid #eee; padding: 5px; border-radius: 4px; }
         
-        /* Clean Inputs */
+        /* Inputs */
         input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         
         /* Loader */
@@ -62,7 +62,7 @@
         #preloader { position: fixed; inset: 0; background: #fff; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
         
         /* Video Filters */
-        .bw-video { filter: grayscale(100%); transition: filter 0.3s; }
+        .bw-video { filter: grayscale(100%); transition: filter 0.3s; background-color: #000; }
         .bw-video:hover { filter: grayscale(0%); }
     </style>
 </head>
@@ -110,11 +110,11 @@
                 </div>
                 
                 <h1 class="text-5xl md:text-7xl font-serif font-bold leading-tight mb-6 text-black" data-aos="fade-up">
-                    A Joia de que eles precisam
+                    A Jóia de que eles precisam
                 </h1>
                 
                 <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed font-light" data-aos="fade-up" data-aos-delay="100">
-                    O seu pai ou avó não tem a informação médica de emergência organizada e à mão para quando (sim, algum dia irá acontecer!) for preciso. Nem tem sítio onde facilmente meter as medições para você controlar se está tudo bem com eles.
+                    O seu pai ou avó não tem a informação médica de emergência organizada e à mão para quando for preciso (sim, algum dia irá acontecer!). Nem tem sítio onde facilmente meter as medições para você controlar se está tudo bem com eles.
                     <br><br>
                     <strong>Tratámos de tudo. Está aqui a sua garantia de paz de espírito.</strong>
                 </p>
@@ -131,20 +131,20 @@
         <section class="py-10 bg-black px-4 border-y-4 border-red-600">
             <div class="max-w-7xl mx-auto">
                 <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-black">
-                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto"><source src="https://github.com/andrefrsilva/medicinup/raw/refs/heads/main/idosa%20molha%20relogio.mp4" type="video/mp4"></video>
+                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-gray-900">
+                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto" onerror="this.parentElement.style.display='none'"><source src="https://github.com/andrefrsilva/medicinup/raw/refs/heads/main/idosa%20molha%20relogio.mp4" type="video/mp4"></video>
                     </div>
-                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-black">
-                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto"><source src="https://github.com/andrefrsilva/medicinup/blob/main/medico%20nao%20sabe%20da%20medica%C3%A7ao%20do%20idoso.mp4?raw=true" type="video/mp4"></video>
+                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-gray-900">
+                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto" onerror="this.parentElement.style.display='none'"><source src="https://github.com/andrefrsilva/medicinup/blob/main/medico%20nao%20sabe%20da%20medica%C3%A7ao%20do%20idoso.mp4?raw=true" type="video/mp4"></video>
                     </div>
-                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-black">
-                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto"><source src="https://github.com/andrefrsilva/medicinup/blob/main/pilhas%20de%20livros%20medico.mp4?raw=true" type="video/mp4"></video>
+                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-gray-900">
+                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto" onerror="this.parentElement.style.display='none'"><source src="https://github.com/andrefrsilva/medicinup/blob/main/pilhas%20de%20livros%20medico.mp4?raw=true" type="video/mp4"></video>
                     </div>
-                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-black">
-                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto"><source src="https://github.com/andrefrsilva/medicinup/blob/main/um%20segundo%20de%20vida%20a%20menos.mp4?raw=true" type="video/mp4"></video>
+                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-gray-900">
+                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto" onerror="this.parentElement.style.display='none'"><source src="https://github.com/andrefrsilva/medicinup/blob/main/um%20segundo%20de%20vida%20a%20menos.mp4?raw=true" type="video/mp4"></video>
                     </div>
-                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-black">
-                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto"><source src="https://github.com/andrefrsilva/medicinup/raw/refs/heads/main/video%20idoso%20inconsciente%20e%20bombeiro%20a%20toa.mp4" type="video/mp4"></video>
+                    <div class="w-full md:w-1/5 border-2 border-gray-800 rounded overflow-hidden bg-gray-900">
+                        <video class="w-full h-auto object-contain bw-video" autoplay loop muted playsinline preload="auto" onerror="this.parentElement.style.display='none'"><source src="https://github.com/andrefrsilva/medicinup/raw/refs/heads/main/video%20idoso%20inconsciente%20e%20bombeiro%20a%20toa.mp4" type="video/mp4"></video>
                     </div>
                 </div>
             </div>
@@ -411,32 +411,50 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // GLOBAL SCOPE FUNCTIONS
+        // PRELOADER & VIDEO RESTART
+        window.addEventListener('load', () => {
+            const pl = document.getElementById('preloader');
+            pl.style.opacity = '0';
+            setTimeout(() => pl.style.display = 'none', 500);
+            document.querySelectorAll('video').forEach(v => v.play().catch(()=>{}));
+        });
+
+        AOS.init({once: true});
         window.GLOBAL_CONT_DATA = [];
-        const GF_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeSGGY8vksnVVvt7h1Cb9fyfILrBAWr0zsP3bdANhexuKimGw/formResponse";
 
-        window.getVisitorId = function() {
-            let id = localStorage.getItem('medicinup_vid');
-            if(!id) { id = crypto.randomUUID(); localStorage.setItem('medicinup_vid', id); }
-            return id;
-        }
-
+        // FUNCTIONS GLOBAL SCOPE
+        window.getVisitorId = function() { let id = localStorage.getItem('medicinup_vid'); if(!id) { id = crypto.randomUUID(); localStorage.setItem('medicinup_vid', id); } return id; }
         window.sendToGoogleForms = function(event, extra="") {
-            const data = new URLSearchParams(); 
-            data.append("entry.1962600437", event); 
-            data.append("entry.656835352", `[medicinup] Visitor:${window.getVisitorId()} | ${extra}`);
-            fetch(GF_URL, { method: "POST", mode: "no-cors", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: data.toString() }).catch(e=>{});
+            const data = new URLSearchParams(); data.append("entry.1962600437", event); data.append("entry.656835352", `[medicinup] Visitor:${window.getVisitorId()} | ${extra}`);
+            fetch("https://docs.google.com/forms/d/e/1FAIpQLSeSGGY8vksnVVvt7h1Cb9fyfILrBAWr0zsP3bdANhexuKimGw/formResponse", { method: "POST", mode: "no-cors", headers: {"Content-Type": "application/x-www-form-urlencoded"}, body: data.toString() }).catch(e=>{});
         }
-
         window.trackClick = function(tag) { window.sendToGoogleForms("clique", tag); }
         window.trackClickBuy = function() { window.sendToGoogleForms("clique_comprar", "Clicou Stripe"); }
         window.sendContact = function(form) { const msg = `Nome: ${form.nome.value}\nMsg: ${form.mensagem.value}`; window.sendToGoogleForms("contact_form", `[Mensagem] ${msg}`); alert('Mensagem enviada.'); form.reset(); }
+        
+        // INIT TRACKING
+        window.sendToGoogleForms("visita_site", "Page Load");
 
+        // TIMER (SECONDS ADDED)
+        window.updateTimer = function() {
+            const target = new Date(); target.setDate(new Date().getDate() + 2); target.setHours(24,0,0,0);
+            const diff = target - new Date();
+            const d = Math.floor(diff/(1000*60*60*24));
+            const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+            const m = Math.floor((diff%(1000*60*60))/(1000*60));
+            const s = Math.floor((diff%(1000*60))/1000);
+            document.getElementById('countdown').innerText = `${d}d ${h}h ${m}m ${s}s`;
+        }
+        window.updateTimer(); setInterval(window.updateTimer, 1000);
+
+        // UI
+        if(!localStorage.getItem('medicinup_cookies')) document.getElementById('cookieBanner').classList.remove('hidden'); document.getElementById('cookieBanner').classList.add('flex');
         window.acceptCookies = function(){ localStorage.setItem('medicinup_cookies', 'true'); document.getElementById('cookieBanner').classList.add('hidden'); }
         window.openModal = function(t){ document.getElementById('modalContent').innerHTML=document.getElementById(t+'-text').innerHTML; document.getElementById('legalModal').classList.remove('hidden'); }
         window.resetToHome = function() { document.getElementById('landing-container').classList.remove('hidden-section'); document.getElementById('dashboard-container').classList.add('hidden-section'); window.scrollTo(0,0); }
         window.runDemo = function() { document.getElementById('navSearchInput').value='1001'; window.searchFromNav(); }
 
+        // GRAPH RENDERER
         window.toggleSection = function(el) { 
             const content = el.nextElementSibling;
             content.classList.toggle('hidden');
@@ -503,6 +521,7 @@
             new vis.Graph2d(c, items, null, { height: '300px', drawPoints: {style:'circle', size:4}, shaded: {orientation:'bottom'} });
         }
 
+        // DATA FETCH
         window.searchFromNav = async function() {
             const num = document.getElementById('navSearchInput').value;
             if(!num) return;
@@ -529,43 +548,26 @@
                 document.getElementById('data-content').classList.remove('hidden');
             } catch(e) { alert(e.message); window.resetToHome(); }
         }
-
         window.fetchExcel = async function(url) { const r = await fetch(url+'&t='+Date.now()); const b = await r.arrayBuffer(); return XLSX.read(b, {type:'array'}); }
-        
+        // FIX OVERFLOW
         window.renderGeneral = function(data) {
             if(!data) { document.getElementById('general-records').innerHTML='Sem dados.'; return; }
             const fields = {'Última Atualização': window.dateFmt(data['Carimbo de data/hora']), 'Naturalidade': data['Naturalidade'], 'Data de Nascimento': window.dateFmt(data['Data de Nascimento']), 'Estado Civil': data['Estado Civil'], 'Altura (cm)': data['Altura (cm)'], 'Medicação Atual': data['Medicação Atual'], 'Alergias': data['Alergias'], 'Profissão Atual': data['Profissão Atual'], 'Cirurgias': data['Cirurgias'], 'Internamentos': data['Internamentos'], 'Resultados de Exames': data['Resultados de Exames (links)'], 'Contacto Emergência': data['Contacto de Emergência'], 'Doenças/Condições': data['Doenças, Condições ou Eventos'], 'Outras Doenças': data['Outras Doenças'], 'Último Peso (kg)': data['Último Peso (kg)'], 'IMC': data['IMC']};
             let html = '<div class="grid grid-cols-1 gap-2">';
-            for(let k in fields) { const val = fields[k] ? fields[k] : '-'; html += `<div class="grid grid-cols-3 border-b border-gray-100 pb-1"><span class="col-span-1 text-xs font-bold text-gray-500 uppercase pt-1 pr-1">${k}</span><span class="col-span-2 text-sm font-medium text-gray-900 pl-2 break-words whitespace-normal">${val}</span></div>`; }
+            // Added whitespace-normal break-words to ensure multiline text
+            for(let k in fields) { const val = fields[k] ? fields[k] : '-'; html += `<div class="grid grid-cols-3 border-b border-gray-100 pb-1"><span class="col-span-1 text-xs font-bold text-gray-500 uppercase pt-1 pr-1 break-words">${k}</span><span class="col-span-2 text-sm font-medium text-gray-900 pl-2 break-words whitespace-normal">${val}</span></div>`; }
             html += '</div>'; document.getElementById('general-records').innerHTML = html;
         }
-
         window.renderSymptoms = function(data) {
             const f = data.filter(r => r['Sintomas / Notas Atuais']);
             let h = '<ul class="space-y-2">';
             f.forEach(r => h+=`<li class="border-l-2 border-black pl-2"><span class="text-[10px] text-gray-500 block">${window.dateFmt2(r['Carimbo de data/hora'])}</span>${r['Sintomas / Notas Atuais']}</li>`);
             document.getElementById('symptoms-content').innerHTML = h+'</ul>';
         }
-
         window.dateExcel = function(s){ if(!s)return null; return new Date((s-25569)*86400*1000); }
         window.dateFmt = function(s){ const d=window.dateExcel(s); return d?d.toLocaleDateString():'-'; }
         window.dateFmt2 = function(s){ const d=window.dateExcel(s); return d?d.toLocaleString():'-'; }
         window.downloadData = function(){ if(window.globalContUrl) window.open(window.globalContUrl); }
-
-        // INIT
-        window.addEventListener('load', () => {
-            const pl = document.getElementById('preloader');
-            pl.style.opacity = '0';
-            setTimeout(() => pl.style.display = 'none', 500);
-            document.querySelectorAll('video').forEach(v => v.play().catch(()=>{}));
-            AOS.init({once: true});
-            window.sendToGoogleForms("visita_site", "Page Load"); 
-            window.updateTimer(); 
-            setInterval(window.updateTimer, 1000);
-            if(!localStorage.getItem('medicinup_cookies')) document.getElementById('cookieBanner').classList.remove('hidden'); 
-            document.getElementById('cookieBanner').classList.add('flex');
-        });
-
         if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
     </script>
 </body>
